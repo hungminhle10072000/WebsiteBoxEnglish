@@ -10,7 +10,7 @@ public class Test {
 	
 	@GetMapping
 	public String Default() {
-		return "index";
+		return "home";
 	}
 	
 }

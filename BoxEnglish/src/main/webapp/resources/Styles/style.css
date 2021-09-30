@@ -1,1 +1,170 @@
 @charset "ISO-8859-1";
+
+.header {
+	position: relative;
+	width: 100%;
+/* 	min-height: 100vh; */
+	background: #e4e8f3;
+	overflow: hidden;
+	margin-bottom: 2rem;
+}
+
+.nav {
+	padding: 1.6rem 0;
+}
+
+.nav.fix-nav {
+	position: fixed;
+	top:0;
+	left:0;
+	width:100%;
+	background-color: #243a6f;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	z-index: 999;
+}
+
+.nav.fix-nav .nav-link,
+.nav.fix-nav .logo,
+.nav.fix-nav .user-icon,
+.nav.fix-nav .hamburger {
+  color: #fff;
+}
+
+.navigation {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.logo a img {
+	font-size: 2.5rem;
+	width: 5rem;
+}
+
+.nav-list {
+	display: flex;
+	align-item: center;
+	list-style: none;
+}
+
+.nav-item:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.nav-link:link,
+.nav-link:visited {
+  font-size: 1.6rem;
+  padding: 0.8rem 1rem;
+  transition: all 300ms ease-in-out;
+}
+
+.nav-link.icon {
+  font-size: 3rem;
+}
+
+.user-icon {
+	font-size: 2.5rem;
+}
+
+.top-nav {
+  display: none;
+}
+
+
+.hamburger {
+  display: none;
+}
+
+/*main*/
+
+.item-category{
+	margin-bottom: 10px;
+}
+
+.title-category {
+	margin-left: 20px;
+	padding-left: 30px;
+	height: 100px;
+	background-color: #13CE66
+}
+
+.col-chartfirst-title{
+	display: flex;
+	justify-content: center;
+}
+
+.chartfirst-title{
+	border-radius: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #37475E;
+    text-align: center;
+    padding: 8px;
+    margin-right: 6px
+}
+
+.chartfirst-title span {
+	font-size: 2rem;
+	color: #fff;
+}
+
+.detail-name-category {
+	color: #46545E;
+	font-size: 2rem;
+}
+
+/* Slide bar */
+.avatar-card {
+	background-color: #e1dd92; 
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+img.card-img-top {
+	width: 70%;
+	border-radius: 50%;
+}
+
+.container-wordlearned {
+	margin-top: 3%;
+	margin-bottom: 3%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	background-color: #13C8CE;
+}
+
+/*footer-design  */
+
+.footer-design {
+	display: flex;
+	justify-content:center;
+	width: 100%;
+	height: 100%;
+	background-color: red;
+	padding:10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
