@@ -3,12 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<jsp:include page="header.jsp"></jsp:include>
 	<meta charset="utf-8">
 	<!-- Favicon -->
  	<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
  	<!-- Box icons -->
  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-	<jsp:include page="header.jsp"></jsp:include>
 	<title>Trang chủ</title>
 </head>
 <body>
@@ -44,9 +44,20 @@
 					</ul>
 				</div>
 				
-				<a href="#" class="user-icon">
-       	        	<i class='bx bx-user-circle'></i>
-		        </a>
+				<div class="container-user-setting">
+					<a href="#" class="user-icon">
+       	        		<i class='bx bx-user-circle'></i>
+		        	</a>
+		        	<div class="setting-user">
+		        		<div class="setting-user-item">
+		        			<i class='bx bxs-edit-alt'></i> <span>Edit profile</span>
+		        		</div>
+		        		<div class="setting-user-item">
+		        			<i class='bx bxs-log-out' ></i> <span>Logout</span>
+		        		</div>
+		        	</div>
+				</div>
+				
 		       
 		        <div class="hamburger">
 		          	<i class="bx bx-menu"></i>
@@ -55,12 +66,13 @@
 			</div>
 		</nav>
 	</header>
+
 	<main>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="card avatar-card" style="width:100%">
-						<h4 class="card-title">Hoàng Dương Hùng</h4>
+						<h4 class="card-title style-card-title">Hoàng Dương Hùng</h4>
 					    <img class="card-img-top" src='<c:url value="/resources/img/avatarronaldo.jpg" />' alt="Avartar">
 					    <div class="card-body container-wordlearned">
 					      	<span>1575</span>
@@ -256,8 +268,58 @@
 			</div>
 		</div>
 	</main>
-	<footer class="footer-design">
+<!-- 	<footer class="footer-design">
 		<h1>Đây là footer</h1>
+	</footer> -->
+	<!-- Footer -->
+	<footer class="page-footer font-small special-color-dark pt-4">
+	
+	  <!-- Footer Elements -->
+	  <div class="container">
+	  		<div class="row">
+	  			<div class="col-12">
+	  					<!-- Social buttons -->
+					    <ul class="list-unstyled list-inline text-center">
+					      <li class="list-inline-item">
+					        <a class="btn-floating btn-fb mx-1">
+					          <i class="fab fa-facebook-f"> </i>
+					        </a>
+					      </li>
+					      <li class="list-inline-item">
+					        <a class="btn-floating btn-tw mx-1">
+					          <i class="fab fa-twitter"> </i>
+					        </a>
+					      </li>
+					      <li class="list-inline-item">
+					        <a class="btn-floating btn-gplus mx-1">
+					          <i class="fab fa-google-plus-g"> </i>
+					        </a>
+					      </li>
+					      <li class="list-inline-item">
+					        <a class="btn-floating btn-li mx-1">
+					          <i class="fab fa-linkedin-in"> </i>
+					        </a>
+					      </li>
+					      <li class="list-inline-item">
+					        <a class="btn-floating btn-dribbble mx-1">
+					          <i class="fab fa-dribbble"> </i>
+					        </a>
+					      </li>
+					    </ul>
+					    <!-- Social buttons -->
+	  			</div>
+	  		</div>
+	  </div>
+	  <!-- Footer Elements -->
+	
+	  <!-- Copyright -->
+	  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+	    <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+	  </div>
+	  <!-- Copyright -->
+	
 	</footer>
+	<!-- Footer -->
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
