@@ -42,7 +42,17 @@ public class VocabularyEntity {
 	
 	@Column(name = "audio_vocabulary")
 	private String audio_vocabulary;
-	
+
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean delete) {
+		isDelete = delete;
+	}
+	@Column(name = "isdelete")
+	private boolean isDelete;
+
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private CategoryEntity categoryEntity;

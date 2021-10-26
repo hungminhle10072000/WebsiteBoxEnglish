@@ -16,6 +16,7 @@ public class TestHomController {
     public String PracticeVoca() {
         return "practice-voca";
     }
+
     @GetMapping(value = "/list-voca")
     public String ListVoca() {
         return "list-voca";

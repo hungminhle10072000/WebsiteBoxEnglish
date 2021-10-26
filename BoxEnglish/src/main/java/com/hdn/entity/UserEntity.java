@@ -41,10 +41,24 @@ public class UserEntity {
 	
 	@Column(name = "role")
 	private String role;
-	
-	
+
+	@Column(name = "isdelete")
+	private boolean isDelete;
+
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean delete) {
+		isDelete = delete;
+	}
+
+
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade =CascadeType.ALL) 
 	private List<ReviewEntity> listReviewEntities;
+
+
 
 
 	public long getId() {

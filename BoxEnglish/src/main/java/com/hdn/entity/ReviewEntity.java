@@ -36,6 +36,18 @@ public class ReviewEntity {
 	@Column(name = "status")
 	private int status;
 
+	@Column(name = "isdelete")
+	private boolean isDelete;
+
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean delete) {
+		isDelete = delete;
+	}
+
+
 	public ReviewKey getId() {
 		return id;
 	}
