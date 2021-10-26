@@ -4,18 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hdn.dao.UserDao;
-import com.hdn.daoimp.Userimp;
+import com.hdn.daoimp.UserImp;
 import com.hdn.entity.UserEntity;
 
 @Service
-public class UserService implements Userimp{
+public class UserService implements UserDao{
 	
 	@Autowired
-	UserDao userDao;
+	UserImp userimp;
 
 	@Override
 	public UserEntity GetUser(Long id) {
-		return userDao.GetUser(id);
+		// TODO Auto-generated method stub
+		return userimp.GetUser(id);
 	}
+	
 	
 }
