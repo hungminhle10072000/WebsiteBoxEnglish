@@ -35,18 +35,9 @@ public class ReviewEntity {
 	
 	@Column(name = "status")
 	private int status;
-
-	@Column(name = "isdelete")
-	private boolean isDelete;
-
-	public boolean isDelete() {
-		return isDelete;
-	}
-
-	public void setDelete(boolean delete) {
-		isDelete = delete;
-	}
-
+	
+	@Column(name = "isDelete")
+	private int isDeletel;
 
 	public ReviewKey getId() {
 		return id;
@@ -96,20 +87,19 @@ public class ReviewEntity {
 		this.status = status;
 	}
 
-	public ReviewEntity(ReviewKey id, UserEntity userEntity, VocabularyEntity vocabularyEntity, Date date_practice,
-			int level, int status) {
-		super();
-		this.id = id;
-		this.userEntity = userEntity;
-		this.vocabularyEntity = vocabularyEntity;
-		this.date_practice = date_practice;
-		this.level = level;
-		this.status = status;
+	
+	
+	public int getIsDeletel() {
+		return isDeletel;
+	}
+
+	public void setIsDeletel(int isDeletel) {
+		this.isDeletel = isDeletel;
 	}
 
 	public ReviewEntity() {
 		super();
 	}
-
+	
 	
 }

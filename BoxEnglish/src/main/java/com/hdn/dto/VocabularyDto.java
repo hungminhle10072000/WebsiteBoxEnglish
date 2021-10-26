@@ -1,4 +1,4 @@
-package com.hdn.dto;
-
-public class VocabularyDto {
-}
+//package com.hdn.dto;
+//
+//public class VocabularyDto {
+//}

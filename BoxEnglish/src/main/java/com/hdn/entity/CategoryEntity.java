@@ -30,17 +30,9 @@ public class CategoryEntity {
 	
 	@Column(name = "description")
 	private String description;
-
-	@Column(name = "isdelete")
-	private boolean isDelete;
-
-	public boolean isDelete() {
-		return isDelete;
-	}
-
-	public void setDelete(boolean delete) {
-		isDelete = delete;
-	}
+	
+	@Column(name = "isDelete")
+	private int isDelete;
 
 	@OneToOne
 	@JoinColumn(name = "user_id")
@@ -97,16 +89,14 @@ public class CategoryEntity {
 		this.listVocabularyEntities = listVocabularyEntities;
 	}
 
-	public CategoryEntity(long id, String title, String image, String description, UserEntity userEntity, boolean isDelete,
-			List<VocabularyEntity> listVocabularyEntities) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.image = image;
-		this.description = description;
-		this.userEntity = userEntity;
+	
+
+	public int getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(int isDelete) {
 		this.isDelete = isDelete;
-		this.listVocabularyEntities = listVocabularyEntities;
 	}
 
 	public CategoryEntity() {
@@ -114,5 +104,4 @@ public class CategoryEntity {
 	}
 	
 	
-	 
 }

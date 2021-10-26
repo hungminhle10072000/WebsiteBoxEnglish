@@ -41,122 +41,78 @@ public class UserEntity {
 	
 	@Column(name = "role")
 	private String role;
-
-	@Column(name = "isdelete")
-	private boolean isDelete;
-
-	public boolean isDelete() {
-		return isDelete;
-	}
-
-	public void setDelete(boolean delete) {
-		isDelete = delete;
-	}
-
-
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade =CascadeType.ALL) 
-	private List<ReviewEntity> listReviewEntities;
-
-
-
+	
+	@Column(name = "isDelete")
+	private int isDelete;
 
 	public long getId() {
 		return id;
 	}
 
-
 	public void setId(long id) {
 		this.id = id;
 	}
-
 
 	public String getFullname() {
 		return fullname;
 	}
 
-
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
-
 
 	public String getUsername() {
 		return username;
 	}
 
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 
 	public String getPassword() {
 		return password;
 	}
 
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 
 	public String getAvatar() {
 		return avatar;
 	}
 
-
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
-
 
 	public int getScore() {
 		return score;
 	}
 
-
 	public void setScore(int score) {
 		this.score = score;
 	}
-
 
 	public String getRole() {
 		return role;
 	}
 
-
 	public void setRole(String role) {
 		this.role = role;
 	}
 
-
-	public List<ReviewEntity> getListReviewEntities() {
-		return listReviewEntities;
+	
+	public int getIsDelete() {
+		return isDelete;
 	}
 
-
-	public void setListReviewEntities(List<ReviewEntity> listReviewEntities) {
-		this.listReviewEntities = listReviewEntities;
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
 	}
-
-
-	public UserEntity(long id, String fullname, String username, String password, String avatar, int score, String role,
-			List<ReviewEntity> listReviewEntities) {
-		super();
-		this.id = id;
-		this.fullname = fullname;
-		this.username = username;
-		this.password = password;
-		this.avatar = avatar;
-		this.score = score;
-		this.role = role;
-		this.listReviewEntities = listReviewEntities;
-	}
-
 
 	public UserEntity() {
 		super();
 	}
-	 
+	
+	
 }

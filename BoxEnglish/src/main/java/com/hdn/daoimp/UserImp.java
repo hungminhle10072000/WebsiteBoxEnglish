@@ -15,12 +15,12 @@ public class UserImp implements UserDao{
 	
 	@Autowired
 	SessionFactory sessionFactory;
-
+	
 	@Transactional
 	public UserEntity GetUser(Long id) {
 		Session session  = sessionFactory.getCurrentSession();
 		try {
-			UserEntity userEntity = (UserEntity) session.createQuery("from UserEntity where id = " + id).getSingleResult();
+			UserEntity userEntity = (UserEntity) session.createQuery("from UserEntity where id = " + 1).getSingleResult();
 			if(userEntity != null) {
 				return userEntity;
 			} else {

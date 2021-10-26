@@ -42,17 +42,10 @@ public class VocabularyEntity {
 	
 	@Column(name = "audio_vocabulary")
 	private String audio_vocabulary;
-
-	public boolean isDelete() {
-		return isDelete;
-	}
-
-	public void setDelete(boolean delete) {
-		isDelete = delete;
-	}
-	@Column(name = "isdelete")
-	private boolean isDelete;
-
+	
+	@Column(name = "isDelete")
+	private String isDelete;
+	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private CategoryEntity categoryEntity;
@@ -142,6 +135,9 @@ public class VocabularyEntity {
 	}
 
 
+
+
+
 	public CategoryEntity getCategoryEntity() {
 		return categoryEntity;
 	}
@@ -161,21 +157,13 @@ public class VocabularyEntity {
 		this.listReviewEntities = listReviewEntities;
 	}
 
+	public String getIsDelete() {
+		return isDelete;
+	}
 
-	public VocabularyEntity(long id, String vocabulary, String mean_vocabulary, String partOfSpeech,
-			String explain_vocabulary, String example_vocabulary, String image_vocabulary, String audio_vocabulary,
-			CategoryEntity categoryEntity, List<ReviewEntity> listReviewEntities) {
-		super();
-		this.id = id;
-		this.vocabulary = vocabulary;
-		this.mean_vocabulary = mean_vocabulary;
-		this.partOfSpeech = partOfSpeech;
-		this.explain_vocabulary = explain_vocabulary;
-		this.example_vocabulary = example_vocabulary;
-		this.image_vocabulary = image_vocabulary;
-		this.audio_vocabulary = audio_vocabulary;
-		this.categoryEntity = categoryEntity;
-		this.listReviewEntities = listReviewEntities;
+
+	public void setIsDelete(String isDelete) {
+		this.isDelete = isDelete;
 	}
 
 
