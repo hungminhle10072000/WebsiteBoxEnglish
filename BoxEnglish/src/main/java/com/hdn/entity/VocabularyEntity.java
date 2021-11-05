@@ -44,7 +44,7 @@ public class VocabularyEntity {
 	private String audio_vocabulary;
 	
 	@Column(name = "isDelete")
-	private String isDelete;
+	private int isDelete;
 	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
@@ -134,9 +134,13 @@ public class VocabularyEntity {
 		this.audio_vocabulary = audio_vocabulary;
 	}
 
+	public int getIsDelete() {
+		return isDelete;
+	}
 
-
-
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
+	}
 
 	public CategoryEntity getCategoryEntity() {
 		return categoryEntity;
@@ -157,14 +161,6 @@ public class VocabularyEntity {
 		this.listReviewEntities = listReviewEntities;
 	}
 
-	public String getIsDelete() {
-		return isDelete;
-	}
-
-
-	public void setIsDelete(String isDelete) {
-		this.isDelete = isDelete;
-	}
 
 
 	public VocabularyEntity() {
