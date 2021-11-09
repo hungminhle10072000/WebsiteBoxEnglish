@@ -9,9 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        html {
+            overflow-y: scroll;
+        }
+    </style>
 </head>
 
-<body>
+<body onload="onStart()">
 <div class="row">
     <div class="col-sm-10 p-3 bg-info text-black">
         <h1>Practice Vocabulary</h1>
@@ -31,10 +36,10 @@
             </div>
         </div>
             <br/>
-        <div id="form_practice">
-            <img class="mx-auto d-block" src='<c:url value="/resources/img/paris.jpeg" />' alt="not display"  style="width:35%">
+        <div id="form_practice" style="display: none;">
+            <img id="imgVoca" class="mx-auto d-block" src='<c:url value="/resources/img/paris.jpeg" />' alt="not display"  style="width:35%">
             <br/>
-            <p style="text-align: center; font-size: 35px;">${category.title}</p>
+            <p id="question" style="text-align: center; font-size: 35px;"></p>
             <br/>
             <input class="mx-auto d-block" id="inputVoca"
                    style="width: 40%; height: 50px; text-align: center; font-size: 150%; border: 3px solid rgb(153, 146, 146);
@@ -49,15 +54,26 @@
             <br/>
         </div>
 
-        <div id="suggestion" style="text-align: center;">
+        <div id="suggestion" style="display: none; text-align: center;">
             <label style="text-align: left;">
-                <div id="question" style="display: none">
-                    <p><b>Từ vựng:</b> <span id="vocabulary">to accept and act according to a law, an agreement</span> </p>
-                    <p><b>Ý nghĩa:</b> <span id="mean_vocabulary">to accept and act according to a law, an agreement</span> </p>
-                </div>
-                <p><b>Giải thích:</b> <span id="explain_vocabulary">to accept and act according to a law, an agreement</span> </p>
-                <p><b>Từ loại:</b> <span id="part_of_speech">(v): tôn trọng, tuân theo, giữ (lời)</span> </p>
-                <p><b>Ví dụ:</b> <span id="example_vocabulary">The two parties agreed to abide by the judge's decision</span> </p>
+                <p><b>Giải thích:</b> <span id="explain_vocabulary_suggestion">to accept and act according to a law, an agreement</span> </p>
+                <p><b>Từ loại:</b> <span id="part_of_speech_suggestion">(v): tôn trọng, tuân theo, giữ (lời)</span> </p>
+                <p><b>Ví dụ:</b> <span id="example_vocabulary_suggestion">The two parties agreed to abide by the judge's decision</span> </p>
+                <p><b> <span >Hai bên đã đồng ý tuân theo quyết định của tòa án.</span> </b></p>
+                <audio controls="">
+                    <source src="audio/abide_by.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </label>
+        </div>
+        <div id="formResult" style="display: none; text-align: center;">
+            <label style="text-align: left;">
+                <img class="mx-auto d-block" src='<c:url value="/resources/img/paris.jpeg" />' alt="not display"  style="width:35%">
+                <p><b>Từ vựng:</b> <span id="vocabulary_result">to accept and act according to a law, an agreement</span> </p>
+                <p><b>Ý nghĩa:</b> <span id="mean_vocabulary_result">to accept and act according to a law, an agreement</span> </p>
+                <p><b>Giải thích:</b> <span id="explain_vocabulary_result">to accept and act according to a law, an agreement</span> </p>
+                <p><b>Từ loại:</b> <span id="part_of_speech_result">(v): tôn trọng, tuân theo, giữ (lời)</span> </p>
+                <p><b>Ví dụ:</b> <span id="example_vocabulary_result">The two parties agreed to abide by the judge's decision</span> </p>
                 <p><b> <span >Hai bên đã đồng ý tuân theo quyết định của tòa án.</span> </b></p>
                 <audio controls="">
                     <source src="audio/abide_by.mp3" type="audio/mpeg">
@@ -73,76 +89,133 @@
         <br/>
         <br/>
         <br/>
-        <button id="btnIdontKnow" class="btn btn-secondary" onclick="hideOrPractice()">I<br/> don't <br/>know</button>
+        <button id="btnIdontKnow" class="btn btn-secondary" onclick="hideOrShowFormResult()">I<br/> don't <br/>know</button>
     </div>`
 </div>
 
 <script>
+    //Variable
     var jsonVocaList = ${lstVoca};
+    var jsonReviewList = [];
     const size = jsonVocaList.length;
     var i =0;
     console.log(jsonVocaList)
-    const voca = document.getElementById("inputVoca");
-    const suggestion =document.getElementById("suggestion");
+    //Form
     const form_practice =document.getElementById("form_practice");
-    const question = document.getElementById("question");
-    const progress = document.getElementById("progress");
+    const form_result = document.getElementById("formResult");
+    const form_suggestion =document.getElementById("suggestion");
+    //Button
     const btnIdontKnow = document.getElementById("btnIdontKnow");
+    //Input
+    const voca = document.getElementById("inputVoca");
+    const question = document.getElementById("question");
+    //Element
+    const suggestion =document.getElementById("suggestion");
+    const progress = document.getElementById("progress");
+    const imgImageVoca = document.getElementById("imgVoca");
 
+    // -----------------------------------------------------------------------------//
+    function hideOrShowPractice() {
+        form_practice.style.display == "none" ? showFormPractice():hideFormPractice()
+    }
+    function hideOrShowSuggestions() {
+        form_suggestion.style.display == "none" ? showSuggestions():hideSuggestions()
+    }
+    function hideOrShowFormResult() {
+        form_result.style.display == "none" ? showFormResult():hideFormResult()
+    }
+
+    function hideFormPractice() {
+        form_practice.style.display = "none";
+    }
+    function hideSuggestions() {
+        form_suggestion.style.display = "none";
+    }
+    function hideFormResult() {
+        if (i <size) {
+            btnIdontKnow.innerHTML="I<br/> don't <br/>know";
+            form_result.style.display="none";
+            form_practice.style.display="block";
+            i++;
+            calculateProgress();
+        } else {
+            //Update data
+
+            //
+            window.location.href = "${pageContext.request.contextPath}/client/donepractice";
+        }
+    }
+    function showFormPractice() {
+        if (i < size) {
+            hideSuggestions();
+            hideFormResult();
+            form_practice.style.display = "block";
+            btnIdontKnow.innerHTML="I<br/> don't <br/>know";
+        } else {
+            //Update data
+
+            // Chuyển sang form hoàn thành
+            window.location.href = "${pageContext.request.contextPath}/client/donepractice";
+
+        }
+    }
+    function showSuggestions() {
+        if (i < size) {
+            form_suggestion.style.display = "block";
+            document.getElementById("explain_vocabulary_suggestion").innerText=jsonVocaList[i].explain_vocabulary.trim()
+            document.getElementById("part_of_speech_suggestion").innerText=jsonVocaList[i].partOfSpeech.trim()
+            document.getElementById("example_vocabulary_suggestion").innerText=jsonVocaList[i].example_vocabulary.trim()
+        }
+    }
+
+    function showFormResult() {
+        hideFormPractice();
+        hideSuggestions();
+        btnIdontKnow.innerText="Next"
+        form_result.style.display="block";
+    }
     function checkVocabulary() {
         console.log('Input: ',voca.value.trim())
         console.log('List : ',jsonVocaList[i].vocabulary.trim())
-        if (voca.value.trim().toUpperCase() == jsonVocaList[i].vocabulary.trim().toUpperCase()) {
+        if ( voca.value == undefined || voca.value.trim() =="" || voca.value.trim().length < 1) {
+            alert("Vui lòng điền từ vựng")
+        } else if (voca.value.trim().toUpperCase() == jsonVocaList[i].vocabulary.trim().toUpperCase()) {
             alert("Success")
+            var review = {
+                "user_id": 1,
+                "vocabulary_id": jsonVocaList[i].vocabulary_id,
+                "level":1,
+                "status":1,
+            }
+            jsonVocaList.push(review);
+
+            i++;
+            calculateProgress();
+            voca.value='';
+            question.innerText=jsonVocaList[i].mean_vocabulary;
+
+            hideSuggestions();
         } else {
             alert("Error")
+            var review = {
+                "user_id": 1,
+                "vocabulary_id": jsonVocaList[i].vocabulary_id,
+                "level":1,
+                "status":1,
+            }
+            jsonVocaList.push(review);
         }
 
-        i++;
+
+    }
+    function calculateProgress() {
         progress.style.width= (i/size)*100+'%'
-        voca.value='';
-        hideSuggestions();
     }
-
-    function hideOrShowSuggestions() {
-        suggestion.style.display == "none" ? showSuggestions():hideSuggestions()
-    }
-
-    function showSuggestions() {
-        if (i < size) {
-            question.style.display = "none";
-
-            document.getElementById("explain_vocabulary").innerText=jsonVocaList[i].explain_vocabulary.trim()
-            document.getElementById("part_of_speech").innerText=jsonVocaList[i].partOfSpeech.trim()
-            document.getElementById("example_vocabulary").innerText=jsonVocaList[i].example_vocabulary.trim()
-        }
-        suggestion.style.display = "block";
-    }
-    function hideSuggestions() {
-        console.log(suggestion.style.display)
-        suggestion.style.display = "none";
-    }
-
-    function hideOrPractice() {
-        form_practice.style.display == "none" ? showFormPractice():hideFormPractice()
-    }
-
-    function showFormPractice() {
+    function onStart() {
         form_practice.style.display = "block";
-        question.style.display = "none";
-        btnIdontKnow.innerHTML="I<br/> don't <br/>know";
-        hideSuggestions();
-    }
-    function hideFormPractice() {
-        if (i <size) {
+        voca.value='';
+        question.innerText=jsonVocaList[i].mean_vocabulary;
 
-            document.getElementById("vocabulary").innerText=jsonVocaList[i].vocabulary;
-            document.getElementById("vocabulary").innerText=jsonVocaList[i].mean_vocabulary;
-        }
-        question.style.display = "block";
-        btnIdontKnow.innerText="Next"
-        form_practice.style.display = "none";
-        showSuggestions();
     }
 
 </script>
