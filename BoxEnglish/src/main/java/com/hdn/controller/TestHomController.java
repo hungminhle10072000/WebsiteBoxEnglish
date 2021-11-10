@@ -21,4 +21,9 @@ public class TestHomController {
     public String ListVoca() {
         return "list-voca";
     }
+    
+    @GetMapping(value = "/admin")
+    public String Admin() {
+        return "admin/index";
+    }
 }
