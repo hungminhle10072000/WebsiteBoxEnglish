@@ -37,6 +37,9 @@ public class VocabularyEntity {
 	@Column(name = "example_vocabulary")
 	private String example_vocabulary;
 	
+	@Column(name="mean_example_vocabulary")
+	private String mean_example_vocabulary;
+	
 	@Column(name = "image_vocabulary")
 	private String image_vocabulary;
 	
@@ -53,6 +56,15 @@ public class VocabularyEntity {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vocabularyEntity", cascade =CascadeType.ALL) 
 	private List<ReviewEntity> listReviewEntities;
+	
+	public String getMean_example_vocabulary() {
+		return mean_example_vocabulary;
+	}
+
+
+	public void setMean_example_vocabulary(String mean_example_vocabulary) {
+		this.mean_example_vocabulary = mean_example_vocabulary;
+	}
 
 
 	public long getId() {
