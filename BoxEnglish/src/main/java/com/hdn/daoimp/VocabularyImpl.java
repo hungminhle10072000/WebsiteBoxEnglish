@@ -28,9 +28,8 @@ public class VocabularyImpl implements VocabularyDao {
             VocabularyEntity vocabularyEntity = (VocabularyEntity) query.uniqueResult();
             return vocabularyEntity;
         } catch ( Exception e) {
+            System.out.println(e.getMessage());
             return null;
-        } finally {
-            session.close();
         }
     }
 

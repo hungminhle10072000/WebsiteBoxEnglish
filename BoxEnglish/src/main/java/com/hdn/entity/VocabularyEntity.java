@@ -1,5 +1,6 @@
 package com.hdn.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -51,8 +52,8 @@ public class VocabularyEntity {
 	private CategoryEntity categoryEntity;
 
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vocabularyEntity", cascade =CascadeType.ALL) 
-	private List<ReviewEntity> listReviewEntities;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "vocabularyEntity", cascade =CascadeType.ALL)
+	private List<ReviewEntity> listReviewEntities; //What is??
 
 
 	public long getId() {

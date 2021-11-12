@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<c:url value="/api/review/insert" var="APIurl"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <style>
         html {
             overflow-y: scroll;
@@ -22,7 +24,7 @@
         <h1>Practice Vocabulary</h1>
     </div>
     <div class="col-sm-2 p-3 bg-info text-black">
-        <button type="button" class="btn btn-info" style="font-size: 40px; font-weight: bold; color: rgba(14, 53, 224, 0.808);">X</button>
+        <button onclick="show_alert()" type="button" class="btn btn-info" style="font-size: 40px; font-weight: bold; color: rgba(14, 53, 224, 0.808);">X</button>
     </div>
 
 </div>
@@ -132,11 +134,13 @@
         form_suggestion.style.display = "none";
     }
     function hideFormResult() {
+        i++;
         if (i <size) {
             btnIdontKnow.innerHTML="I<br/> don't <br/>know";
             form_result.style.display="none";
             form_practice.style.display="block";
-            i++;
+            voca.value='';
+
             calculateProgress();
         } else {
             //Update data
@@ -146,10 +150,13 @@
         }
     }
     function showFormPractice() {
+        voca.value='';
         if (i < size) {
             hideSuggestions();
             hideFormResult();
             form_practice.style.display = "block";
+            voca.value='';
+            question.innerText=jsonVocaList[i].mean_vocabulary;
             btnIdontKnow.innerHTML="I<br/> don't <br/>know";
         } else {
             //Update data
@@ -173,6 +180,13 @@
         hideSuggestions();
         btnIdontKnow.innerText="Next"
         form_result.style.display="block";
+
+        document.getElementById("vocabulary_result").innerText=jsonVocaList[i].vocabulary.trim()
+        document.getElementById("mean_vocabulary_result").innerText=jsonVocaList[i].mean_vocabulary.trim()
+        document.getElementById("explain_vocabulary_result").innerText=jsonVocaList[i].explain_vocabulary.trim()
+        document.getElementById("part_of_speech_result").innerText=jsonVocaList[i].mean_vocabulary.trim()
+        document.getElementById("example_vocabulary_result").innerText=jsonVocaList[i].example_vocabulary.trim()
+
     }
     function checkVocabulary() {
         console.log('Input: ',voca.value.trim())
@@ -183,27 +197,36 @@
             alert("Success")
             var review = {
                 "user_id": 1,
-                "vocabulary_id": jsonVocaList[i].vocabulary_id,
+                "vocabulary_id": jsonVocaList[i].id,
                 "level":1,
                 "status":1,
             }
+            insertReview(review);
             jsonVocaList.push(review);
 
             i++;
-            calculateProgress();
-            voca.value='';
-            question.innerText=jsonVocaList[i].mean_vocabulary;
+            if (i < size) {
+                calculateProgress();
+                voca.value='';
+                question.innerText=jsonVocaList[i].mean_vocabulary;
 
-            hideSuggestions();
+                hideSuggestions();
+            } else {
+                //UpdateData
+                window.location.href = "${pageContext.request.contextPath}/client/donepractice";
+            }
+
         } else {
             alert("Error")
             var review = {
                 "user_id": 1,
-                "vocabulary_id": jsonVocaList[i].vocabulary_id,
+                "vocabulary_id": jsonVocaList[i].id,
                 "level":1,
-                "status":1,
+                "status":0,
             }
+            insertReview(review);
             jsonVocaList.push(review);
+            showFormResult();
         }
 
 
@@ -216,6 +239,32 @@
         voca.value='';
         question.innerText=jsonVocaList[i].mean_vocabulary;
 
+    }
+    function show_alert() {
+        if(!confirm("Do you really want to do this?")) {
+            return false;
+        }
+        //update
+        window.location.href = "${pageContext.request.contextPath}/client/donepractice";
+    }
+
+    function insertReview(data){
+        $.ajax({
+            url: '${APIurl}',
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            processData:false,
+            contentType: 'application/json',
+            data:JSON.stringify(data),
+            dataType: 'json',
+            success: function (result){
+                console.log("Success");
+                <%--window.location.href = "${PCurl}?type=list&message=insert_success";--%>
+            },
+            errMode: function (error){
+                console.log("Error");
+            }
+        })
     }
 
 </script>
