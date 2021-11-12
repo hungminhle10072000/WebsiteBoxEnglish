@@ -1,5 +1,6 @@
 package com.hdn.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -54,8 +55,7 @@ public class VocabularyEntity {
 	private CategoryEntity categoryEntity;
 
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vocabularyEntity", cascade =CascadeType.ALL) 
-	private List<ReviewEntity> listReviewEntities;
+
 	
 	public String getMean_example_vocabulary() {
 		return mean_example_vocabulary;
@@ -65,6 +65,9 @@ public class VocabularyEntity {
 	public void setMean_example_vocabulary(String mean_example_vocabulary) {
 		this.mean_example_vocabulary = mean_example_vocabulary;
 	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "vocabularyEntity", cascade =CascadeType.ALL)
+	private List<ReviewEntity> listReviewEntities; //What is??
 
 
 	public long getId() {

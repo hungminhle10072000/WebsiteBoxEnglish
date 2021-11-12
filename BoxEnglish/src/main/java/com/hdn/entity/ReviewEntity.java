@@ -1,21 +1,19 @@
 package com.hdn.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "REVIEW")
 public class ReviewEntity {
-	
-	@EmbeddedId
-	ReviewKey id;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+
+	ReviewKey key;
 	
 	@ManyToOne
 	@MapsId("user_id")
@@ -39,12 +37,21 @@ public class ReviewEntity {
 	@Column(name = "isDelete")
 	private int isDeletel;
 
-	public ReviewKey getId() {
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(ReviewKey id) {
+	public void setId(long id) {
 		this.id = id;
+	}
+
+	public ReviewKey getKey() {
+		return key;
+	}
+
+	public void setKey(ReviewKey key) {
+		this.key = key;
 	}
 
 	public UserEntity getUserEntity() {
@@ -99,6 +106,7 @@ public class ReviewEntity {
 
 	public ReviewEntity() {
 		super();
+		this.date_practice= new Timestamp(System.currentTimeMillis());
 	}
 	
 	
