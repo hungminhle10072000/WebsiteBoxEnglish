@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "REVIEW")
 public class ReviewEntity {
@@ -13,6 +15,7 @@ public class ReviewEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@Embedded
 	ReviewKey key;
 	
 	@ManyToOne
@@ -20,21 +23,23 @@ public class ReviewEntity {
 	@JoinColumn(name = "user_id")
 	private UserEntity userEntity;
 	
-	 @ManyToOne
-	 @MapsId("vocabulary_id")
-	 @JoinColumn(name = "vocabulary_id") 
-	 private VocabularyEntity vocabularyEntity;
+	@ManyToOne
+	@MapsId("vocabulary_id")
+	@JoinColumn(name = "vocabulary_id") 
+	private VocabularyEntity vocabularyEntity;
 	 
 	@Column(name = "date_practice", nullable = false)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date date_practice;
 	
-	@Column(name = "level")
+	@Column(name = "level", nullable = false)
 	private int level;
 	
-	@Column(name = "status")
+	@Column(name = "status", nullable = false)
 	private int status;
 	
-	@Column(name = "isDelete")
+	@Column(name = "isDelete", nullable = false)
 	private int isDeletel;
 
 
@@ -94,7 +99,6 @@ public class ReviewEntity {
 		this.status = status;
 	}
 
-	
 	
 	public int getIsDeletel() {
 		return isDeletel;

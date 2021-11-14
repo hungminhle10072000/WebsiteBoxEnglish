@@ -22,20 +22,20 @@ public class CategoryEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "title")
+	@Column(name = "title", nullable = false)
 	private String title;
 	
-	@Column(name = "image")
+	@Column(name = "image", nullable = false)
 	private String image;
 	
-	@Column(name = "description")
+	@Column(name = "description", nullable = false)
 	private String description;
 	
-	@Column(name = "isDelete")
+	@Column(name = "isDelete", nullable = false)
 	private int isDelete;
 
 	@OneToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", nullable = false)
 	private UserEntity userEntity;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryEntity", cascade=CascadeType.ALL) 

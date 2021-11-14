@@ -4,15 +4,17 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Embeddable
 public class ReviewKey implements Serializable{
-	
-	@Column(name = "user_id")
+		
+	@Column(name = "user_id", nullable = false)
 	private long user_id;
 	
 	
-	@Column(name = "vocabulary_id") 
+	@Column(name = "vocabulary_id", nullable = false) 
 	private long vocabulary_id;
 	 
 	public long getUser_id() {

@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Nationalized;
+
 @Entity
 @Table(name = "VOCABULARY")
 public class VocabularyEntity {
@@ -23,38 +25,39 @@ public class VocabularyEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "vocabulary")
+	@Column(name = "vocabulary", nullable = false)
 	private String vocabulary;
 	
-	@Column(name = "mean_vocabulary")
+	@Column(name = "mean_vocabulary", nullable = false)
+	@Nationalized
 	private String mean_vocabulary;
 	
 	@Column(name = "partOfSpeech")
 	private String partOfSpeech;
 	
-	@Column(name = "explain_vocabulary")
+	@Column(name = "explain_vocabulary", nullable = false)
+	@Nationalized 
 	private String explain_vocabulary;
 	
-	@Column(name = "example_vocabulary")
+	@Column(name = "example_vocabulary", nullable = false)
 	private String example_vocabulary;
 	
-	@Column(name="mean_example_vocabulary")
+	@Column(name="mean_example_vocabulary", nullable = false)
+	@Nationalized 
 	private String mean_example_vocabulary;
 	
-	@Column(name = "image_vocabulary")
+	@Column(name = "image_vocabulary", nullable = false)
 	private String image_vocabulary;
 	
-	@Column(name = "audio_vocabulary")
+	@Column(name = "audio_vocabulary", nullable = false)
 	private String audio_vocabulary;
 	
-	@Column(name = "isDelete")
+	@Column(name = "isDelete", nullable = false)
 	private int isDelete;
 	
 	@ManyToOne
-	@JoinColumn(name = "category_id")
+	@JoinColumn(name = "category_id", nullable = false)
 	private CategoryEntity categoryEntity;
-
-	
 
 	
 	public String getMean_example_vocabulary() {

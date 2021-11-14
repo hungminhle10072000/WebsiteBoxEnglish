@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Nationalized;
+
 @Entity
 @Table(name = "USER")
 public class UserEntity {
@@ -21,28 +23,31 @@ public class UserEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "fullname")
+	@Column(name = "fullname", nullable = false)
+	@Nationalized 
 	private String fullname;
 
 	
-	@Column(name = "username")
+	@Column(name = "username", nullable = false) 
 	private String username;
 	
 	
-	@Column(name = "password")
+	@Column(name = "password", nullable = false)
 	private String password;
 	
 	
 	@Column(name = "avatar")
+	@Nationalized
 	private String avatar;
 	
 	@Column(name = "score")
 	private int score;
 	
-	@Column(name = "role")
+	@Column(name = "role", nullable = false)
+	@Nationalized 
 	private String role;
 	
-	@Column(name = "isDelete")
+	@Column(name = "isDelete", nullable = false)
 	private int isDelete;
 
 	public long getId() {
