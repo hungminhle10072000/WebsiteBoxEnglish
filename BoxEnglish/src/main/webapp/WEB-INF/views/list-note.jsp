@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +42,7 @@
 			              <a href="#" class="nav-link scroll-link">Danh sách khóa học</a>
 			            </li>
 		             	<li class="nav-item">
-			              	<a href="" class="nav-link scroll-link">Ghi chú</a>
+			              	<a href="/BoxEnglish/note/" class="nav-link scroll-link">Ghi chú</a>
 			            </li>
 					</ul>
 				</div>
@@ -67,7 +69,11 @@
 			</div>
 		</nav>
 	</header>
-	<main class="container-main">
+	<main>
+		<div id="alertPageSuccess" class="alert alert-success collapse alert-page">
+			<a id="linkClose" href="#" class="close" >&times;</a>
+			<strong>Thành công !</strong>
+		</div>
 		<div class="container-fluid">			
 			<div class="row">
 				<div class="col-md-4">
@@ -85,7 +91,7 @@
 					        </button>
 					      </div>
 					      <div class="modal-body">
-						      <form:form action="add"
+						      <form:form action="/BoxEnglish/note/add"
 										method="post" enctype="multipart/form-data" modelAttribute="noteEntity">
 						          <div class="form-group">
 						            <label for="title" class="col-form-label">Tên ghi chú:</label>
@@ -106,55 +112,32 @@
 					      </div>
 					    </div>
 					  </div>
-					  <!--end modal  -->
+					  <!--end modal  -->  
 					</div>
 				</div>
 			</div>
+			
+			<!--display note-->
+			<div class="row mt-3 pb-3">
+				<c:forEach var="f" items="${noteList }">				
+						<div class="col-md-3 mt-3">
+							<div class="card" style="width: 100%;">
+							  <img class="card-img-top img-fluid" src='<c:url value="/resources/img/${f.image }" />' alt="Ảnh ghi chú" style="height: 250px">
+							  <div class="card-body">
+							    <h4 class="card-title">${f.title }</h4>
+							    <p class="card-text">${f.description }</p>
+						        <p class="card-text"><span style="color: #f70000">Ngày tạo:</span>  <fmt:formatDate pattern = "dd/MM/yyyy" value = "${f.createDate }" /></p>
+							    <a href="#" class="btn btn-primary">Chi tiết</a>
+							    <a href="#" class="btn btn-warning">Chỉnh sửa</a>
+							    <a href="/BoxEnglish/note/delete/${f.id }" class="btn btn-danger">Xóa</a>
+							  </div>
+							</div>
+						</div>
+					
+				</c:forEach>
+			</div>			
 		</div>
 	</main>
-
-	<!-- Footer -->
-	<footer class="page-footer font-small special-color-dark pt-4 footer-design">
-	
-	  <!-- Footer Elements -->
-	  <div class="container">
-	  		<div class="row">
-	  			<div class="col-12">
-	  					<!-- Social buttons -->
-					    <ul class="list-unstyled list-inline text-center">
-					      <li class="list-inline-item">
-					        <a class="btn-floating btn-fb mx-1">
-					          <i class="fab fa-facebook-f"> </i>
-					        </a>
-					      </li>
-					      <li class="list-inline-item">
-					        <a class="btn-floating btn-tw mx-1">
-					          <i class="fab fa-twitter"> </i>
-					        </a>
-					      </li>
-					      <li class="list-inline-item">
-					        <a class="btn-floating btn-gplus mx-1">
-					          <i class="fab fa-google-plus-g"> </i>
-					        </a>
-					      </li>
-					      <li class="list-inline-item">
-					        <a class="btn-floating btn-li mx-1">
-					          <i class="fab fa-linkedin-in"> </i>
-					        </a>
-					      </li>
-					      <li class="list-inline-item">
-					        <a class="btn-floating btn-dribbble mx-1">
-					          <i class="fab fa-dribbble"> </i>
-					        </a>
-					      </li>
-					    </ul>
-					    <!-- Social buttons -->
-	  			</div>
-	  		</div>
-	  </div>
-	  <!-- Footer Elements -->	
-	</footer>
-	<!-- Footer -->
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

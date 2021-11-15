@@ -28,4 +28,8 @@ $(document).ready(function(){
 	  var modal = $(this)
 	})
 	
+	$('#linkClose').click(function(){
+		$('#alertPageSuccess').hide('fade');
+	})
+	
 })

@@ -73,7 +73,7 @@
 				<div class="col-sm-3">
 					<div class="card avatar-card" style="width:100%">
 						<h4 class="card-title style-card-title">Hoàng Dương Hùng</h4>
-					    <img class="card-img-top" src='<c:url value="/resources/img/avatarronaldo.jpg" />' alt="Avartar">
+					    <img class="card-img-top card-img-left" src='<c:url value="/resources/img/avatarronaldo.jpg" />' alt="Avartar">
 					    <div class="card-body container-wordlearned">
 					      	<span>1575</span>
 					      	<span>word learned</span>
@@ -228,6 +228,75 @@
 								<div class="col-sm-9" style="margin-top: 10px">
 									<div class="row">
 										<span class="detail-name-category">MOUSE</span>
+									</div>
+									<div class="row">
+										<div class="progress" style="width: 80%">
+										  <div class="progress-bar" role="progressbar" aria-valuenow="70"
+										  		aria-valuemin="0" aria-valuemax="100" style="width:70%">
+										    70%
+										  </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row item-category">
+						<div class="col-sm-11 title-category">
+							<div class="row">
+								<div class="col-sm-3 col-chartfirst-title" style="margin-top: 20px;">
+									<div class="chartfirst-title"><span>T</span></div>
+								</div>
+								<div class="col-sm-9" style="margin-top: 10px">
+									<div class="row">
+										<span class="detail-name-category">TABLE</span>
+									</div>
+									<div class="row">
+										<div class="progress" style="width: 80%">
+										  <div class="progress-bar" role="progressbar" aria-valuenow="70"
+										  		aria-valuemin="0" aria-valuemax="100" style="width:70%">
+										    70%
+										  </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row item-category">
+						<div class="col-sm-11 title-category">
+							<div class="row">
+								<div class="col-sm-3 col-chartfirst-title" style="margin-top: 20px;">
+									<div class="chartfirst-title"><span>T</span></div>
+								</div>
+								<div class="col-sm-9" style="margin-top: 10px">
+									<div class="row">
+										<span class="detail-name-category">TABLE</span>
+									</div>
+									<div class="row">
+										<div class="progress" style="width: 80%">
+										  <div class="progress-bar" role="progressbar" aria-valuenow="70"
+										  		aria-valuemin="0" aria-valuemax="100" style="width:70%">
+										    70%
+										  </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row item-category">
+						<div class="col-sm-11 title-category">
+							<div class="row">
+								<div class="col-sm-3 col-chartfirst-title" style="margin-top: 20px;">
+									<div class="chartfirst-title"><span>T</span></div>
+								</div>
+								<div class="col-sm-9" style="margin-top: 10px">
+									<div class="row">
+										<span class="detail-name-category">TABLE</span>
 									</div>
 									<div class="row">
 										<div class="progress" style="width: 80%">

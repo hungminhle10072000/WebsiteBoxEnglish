@@ -1,5 +1,6 @@
 package com.hdn.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,8 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
@@ -36,6 +40,11 @@ public class CategoryEntity {
 	
 	@Column(name = "isDelete", nullable = false)
 	private int isDelete;
+	
+	@Column(name = "createDate")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date createDate;
 
 	@OneToOne
 	@JoinColumn(name = "user_id", nullable = false)
@@ -47,7 +56,14 @@ public class CategoryEntity {
 	@Transient
 	private MultipartFile fileImage;
 	
-	
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
 	public MultipartFile getFileImage() {
 		return fileImage;
 	}
