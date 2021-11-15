@@ -17,9 +17,11 @@ import java.util.List;
 @EnableTransactionManagement
 @Transactional
 public class VocabularyImpl implements VocabularyDao {
+	
     @Autowired
     SessionFactory sessionFactory;
-    @Override
+    
+    
     public VocabularyEntity getVocabulary(Long id) {
         Session session  = sessionFactory.getCurrentSession();
         try {
@@ -33,7 +35,8 @@ public class VocabularyImpl implements VocabularyDao {
         }
     }
 
-    @Override
+
+    
     public List<VocabularyEntity> findAll() {
         Session session  = sessionFactory.getCurrentSession();
         try {
@@ -45,7 +48,7 @@ public class VocabularyImpl implements VocabularyDao {
         }
     }
 
-    @Override
+
     public Integer addVocabulary(VocabularyEntity vocabularyEntity) {
         Session session  = sessionFactory.getCurrentSession();
         try {

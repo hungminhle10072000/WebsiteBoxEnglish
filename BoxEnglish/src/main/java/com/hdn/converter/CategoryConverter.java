@@ -33,7 +33,7 @@ public class CategoryConverter {
         return categoryDto;
     }
     public List<CategoryDto> toListDto(List<CategoryEntity> categoryEntities) {
-        List<CategoryDto> lstCategoryDto = new ArrayList<>();
+        List<CategoryDto> lstCategoryDto = new ArrayList();
         if (categoryEntities != null) {
             for (CategoryEntity t: categoryEntities) {
                 CategoryDto categoryDto = toDto(t);

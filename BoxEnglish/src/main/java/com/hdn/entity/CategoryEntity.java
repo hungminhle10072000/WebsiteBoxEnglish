@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "CATEGORY")
@@ -40,6 +43,18 @@ public class CategoryEntity {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryEntity", cascade=CascadeType.ALL) 
 	private List<VocabularyEntity> listVocabularyEntities;
+	
+	@Transient
+	private MultipartFile fileImage;
+	
+	
+	public MultipartFile getFileImage() {
+		return fileImage;
+	}
+
+	public void setFileImage(MultipartFile fileImage) {
+		this.fileImage = fileImage;
+	}
 
 	public long getId() {
 		return id;

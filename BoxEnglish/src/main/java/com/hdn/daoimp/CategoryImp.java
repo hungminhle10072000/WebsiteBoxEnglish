@@ -17,8 +17,6 @@ public class CategoryImp implements CategoryDao {
     @Autowired
     SessionFactory sessionFactory;
 
-
-    @Override
     public CategoryEntity getCategory(Long id) {
         Session session  = sessionFactory.getCurrentSession();
         try {
@@ -44,7 +42,8 @@ public class CategoryImp implements CategoryDao {
             return null;
         }
     }
-    @Override
+
+    
     public Integer addCategory(CategoryEntity categoryEntity) {
         Session session  = sessionFactory.getCurrentSession();
         try {

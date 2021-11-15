@@ -54,7 +54,7 @@ public class ReviewConverter {
         return reviewDto;
     }
     public List<ReviewDto> toListDto(List<ReviewEntity> reviewEntities) {
-        List<ReviewDto> lstReviewDto = new ArrayList<>();
+        List<ReviewDto> lstReviewDto = new ArrayList();
         if (reviewEntities != null) {
             for (ReviewEntity t: reviewEntities) {
                 ReviewDto reviewDto = toDto(t);

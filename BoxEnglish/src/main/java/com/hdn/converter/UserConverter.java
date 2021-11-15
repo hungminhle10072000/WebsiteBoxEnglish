@@ -35,7 +35,7 @@ public class UserConverter {
         return userDto;
     }
     public List<UserDto> toListDto(List<UserEntity> userEntities) {
-        List<UserDto> lstUserDto = new ArrayList<>();
+        List<UserDto> lstUserDto = new ArrayList();
         if (userEntities != null) {
             for (UserEntity t: userEntities) {
                 UserDto userDto = toDto(t);
