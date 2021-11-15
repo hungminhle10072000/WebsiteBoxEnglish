@@ -216,12 +216,6 @@ body {
 }
 
 /*main*/
-
-.container-main {
-	position: relative;
-	height: 59%;
-}
-
 .item-category{
 	margin-bottom: 10px;
 }
@@ -285,7 +279,7 @@ body {
 	}
 }
 
-img.card-img-top {
+img.card-img-left {
 	width: 70%;
 	border-radius: 50%;
 }
@@ -378,8 +372,15 @@ i.fab.fa-dribbble {
     color: #ffffff;
 }
 
+/* alert */
 
-
+div#alertPageSuccess{
+	position: absolute;
+    top: 6rem;
+    right: 0;
+    width: 250px;
+    background-color: #39dd21 !important;
+}
 
 
 
