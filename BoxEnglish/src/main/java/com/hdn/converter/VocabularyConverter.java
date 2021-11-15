@@ -38,7 +38,7 @@ public class VocabularyConverter {
         return vocabularyDto;
     }
     public List<VocabularyDto> toListDto(List<VocabularyEntity> vocabularyEntities) {
-        List<VocabularyDto> lstVocabularyDto = new ArrayList<>();
+        List<VocabularyDto> lstVocabularyDto = new ArrayList();
         if (vocabularyEntities != null) {
             for (VocabularyEntity t: vocabularyEntities) {
                 VocabularyDto vocabularyDto = toDto(t);

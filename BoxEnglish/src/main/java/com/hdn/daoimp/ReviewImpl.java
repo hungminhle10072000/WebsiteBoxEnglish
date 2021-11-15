@@ -20,7 +20,6 @@ public class ReviewImpl implements ReviewDao {
     @Autowired
     SessionFactory sessionFactory;
 
-    @Override
     public Integer addReview(ReviewEntity reviewEntity) {
         Session session  = sessionFactory.getCurrentSession();
         try {
@@ -31,7 +30,8 @@ public class ReviewImpl implements ReviewDao {
             return null;
         }
     }
-    @Override
+    
+    
     public ReviewEntity getReviewById(Long id) {
         Session session  = sessionFactory.getCurrentSession();
         try {

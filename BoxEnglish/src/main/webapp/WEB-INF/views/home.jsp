@@ -30,16 +30,16 @@
 					</div> 
 					<ul class="nav-list">
 						<li class="nav-item">
-				             <a href="#home" class="nav-link scroll-link">Home</a>
+				             <a href="/BoxEnglish/" class="nav-link scroll-link">Trang chủ</a>
 			            </li>
 			            <li class="nav-item">
-			              <a href="#" class="nav-link">My Course</a>
+			              <a href="#" class="nav-link">Khóa học của tôi</a>
 			            </li>
 			            <li class="nav-item">
-			              <a href="#" class="nav-link scroll-link">Course</a>
+			              <a href="#" class="nav-link scroll-link">Danh sách khóa học</a>
 			            </li>
 		             	<li class="nav-item">
-			              	<a href="#" class="nav-link scroll-link">Note</a>
+			              	<a href="list-note" class="nav-link scroll-link">Ghi chú</a>
 			            </li>
 					</ul>
 				</div>
@@ -50,10 +50,10 @@
 		        	</a>
 		        	<div class="setting-user">
 		        		<div class="setting-user-item">
-		        			<i class='bx bxs-edit-alt'></i> <span>Edit profile</span>
+		        			<i class='bx bxs-edit-alt'></i> <span>Cập nhật thông tin</span>
 		        		</div>
 		        		<div class="setting-user-item">
-		        			<i class='bx bxs-log-out' ></i> <span>Logout</span>
+		        			<i class='bx bxs-log-out' ></i> <span>Đăng xuất</span>
 		        		</div>
 		        	</div>
 				</div>
@@ -268,11 +268,8 @@
 			</div>
 		</div>
 	</main>
-<!-- 	<footer class="footer-design">
-		<h1>Đây là footer</h1>
-	</footer> -->
 	<!-- Footer -->
-	<footer class="page-footer font-small special-color-dark pt-4">
+	<footer class="page-footer font-small special-color-dark pt-4 footer-design">
 	
 	  <!-- Footer Elements -->
 	  <div class="container">
@@ -311,13 +308,6 @@
 	  		</div>
 	  </div>
 	  <!-- Footer Elements -->
-	
-	  <!-- Copyright -->
-	  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-	    <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
-	  </div>
-	  <!-- Copyright -->
-	
 	</footer>
 	<!-- Footer -->
 	<jsp:include page="footer.jsp"></jsp:include>

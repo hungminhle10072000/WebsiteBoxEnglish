@@ -13,7 +13,6 @@ public class UserService implements UserDao{
 	@Autowired
 	UserImp userimp;
 
-	@Override
 	public UserEntity GetUser(Long id) {
 		// TODO Auto-generated method stub
 		return userimp.GetUser(id);
