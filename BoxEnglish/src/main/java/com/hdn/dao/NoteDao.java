@@ -7,4 +7,5 @@ public interface NoteDao {
 	boolean AddNote(CategoryEntity categoryEntity);
 	List<CategoryEntity> getAllNote(Long idUser);
 	boolean deleteNote(Long id);
+	CategoryEntity getNoteById(Long idNote);
 }

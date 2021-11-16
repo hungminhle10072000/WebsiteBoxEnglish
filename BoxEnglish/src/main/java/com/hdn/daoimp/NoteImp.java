@@ -64,4 +64,14 @@ public class NoteImp implements NoteDao{
 		}
 	}
 
+	@Override
+	public CategoryEntity getNoteById(Long idNote) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM CategoryEntity c WHERE c.id = :id and c.isDelete = 0";
+		Query<CategoryEntity> query = session.createQuery(hql);
+		query.setParameter("id", idNote);
+		CategoryEntity noteResult = query.getSingleResult();
+		return noteResult;
+	}
+
 }

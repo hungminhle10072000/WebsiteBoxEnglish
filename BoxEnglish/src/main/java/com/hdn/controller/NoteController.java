@@ -22,10 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hdn.entity.CategoryEntity;
 import com.hdn.entity.UserEntity;
 import com.hdn.service.NoteService;
+import com.hdn.service.UserService;
 
 @Controller
+@SessionAttributes("user")
 @RequestMapping("/note/")
-@SessionAttributes({"user"})
 public class NoteController {
 	
 	@Autowired
@@ -33,6 +34,9 @@ public class NoteController {
 	
 	@Autowired
 	private NoteService noteService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping
 	public String defaultNote(ModelMap model, @ModelAttribute("user") UserEntity user) {
@@ -43,24 +47,59 @@ public class NoteController {
 	}
 	
 	@PostMapping("add")
-	public String addNote(@ModelAttribute("noteEntity") CategoryEntity note, @ModelAttribute("user") UserEntity user) {
+	public String addNote(ModelMap model, @ModelAttribute("noteEntity") CategoryEntity note, @ModelAttribute("user") UserEntity user) {
 		note.setIsDelete(0);
 		note.setUserEntity(user);
 		try {
 			String path = context.getRealPath("/") + "resources/img/" + note.getFileImage().getOriginalFilename();
 			note.getFileImage().transferTo(new File(path));
 			note.setImage(note.getFileImage().getOriginalFilename());
-			if(noteService.AddNote(note)) return "redirect:/list-note";
-			else return "redirect:/list-note";
+			if(noteService.AddNote(note)) {
+				model.addAttribute("message","Thêm ghi chú thành công !!!");
+			}	
+			else {
+				model.addAttribute("message","Thêm ghi chú thất bại !!!");
+			}
+				
 		} catch (Exception e) {
-			return "redirect:/list-note";
-		}		
+			model.addAttribute("message","Thêm ghi chú thất bại !!!");
+			
+		} finally {
+			List<CategoryEntity> noteList = noteService.getAllNote(user.getId());
+			model.addAttribute("noteEntity", new CategoryEntity());
+			model.addAttribute("noteList", noteList);
+			return "list-note";
+		}
 	}
 	
-	@GetMapping("delete/{id}")
-	public String deleteNote(@PathVariable("id") Long id) {
-		noteService.deleteNote(id);
-		return "redirect:/list-note";
+	@GetMapping("delete/{idNote}")
+	public String deleteNote(@PathVariable("idNote") Long idNote, ModelMap model, @ModelAttribute("user") UserEntity user) {
+		try {
+			if(noteService.deleteNote(idNote)) {
+				model.addAttribute("message","Xóa ghi chú thành công !!!");
+			} else model.addAttribute("message","Xóa ghi chú thất bại !!!");
+		} catch (Exception e) {
+			model.addAttribute("message","Xóa ghi chú thất bại !!!");
+		} finally {
+			List<CategoryEntity> noteList = noteService.getAllNote(user.getId());
+			model.addAttribute("noteEntity", new CategoryEntity());
+			model.addAttribute("noteList", noteList);
+			return "list-note";
+		}	
 	}
 	
+	@GetMapping("edit/{idNote}")
+	public String editNote(@PathVariable("idNote") Long idNote, ModelMap model) {
+		CategoryEntity noteEdit = noteService.getNoteById(idNote);
+		model.addAttribute("noteEdit",noteEdit);
+		return "edit-note";
+	}
+	
+	@ModelAttribute("user")
+	public UserEntity getUserForTest () {
+		Long test = (long) 1;
+	    UserEntity userEntityTest = userService.GetUser(test);
+	    return userEntityTest;
+	}
+	 
 }

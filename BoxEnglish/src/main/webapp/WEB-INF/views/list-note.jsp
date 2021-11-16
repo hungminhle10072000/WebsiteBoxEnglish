@@ -33,7 +33,7 @@
 					</div> 
 					<ul class="nav-list">
 						<li class="nav-item">
-				             <a href="/BoxEnglish/" class="nav-link scroll-link">Trang chủ</a>
+				             <a href="${pageContext.request.contextPath }/" class="nav-link scroll-link">Trang chủ</a>
 			            </li>
 			            <li class="nav-item">
 			              <a href="#" class="nav-link">Khóa học của tôi</a>
@@ -42,7 +42,7 @@
 			              <a href="#" class="nav-link scroll-link">Danh sách khóa học</a>
 			            </li>
 		             	<li class="nav-item">
-			              	<a href="/BoxEnglish/note/" class="nav-link scroll-link">Ghi chú</a>
+			              	<a href="${pageContext.request.contextPath }/note/" class="nav-link scroll-link">Ghi chú</a>
 			            </li>
 					</ul>
 				</div>
@@ -70,10 +70,12 @@
 		</nav>
 	</header>
 	<main>
-		<div id="alertPageSuccess" class="alert alert-success collapse alert-page">
-			<a id="linkClose" href="#" class="close" >&times;</a>
-			<strong>Thành công !</strong>
-		</div>
+		<c:if test="${message != null}">
+			<div id="alertPageSuccess" class="alert alert-success collapse alert-page">
+				<a id="linkClose" href="#" class="close" style="margin-left: 10px; margin-right: 2px">&times;</a> 
+				<strong>${message }</strong>
+			</div>
+		</c:if>
 		<div class="container-fluid">			
 			<div class="row">
 				<div class="col-md-4">
@@ -91,7 +93,7 @@
 					        </button>
 					      </div>
 					      <div class="modal-body">
-						      <form:form action="/BoxEnglish/note/add"
+						      <form:form action="${pageContext.request.contextPath }/note/add"
 										method="post" enctype="multipart/form-data" modelAttribute="noteEntity">
 						          <div class="form-group">
 						            <label for="title" class="col-form-label">Tên ghi chú:</label>
@@ -112,7 +114,7 @@
 					      </div>
 					    </div>
 					  </div>
-					  <!--end modal  -->  
+					  <!--end modal  -->    
 					</div>
 				</div>
 			</div>
@@ -128,8 +130,8 @@
 							    <p class="card-text">${f.description }</p>
 						        <p class="card-text"><span style="color: #f70000">Ngày tạo:</span>  <fmt:formatDate pattern = "dd/MM/yyyy" value = "${f.createDate }" /></p>
 							    <a href="#" class="btn btn-primary">Chi tiết</a>
-							    <a href="#" class="btn btn-warning">Chỉnh sửa</a>
-							    <a href="/BoxEnglish/note/delete/${f.id }" class="btn btn-danger">Xóa</a>
+							    <a href="${pageContext.request.contextPath }/note/edit/${f.id }" class="btn btn-warning">Chỉnh sửa</a>
+							    <a href="${pageContext.request.contextPath }/note/delete/${f.id }" class="btn btn-danger">Xóa</a>
 							  </div>
 							</div>
 						</div>
