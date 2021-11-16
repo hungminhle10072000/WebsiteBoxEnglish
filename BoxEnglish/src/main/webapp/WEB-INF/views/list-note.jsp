@@ -118,7 +118,7 @@
 					</div>
 				</div>
 			</div>
-			
+			<hr style="width: 100%; border: 1px solid #cdbbbb;">
 			<!--display note-->
 			<div class="row mt-3 pb-3">
 				<c:forEach var="f" items="${noteList }">				

@@ -37,4 +37,9 @@ public class NoteService implements NoteDao{
 		return noteImp.getNoteById(idNote);
 	}
 
+	@Override
+	public boolean UpdateNote(Long id, CategoryEntity categoryEntity) {
+		return noteImp.UpdateNote(id, categoryEntity);
+	}
+
 }

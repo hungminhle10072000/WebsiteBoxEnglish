@@ -1,7 +1,10 @@
 package com.hdn.daoimp;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -20,6 +23,9 @@ public class NoteImp implements NoteDao{
 	
 	@Autowired
 	SessionFactory sessionFactory;
+	
+	@Autowired
+	ServletContext context;
 
 	@Override
 	public boolean AddNote(CategoryEntity categoryEntity) {
@@ -61,6 +67,8 @@ public class NoteImp implements NoteDao{
 		} catch (Exception e) {
 			t.rollback();
 			return false;
+		} finally {
+			session.close();
 		}
 	}
 
@@ -72,6 +80,32 @@ public class NoteImp implements NoteDao{
 		query.setParameter("id", idNote);
 		CategoryEntity noteResult = query.getSingleResult();
 		return noteResult;
+	}
+
+	@Override
+	public boolean UpdateNote(Long id,CategoryEntity noteEntity) {
+		Date date=java.util.Calendar.getInstance().getTime();  
+		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			CategoryEntity noteUpdate  = session.get(CategoryEntity.class, id);
+			noteUpdate.setCreateDate(date);
+			noteUpdate.setTitle(noteEntity.getTitle());
+			noteUpdate.setDescription(noteEntity.getDescription());
+			if(!noteEntity.getFileImage().isEmpty()) {
+				String path = context.getRealPath("/") + "resources/img/" + noteEntity.getFileImage().getOriginalFilename();
+				noteEntity.getFileImage().transferTo(new File(path));
+				noteUpdate.setImage(noteEntity.getFileImage().getOriginalFilename());
+			}
+			session.update(noteUpdate);
+			t.commit();
+			return true;
+		} catch (Exception e) {
+			t.rollback();
+			return false;
+		} finally {
+			session.close();
+		}
 	}
 
 }

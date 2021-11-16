@@ -76,35 +76,37 @@
 				<strong>${message }</strong>
 			</div>
 		</c:if>
-		<div class="container-fluid">			
+		<div class="container-fluid" style="padding: 0">			
 			<div class="row">
-				<div class="col-md-4">
-					<h3>Chỉnh sửa ghi chú</h3>
+				<div class="col-md-12 d-flex justify-content-center">
+					<h2>Chỉnh sửa ghi chú</h2>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col">
-					<form:form action="" modelAttribute="noteEdit" method="post">
+			<hr style="width: 100%; border: 1px solid #cdbbbb;">
+			<div class="row mt-2">
+				<div class="col-md-12  d-flex justify-content-center">
+					<form:form action="${pageContext.request.contextPath }/note/update/${noteEdit.id }" modelAttribute="noteEdit" method="post" enctype="multipart/form-data" id="form-edit-note">
 						<div style="margin-top: 5px">
-							<label>Tên ghi chú:</label> <br >
-							<form:input path="title"/>
+							<label style="font-weight: 500">Tên ghi chú:</label> <br >
+							<form:input id="input-edit-title" path="title" required="required" style="width:355px"/>
 						</div>
-						<div style="margin-top: 5px; margin-bottom: 5px">
-							<label>Mô tả:</label> <br />
-							<form:textarea path="description" rows="3" cols="40"/>
+						<div style="margin-top: 10px; margin-bottom: 5px">
+							<label style="font-weight: 500">Mô tả:</label> <br />
+							<form:textarea id="input-edit-description" path="description" rows="3" cols="40" required="required"/>
 						</div>
-						<div style="margin-top: 5px; margin-bottom: 5px">
-							<label>Ảnh mô tả:</label> <br />
-							<form:input path="fileImage" type="file" accept="image/*"/>
+						<div style="margin-top: 10px; margin-bottom: 5px">
+							<label style="font-weight: 500">Ảnh mô tả:</label> <br />
+							<form:input onchange="chosseFileImage(event)" path="fileImage" type="file" accept="image/*"/>
 						</div>
 						<div>
 							<c:if test="${noteEdit.image != null}">
-								<img alt="Ảnh mô tả" src='<c:url value="/resources/img/${noteEdit.image }" />' style="height: 250px; width: 250px"/>
+								<img id="imgNoteOldNone" alt="Ảnh mô tả" src='<c:url value="/resources/img/${noteEdit.image }" />' style="height: 250px; width: 250px"/>
 							</c:if>
 						</div>
-						<div style="margin-top: 10px; margin-bottom: 10px">
-							<button class="btn btn-success">Cập nhật</button>
-							<button class="btn btn-warning" type="reset">Reset</button>
+						<div style="margin-top: 10px; margin-bottom: 10px" class="group-button-editForm">
+							<button class="btn btn-success" type="submit">Cập nhật</button>
+							<button class="btn btn-warning ml-2" type="reset" onclick="setImgNoteOld()">Reset</button>
+							<button class="btn btn-secondary ml-2" type="button"><a href="${pageContext.request.contextPath }/note/" style=" text-decoration: none; color: white;">Quay lại</a></button>
 						</div>	
 					</form:form>
 				</div>

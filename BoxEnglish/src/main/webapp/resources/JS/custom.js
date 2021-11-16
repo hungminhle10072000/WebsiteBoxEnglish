@@ -37,6 +37,19 @@ $(document).ready(function(){
 	
 	$('#linkClose').click(function(){
 		$('#alertPageSuccess').hide('fade');
-	})
-	
+	})	
 })
+
+function chosseFileImage(event){
+	$(document).ready(function(){
+		const imgNoteOldNone = document.querySelector("#imgNoteOldNone");
+		$(imgNoteOldNone).hide();
+	})
+}
+
+function setImgNoteOld(){
+	$(document).ready(function(){
+		const imgNoteOldNone = document.querySelector("#imgNoteOldNone");
+		$(imgNoteOldNone).show();
+	})
+}

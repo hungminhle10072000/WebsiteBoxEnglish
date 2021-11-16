@@ -24,6 +24,7 @@ import com.hdn.entity.UserEntity;
 import com.hdn.service.NoteService;
 import com.hdn.service.UserService;
 
+
 @Controller
 @SessionAttributes("user")
 @RequestMapping("/note/")
@@ -93,6 +94,19 @@ public class NoteController {
 		CategoryEntity noteEdit = noteService.getNoteById(idNote);
 		model.addAttribute("noteEdit",noteEdit);
 		return "edit-note";
+	}
+	
+	@PostMapping("update/{idNote}")
+	public String updateNote(@PathVariable("idNote") Long idNote, ModelMap model, @ModelAttribute("user") UserEntity user, @ModelAttribute("noteEdit") CategoryEntity note) {
+		if(noteService.UpdateNote(idNote, note)) {
+			model.addAttribute("message", "Cập nhật ghi chú thành công !!!");
+		} else {
+			model.addAttribute("message", "Cập nhật ghi chú thất bại !!!");
+		}
+		List<CategoryEntity> noteList = noteService.getAllNote(user.getId());
+		model.addAttribute("noteEntity", new CategoryEntity());
+		model.addAttribute("noteList", noteList);
+		return "list-note";
 	}
 	
 	@ModelAttribute("user")
