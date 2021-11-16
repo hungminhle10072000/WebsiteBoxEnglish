@@ -28,6 +28,13 @@ $(document).ready(function(){
 	  var modal = $(this)
 	})
 	
+	
+	$('#alertPageSuccess').show('fade');
+	
+	setTimeout(function () {
+		$('#alertPageSuccess').hide('fade');
+	},3000);
+	
 	$('#linkClose').click(function(){
 		$('#alertPageSuccess').hide('fade');
 	})

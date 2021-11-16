@@ -43,10 +43,6 @@ public class HomController {
     
     @GetMapping("list-note")
     public String listNote(HttpSession httpSession) {
-    	Long test = (long) 1;
-    	UserEntity userEntity = userService.GetUser(test);
-    	System.out.println(userEntity.getFullname());
-    	httpSession.setAttribute("user", userEntity);
     	return "redirect:note/";
     }
     

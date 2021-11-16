@@ -32,4 +32,9 @@ public class NoteService implements NoteDao{
 		return noteImp.deleteNote(id);
 	}
 
+	@Override
+	public CategoryEntity getNoteById(Long idNote) {
+		return noteImp.getNoteById(idNote);
+	}
+
 }
