@@ -30,4 +30,22 @@ public class UserImp implements UserDao{
 			return null;
 		}
 	}
+	
+	@Transactional
+	public UserEntity findbyusername_password(String username, String password){
+       
+		Session session  = sessionFactory.getCurrentSession();
+        try {
+ 
+        	UserEntity  userEntity = (UserEntity) session.createQuery("FROM UserEntity U WHERE U.username = :userName").setParameter("userName", username).uniqueResult();
+
+            if (userEntity != null && userEntity.getPassword().equals(password)) {
+                return userEntity;
+            }else {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		}
+    }
 }
