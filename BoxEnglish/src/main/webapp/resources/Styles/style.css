@@ -383,6 +383,72 @@ div#alertPageSuccess{
 }
 
 
+/* edit note */
+form#form-edit-note {
+	padding: 1rem;
+	margin-bottom: 1rem;
+	background-color: #00ff90 !important;
+	border-radius: 10px;
+}
+
+input#input-edit-title, textarea#input-edit-description{
+	  width: 100%;
+	  padding: 12px 20px;
+	  margin: 8px 0;
+	  box-sizing: border-box;
+	  border: 3px solid #ccc;
+	  -webkit-transition: 0.5s;
+	  transition: 0.5s;
+	  outline: none;
+}
+
+
+input#input-edit-title:focus{
+	border: 3px solid #555;
+}
+
+textarea#input-edit-description:focus{
+	border: 3px solid #555;
+}
+
+.group-button-editForm {
+	display: flex;
+	justify-content: flex-start;
+}
+
+/* detail note*/
+
+#upload-audio {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+}
+
+
+label.label-upload-audio {
+   cursor: pointer;
+}
+
+i.fas.fa-plus {
+	cursor: pointer; 
+	font-size: 1.5rem; 
+	display: none
+}
+
+
+tr.row-add-word:hover td i.fas.fa-plus {
+	display: block;
+}
+
+i.fas.fa-minus {
+	cursor: pointer;
+	font-size: 1.5rem;
+	display: none;
+}
+
+tr.row-item-word:hover td i.fas.fa-minus {
+	display: block;
+}
 
 
 

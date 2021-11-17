@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import com.hdn.entity.CategoryEntity;
 import com.hdn.entity.UserEntity;
+import com.hdn.entity.VocabularyEntity;
 import com.hdn.service.NoteService;
 import com.hdn.service.UserService;
+
 
 @Controller
 @SessionAttributes("user")
@@ -93,6 +95,26 @@ public class NoteController {
 		CategoryEntity noteEdit = noteService.getNoteById(idNote);
 		model.addAttribute("noteEdit",noteEdit);
 		return "edit-note";
+	}
+	
+	@PostMapping("update/{idNote}")
+	public String updateNote(@PathVariable("idNote") Long idNote, ModelMap model, @ModelAttribute("user") UserEntity user, @ModelAttribute("noteEdit") CategoryEntity note) {
+		if(noteService.UpdateNote(idNote, note)) {
+			model.addAttribute("message", "Cập nhật ghi chú thành công !!!");
+		} else {
+			model.addAttribute("message", "Cập nhật ghi chú thất bại !!!");
+		}
+		List<CategoryEntity> noteList = noteService.getAllNote(user.getId());
+		model.addAttribute("noteEntity", new CategoryEntity());
+		model.addAttribute("noteList", noteList);
+		return "list-note";
+	}
+	
+	@GetMapping("detail/{idNote}")
+	public String detailNote(@PathVariable("idNote") Long idNote, ModelMap model) {
+		List<VocabularyEntity> listVocanote = noteService.getAllNoteDetail(idNote);
+		model.addAttribute("listVocanote",listVocanote);
+		return "note-detail";
 	}
 	
 	@ModelAttribute("user")

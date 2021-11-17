@@ -118,7 +118,7 @@
 					</div>
 				</div>
 			</div>
-			
+			<hr style="width: 100%; border: 1px solid #cdbbbb;">
 			<!--display note-->
 			<div class="row mt-3 pb-3">
 				<c:forEach var="f" items="${noteList }">				
@@ -129,7 +129,7 @@
 							    <h4 class="card-title">${f.title }</h4>
 							    <p class="card-text">${f.description }</p>
 						        <p class="card-text"><span style="color: #f70000">Ngày tạo:</span>  <fmt:formatDate pattern = "dd/MM/yyyy" value = "${f.createDate }" /></p>
-							    <a href="#" class="btn btn-primary">Chi tiết</a>
+							    <a href="${pageContext.request.contextPath }/note/detail/${f.id }" class="btn btn-primary">Chi tiết</a>
 							    <a href="${pageContext.request.contextPath }/note/edit/${f.id }" class="btn btn-warning">Chỉnh sửa</a>
 							    <a href="${pageContext.request.contextPath }/note/delete/${f.id }" class="btn btn-danger">Xóa</a>
 							  </div>

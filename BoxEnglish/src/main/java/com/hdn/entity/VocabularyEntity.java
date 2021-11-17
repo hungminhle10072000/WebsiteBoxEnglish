@@ -14,8 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Nationalized;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "VOCABULARY")
@@ -52,6 +54,9 @@ public class VocabularyEntity {
 	@Column(name = "audio_vocabulary", nullable = false)
 	private String audio_vocabulary;
 	
+	@Transient
+	private MultipartFile fileAudio;
+	
 	@Column(name = "isDelete", nullable = false)
 	private int isDelete;
 	
@@ -68,6 +73,18 @@ public class VocabularyEntity {
 	public void setMean_example_vocabulary(String mean_example_vocabulary) {
 		this.mean_example_vocabulary = mean_example_vocabulary;
 	}
+	
+	
+	public MultipartFile getFileAudio() {
+		return fileAudio;
+	}
+
+
+	public void setFileAudio(MultipartFile fileAudio) {
+		this.fileAudio = fileAudio;
+	}
+
+
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "vocabularyEntity", cascade =CascadeType.ALL)
 	private List<ReviewEntity> listReviewEntities; //What is??
