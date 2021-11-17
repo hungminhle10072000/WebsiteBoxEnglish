@@ -40,7 +40,7 @@ public class HomeAPI {
 			session.setAttribute("user", userEntity);
 			if (userEntity.getRole().equals("1") || userEntity.getRole().equals("2")
 					|| userEntity.getRole().equals("3")) {
-				return "admin";
+				return "admin/index";
 			} else {
 				return "home";
 			}
