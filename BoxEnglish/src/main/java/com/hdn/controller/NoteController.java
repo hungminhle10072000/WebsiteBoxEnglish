@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import com.hdn.entity.CategoryEntity;
 import com.hdn.entity.UserEntity;
+import com.hdn.entity.VocabularyEntity;
 import com.hdn.service.NoteService;
 import com.hdn.service.UserService;
 
@@ -107,6 +108,13 @@ public class NoteController {
 		model.addAttribute("noteEntity", new CategoryEntity());
 		model.addAttribute("noteList", noteList);
 		return "list-note";
+	}
+	
+	@GetMapping("detail/{idNote}")
+	public String detailNote(@PathVariable("idNote") Long idNote, ModelMap model) {
+		List<VocabularyEntity> listVocanote = noteService.getAllNoteDetail(idNote);
+		model.addAttribute("listVocanote",listVocanote);
+		return "note-detail";
 	}
 	
 	@ModelAttribute("user")

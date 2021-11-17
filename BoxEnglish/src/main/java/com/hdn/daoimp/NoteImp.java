@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hdn.dao.NoteDao;
 import com.hdn.entity.CategoryEntity;
+import com.hdn.entity.VocabularyEntity;
 
 @Repository
 @Transactional
@@ -98,6 +99,35 @@ public class NoteImp implements NoteDao{
 				noteUpdate.setImage(noteEntity.getFileImage().getOriginalFilename());
 			}
 			session.update(noteUpdate);
+			t.commit();
+			return true;
+		} catch (Exception e) {
+			t.rollback();
+			return false;
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public List<VocabularyEntity> getAllNoteDetail(Long idNote) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM VocabularyEntity c WHERE c.categoryEntity.id = :id and c.isDelete = 0";
+		Query<CategoryEntity> query = session.createQuery(hql);
+		query.setParameter("id", idNote);
+		List results = query.list();
+		return results;
+	}
+
+	@Override
+	public boolean AddWordNote(VocabularyEntity wordNote) {
+		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			String path = context.getRealPath("/") + "resources/audio/" + wordNote.getFileAudio().getOriginalFilename();
+			wordNote.getFileAudio().transferTo(new File(path));
+			wordNote.setAudio_vocabulary(wordNote.getFileAudio().getOriginalFilename());
+			session.save(wordNote);
 			t.commit();
 			return true;
 		} catch (Exception e) {

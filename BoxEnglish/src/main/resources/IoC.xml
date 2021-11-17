@@ -16,7 +16,7 @@
 	   <property name="driverClassName" value="com.mysql.jdbc.Driver" />
 	   <property name="url" value="jdbc:mysql://localhost:3306/dbboxenglish?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
 	   <property name="username" value="root"/>
-	   <property name="password" value="123456"/>
+	   <property name="password" value="minhle10072000"/>
 	</bean>
 	
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -25,9 +25,9 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+<!-- 				<prop key="hibernate.show_sql">true</prop> -->
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.hibernate.current_session_context_class">thread</prop> 
 				<prop key="hibernate.connection.characterEncoding">utf8</prop>
 			</props>

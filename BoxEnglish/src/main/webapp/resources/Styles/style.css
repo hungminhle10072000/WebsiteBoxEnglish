@@ -415,3 +415,42 @@ textarea#input-edit-description:focus{
 	display: flex;
 	justify-content: flex-start;
 }
+
+/* detail note*/
+
+#upload-audio {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+}
+
+
+label.label-upload-audio {
+   cursor: pointer;
+}
+
+i.fas.fa-plus {
+	cursor: pointer; 
+	font-size: 1.5rem; 
+	display: none
+}
+
+
+tr.row-add-word:hover td i.fas.fa-plus {
+	display: block;
+}
+
+i.fas.fa-minus {
+	cursor: pointer;
+	font-size: 1.5rem;
+	display: none;
+}
+
+tr.row-item-word:hover td i.fas.fa-minus {
+	display: block;
+}
+
+
+
+
+
