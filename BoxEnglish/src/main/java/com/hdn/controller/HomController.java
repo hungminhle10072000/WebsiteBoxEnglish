@@ -8,11 +8,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hdn.entity.CategoryEntity;
 import com.hdn.entity.UserEntity;
 import com.hdn.service.UserService;
+import com.sun.jdi.Method;
 
 @Controller
 @RequestMapping("/")
@@ -40,10 +42,20 @@ public class HomController {
     public String Admin() {
         return "admin/index";
     }
-    
+
     @GetMapping("list-note")
     public String listNote(HttpSession httpSession) {
     	return "redirect:note/";
     }
-    
+
+    @GetMapping(value = "/login")
+	public String Login( ModelMap mm ) {
+
+    	//mm.put("user", new UserEntity());
+        return "login";
+    }
+    @GetMapping(value = "/register")
+    public String Register() {
+        return "register";
+    }
 }
