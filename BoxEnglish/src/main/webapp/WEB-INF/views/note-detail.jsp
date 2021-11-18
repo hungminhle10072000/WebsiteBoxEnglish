@@ -92,7 +92,7 @@
 					  <tbody>
 					  	<c:forEach var="f" items="${listVocanote }">
 					  		 <tr class="row-item-word">
-							  <td><i class="fas fa-minus" id-note-detail="${f.id }"></i></td>	
+							  <td><i class="fas fa-minus action-delete-word" id-note-detail="${f.id }"></i></td>	
 						      <td>${f.vocabulary }</td>
 						      <td>${f.mean_vocabulary }</td>
 						      <td>
@@ -136,7 +136,31 @@
 			});
 		} 
 		
-		$(document).ready(function() {			
+		$(document).ready(function() {
+			
+			$("#table-word-note").on('click', '.action-delete-word', function() {
+				var currentRow= $(this).closest("tr");
+			    var checkConfirm = confirm("Bạn chắc chắn muốn xóa !!!!");
+			    if (checkConfirm == true){
+			    	var idWordDelete = $(this).attr("id-note-detail")
+			    	$.ajax({
+	                    type: "DELETE",
+	                    url: '${pageContext.request.contextPath }/note/detail/delete/' + idWordDelete,
+	                    contentType: false,
+	                    success: function (data) {
+	                        alert("Xóa thành công !!!");
+	                        currentRow.remove();
+	                    },
+	                    error: function (data) {
+	                    	console.log(data);
+	                    	alert("Xóa thất bại !!!");
+	                    }
+                	});		
+			    } else {
+			    	
+			    }		
+			})
+			
 			$("i.fas.fa-plus.action-add-word").click(function() {
 				var currentRow=$(this).closest("tr");
 				var value_idNote = document.getElementById("value_idNote").value;
@@ -172,7 +196,7 @@
 		                cell2 = row.insertCell(2);
 		                cell3 = row.insertCell(3);
 		                
-		                cell0.innerHTML = '<i class="fas fa-minus" id-note-detail="' + data.id  + '"></i>';
+		                cell0.innerHTML = '<i class="fas fa-minus action-delete-word" id-note-detail="' + data.id  + '"></i>';
 		                cell1.innerHTML = data.vocabulary;
 		                cell2.innerHTML = data.mean_vocabulary;
 		                cell3.innerHTML = '<audio controls><source src="/BoxEnglish/resources/audio/' + data.audio_vocabulary + '" type="audio/mp3"></audio>';
@@ -190,6 +214,9 @@
 				})
 			})
 		})
+		
+		
+		
 	</script>
 </body>
 </html>

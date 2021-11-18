@@ -53,4 +53,9 @@ public class NoteService implements NoteDao{
 		return noteImp.AddWordNote(wordNote);
 	}
 
+	@Override
+	public boolean deleteWordNote(Long idWord) {
+		return noteImp.deleteWordNote(idWord);
+	}
+
 }

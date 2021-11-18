@@ -13,4 +13,5 @@ public interface NoteDao {
 	boolean UpdateNote(Long id, CategoryEntity categoryEntity);
 	List<VocabularyEntity> getAllNoteDetail(Long idNote);
 	VocabularyEntity AddWordNote(VocabularyEntity wordNote);
+	boolean deleteWordNote(Long idWord);
 }

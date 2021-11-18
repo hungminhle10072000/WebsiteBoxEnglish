@@ -145,4 +145,22 @@ public class NoteImp implements NoteDao{
 		return result;
 	}
 
+	@Override
+	public boolean deleteWordNote(Long idWord) {
+		boolean checkResult = false;
+		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
+		VocabularyEntity wordNote = session.get(VocabularyEntity.class, idWord);
+		try {
+			session.delete(wordNote);
+			checkResult = true;
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+		} finally {
+			session.close();
+		}
+		return checkResult;
+	}
+
 }
