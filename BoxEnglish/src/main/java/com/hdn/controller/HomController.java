@@ -24,8 +24,13 @@ public class HomController {
 	private UserService userService;
 	
     @GetMapping
-    public String Home() {
-        return "home";
+    public String Home(HttpSession session) {
+    	if(session.getAttribute("user") != null) {
+    		return "home";
+    	} else {
+    		return "redirect:login/";
+    	}
+        
     }
     
     @GetMapping(value = "/practice-voca")
@@ -49,11 +54,10 @@ public class HomController {
     }
 
     @GetMapping(value = "/login")
-	public String Login( ModelMap mm ) {
-
-    	//mm.put("user", new UserEntity());
+	public String Login() {
         return "login";
     }
+    
     @GetMapping(value = "/register")
     public String Register() {
         return "register";

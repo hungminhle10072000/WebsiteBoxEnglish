@@ -141,13 +141,5 @@ public class NoteController {
 			return null;
 		}
 	}
-	
-	
-	@ModelAttribute("user")
-	public UserEntity getUserForTest () {
-		Long test = (long) 1;
-	    UserEntity userEntityTest = userService.GetUser(test);
-	    return userEntityTest;
-	}
 	 
 }
