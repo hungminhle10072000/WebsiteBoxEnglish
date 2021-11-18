@@ -28,10 +28,20 @@
    	<mvc:annotation-driven enable-matrix-variables="true"></mvc:annotation-driven>
    	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
    	
+   	<!--    Configure processor mapper-->
+	<bean id="requestMappingHandlerAdapter"
+	      class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	    <property name="messageConverters">
+	        <list>
+	            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+	        </list>
+	    </property>
+	</bean>
+   	
    	<bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- max upload size in bytes -->
-        <property name="maxUploadSize" value="20971520" /> <!-- 20MB -->
+        <property name="maxUploadSize" value="52428800" /> <!-- 20MB -->
          
         <!-- max size of file in memory (in bytes) -->
         <property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->

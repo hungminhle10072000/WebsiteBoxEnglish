@@ -80,7 +80,7 @@
 			<hr style="width: 100%; border: 1px solid #cdbbbb;">
 			<div class="row">
 				<div class="col-md-12 table-responsive" style="overflow: hidden;">
-					<table class="table table-hover">
+					<table class="table table-hover" id="table-word-note">
 					  <thead>
 					    <tr>
 					      <th scope="col"></th>
@@ -95,24 +95,29 @@
 							  <td><i class="fas fa-minus" id-note-detail="${f.id }"></i></td>	
 						      <td>${f.vocabulary }</td>
 						      <td>${f.mean_vocabulary }</td>
-						      <td>${f.audio_vocabulary }</td>
+						      <td>
+						      	<audio controls>
+						      		<source src='<c:url value="/resources/audio/${f.audio_vocabulary }" />' type="audio/mp3">
+								</audio>						
+							  </td>
 						    </tr>
 					  	</c:forEach>
 					    <tr class="row-add-word">
-					    	<td style="width: 115px"><i class="fas fa-plus"></i></td>
-					    	<td><input type="text"></td>
-					    	<td><input type="text"></td>
+					    	<input hidden id="value_idNote" value="${idNote }"/>
+					    	<td style="width: 115px"><i class="fas fa-plus action-add-word"></i></td>
+					    	<td class="input_vocabulary"><input type="text"></td>
+					    	<td class="input_mean_vocabulary"><input type="text"></td>
 					    	<td>
 					    		<button class="btn btn-secondary"><label for="upload-audio" class="label-upload-audio">Upload</label></button>
 					    		<span id="labelNameFile"></span>
-					    		<input type="file" id="upload-audio" accept="audio/*" onchange="setNameFile(event)"/>
+					    		<input type="file" id="upload-audio" accept="audio/*" class="file_audio" onchange="setNameFile(event)"/>
 					    	</td>
 					    </tr>
 					  </tbody>
 					</table>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row pb-5">
 				<div class="group-button-note-detail col-md-2 offset-10">
 					<button class="btn btn-success" onclick="window.location.reload()">Làm mới</button>
 					<button class="btn btn-warning"><a href="${pageContext.request.contextPath }/note/" style=" text-decoration: none; color: white;">Quay lại</a></button>
@@ -122,13 +127,69 @@
 	</main>
 	<jsp:include page="footer.jsp"></jsp:include>
 	<script type="text/javascript">
+		let file_audio = null;
 		function setNameFile(event) {
-			var filename = event.target.files[0].name;
-			$( document ).ready(function() {
+			file_audio = event.target.files[0];
+			$(document ).ready(function() {
 				var labelName = document.getElementById('labelNameFile');
-				$(labelName).text(filename);
+				$(labelName).text(file_audio.name);
 			});
-		}
+		} 
+		
+		$(document).ready(function() {			
+			$("i.fas.fa-plus.action-add-word").click(function() {
+				var currentRow=$(this).closest("tr");
+				var value_idNote = document.getElementById("value_idNote").value;
+				var vocabulary = currentRow.find("td:eq(1) input[type='text']").val();
+				var mean_vocabulary = currentRow.find("td:eq(2) input[type='text']").val();
+				if(vocabulary === '' || mean_vocabulary === '' ||file_audio === null){
+					alert("Bạn chưa nhập đầy đủ !!!!!!")
+					return;
+				}
+				let formData = new FormData();
+				formData.append("idNote",value_idNote);
+				formData.append("vocabulary", vocabulary);
+				formData.append("mean_vocabulary", mean_vocabulary);
+				formData.append("file_audio", file_audio);
+				$.ajax({
+					type: "POST",
+					enctype: 'multipart/form-data',
+					url: "${pageContext.request.contextPath }/note/detail/addWord",
+					data: formData,
+					processData: false,
+			        contentType: false,
+			        cache: false,
+		            timeout: 600000,
+		            success: function (data) {
+		            	alert("Thêm thành công !!!")
+		            	var table = document.getElementById("table-word-note");
+		                var index = table.rows.length - 1
+		                
+		                row = table.insertRow(index);
+		                $(row).addClass("row-item-word");
+		                cell0 = row.insertCell(0);
+		                cell1 = row.insertCell(1);
+		                cell2 = row.insertCell(2);
+		                cell3 = row.insertCell(3);
+		                
+		                cell0.innerHTML = '<i class="fas fa-minus" id-note-detail="' + data.id  + '"></i>';
+		                cell1.innerHTML = data.vocabulary;
+		                cell2.innerHTML = data.mean_vocabulary;
+		                cell3.innerHTML = '<audio controls><source src="/BoxEnglish/resources/audio/' + data.audio_vocabulary + '" type="audio/mp3"></audio>';
+		            	
+		                $( ".input_vocabulary" )[0].innerHTML = '<input type="text">'
+	                	$( ".input_mean_vocabulary" )[0].innerHTML = '<input type="text">'
+                		$( ".file_audio" ).val("")
+               			file_audio = null
+               			var labelName = document.getElementById('labelNameFile');
+						$(labelName).text("");
+		            },
+		            error: function (res) {
+		               	alert("Thêm thất bại !!!")
+		            }
+				})
+			})
+		})
 	</script>
 </body>
 </html>

@@ -202,5 +202,4 @@ public class VocabularyEntity {
 		super();
 	}
 
-	
 }
