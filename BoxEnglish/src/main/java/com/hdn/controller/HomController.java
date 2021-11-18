@@ -19,47 +19,47 @@ import com.sun.jdi.Method;
 @Controller
 @RequestMapping("/")
 public class HomController {
-	
+
 	@Autowired
 	private UserService userService;
-	
-    @GetMapping
-    public String Home(HttpSession session) {
-    	if(session.getAttribute("user") != null) {
-    		return "home";
-    	} else {
-    		return "redirect:login/";
-    	}
-        
-    }
-    
-    @GetMapping(value = "/practice-voca")
-    public String PracticeVoca() {
-        return "practice-voca";
-    }
 
-    @GetMapping(value = "/list-voca")
-    public String ListVoca() {
-        return "list-voca";
-    }
-    
-    @GetMapping(value = "/admin")
-    public String Admin() {
-        return "admin/index";
-    }
+	@GetMapping
+	public String Home(HttpSession session) {
+		if (session.getAttribute("user") != null) {
+			return "home";
+		} else {
+			return "redirect:/login";
+		}
 
-    @GetMapping("list-note")
-    public String listNote(HttpSession httpSession) {
-    	return "redirect:note/";
-    }
+	}
 
-    @GetMapping(value = "/login")
+	@GetMapping(value = "/practice-voca")
+	public String PracticeVoca() {
+		return "practice-voca";
+	}
+
+	@GetMapping(value = "/list-voca")
+	public String ListVoca() {
+		return "list-voca";
+	}
+
+	@GetMapping(value = "/admin")
+	public String Admin() {
+		return "admin/index";
+	}
+
+	@GetMapping("list-note")
+	public String listNote(HttpSession httpSession) {
+		return "redirect:note/";
+	}
+
+	@GetMapping(value = "/login")
 	public String Login() {
-        return "login";
-    }
-    
-    @GetMapping(value = "/register")
-    public String Register() {
-        return "register";
-    }
+		return "login";
+	}
+
+	@GetMapping(value = "/register")
+	public String Register() {
+		return "register";
+	}
 }
