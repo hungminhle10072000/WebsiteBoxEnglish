@@ -120,22 +120,29 @@ public class NoteImp implements NoteDao{
 	}
 
 	@Override
-	public boolean AddWordNote(VocabularyEntity wordNote) {
+	public VocabularyEntity AddWordNote(VocabularyEntity wordNote) {
+		VocabularyEntity result = null;
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
 			String path = context.getRealPath("/") + "resources/audio/" + wordNote.getFileAudio().getOriginalFilename();
 			wordNote.getFileAudio().transferTo(new File(path));
 			wordNote.setAudio_vocabulary(wordNote.getFileAudio().getOriginalFilename());
-			session.save(wordNote);
+			wordNote.setExplain_vocabulary(" ");
+			wordNote.setExample_vocabulary(" ");
+			wordNote.setMean_example_vocabulary(" ");
+			wordNote.setIsDelete(0);
+			wordNote.setImage_vocabulary(" ");
+			Long idWordNote = (Long) session.save(wordNote);
 			t.commit();
-			return true;
+			result = session.get(VocabularyEntity.class, idWordNote);
+			return result;
 		} catch (Exception e) {
 			t.rollback();
-			return false;
 		} finally {
 			session.close();
 		}
+		return result;
 	}
 
 }

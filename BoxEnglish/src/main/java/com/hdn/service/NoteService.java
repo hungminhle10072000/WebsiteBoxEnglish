@@ -49,7 +49,7 @@ public class NoteService implements NoteDao{
 	}
 
 	@Override
-	public boolean AddWordNote(VocabularyEntity wordNote) {
+	public VocabularyEntity AddWordNote(VocabularyEntity wordNote) {
 		return noteImp.AddWordNote(wordNote);
 	}
 

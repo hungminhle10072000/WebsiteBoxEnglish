@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hdn.entity.CategoryEntity;
 import com.hdn.entity.UserEntity;
 import com.hdn.entity.VocabularyEntity;
@@ -39,6 +40,7 @@ public class NoteController {
 	
 	@Autowired
 	private UserService userService;
+	
 	
 	@GetMapping
 	public String defaultNote(ModelMap model, @ModelAttribute("user") UserEntity user) {
@@ -114,8 +116,32 @@ public class NoteController {
 	public String detailNote(@PathVariable("idNote") Long idNote, ModelMap model) {
 		List<VocabularyEntity> listVocanote = noteService.getAllNoteDetail(idNote);
 		model.addAttribute("listVocanote",listVocanote);
+		model.addAttribute("idNote",idNote);
 		return "note-detail";
 	}
+	
+	@PostMapping("detail/addWord")
+	@ResponseBody
+	public VocabularyEntity addWordNote(@RequestParam("idNote") Long idNote,@RequestParam("vocabulary") String vocabulary, @RequestParam("mean_vocabulary") String mean_vocabulary, @RequestParam("file_audio") MultipartFile file_audio) throws JsonProcessingException {
+		VocabularyEntity wordNote = new VocabularyEntity();
+		CategoryEntity noteEntity = noteService.getNoteById(idNote);
+		wordNote.setCategoryEntity(noteEntity);
+		wordNote.setFileAudio(file_audio);
+		wordNote.setVocabulary(vocabulary);
+		wordNote.setMean_vocabulary(mean_vocabulary);
+		VocabularyEntity wordSave = noteService.AddWordNote(wordNote);
+		VocabularyEntity wordResult = new VocabularyEntity();
+		if(wordSave != null) {
+			wordResult.setId(wordSave.getId());
+			wordResult.setVocabulary(vocabulary);
+			wordResult.setMean_vocabulary(mean_vocabulary);
+			wordResult.setAudio_vocabulary(wordSave.getAudio_vocabulary());
+			return wordResult;
+		} else {
+			return null;
+		}
+	}
+	
 	
 	@ModelAttribute("user")
 	public UserEntity getUserForTest () {
