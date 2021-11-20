@@ -40,16 +40,17 @@ $(document).ready(function(){
 	})	
 })
 
-	function chosseFileImage(event){
-		$(document).ready(function(){
-			const imgNoteOldNone = document.querySelector("#imgNoteOldNone");
-			$(imgNoteOldNone).hide();
-		})
-	}
-	
-	function setImgNoteOld(){
-		$(document).ready(function(){
-			const imgNoteOldNone = document.querySelector("#imgNoteOldNone");
-			$(imgNoteOldNone).show();
-		})
-	}
+function chosseFileImage(event){
+	$(document).ready(function(){
+		const imgNoteOldNone = document.querySelector("#imgNoteOldNone");
+		$(imgNoteOldNone).hide();
+	})
+}
+
+function setImgNoteOld(){
+	$(document).ready(function(){
+		const imgNoteOldNone = document.querySelector("#imgNoteOldNone");
+		$(imgNoteOldNone).show();
+	})
+}
+

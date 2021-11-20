@@ -16,60 +16,7 @@
 	<title>Danh sách chi tiết</title>
 </head>
 <body>
-	<header id="home" class="header">
-		<nav class="nav">
-			<div class="navigation container">
-				<div class="logo">
-					<a href=""><img alt="anhlogo" src='<c:url value="/resources/img/logo.jpg" />'/></a>
-				</div>
-				
-				<div class="menu">
-					<div class="top-nav">
-						<div class="logo">
-							<a href=""><img alt="anhlogo" src='<c:url value="/resources/img/logo.jpg" />'/></a>
-						</div>
-						<div class="close">
-							<i class="bx bx-x"></i>
-						</div>
-					</div> 
-					<ul class="nav-list">
-						<li class="nav-item">
-				             <a href="${pageContext.request.contextPath }/" class="nav-link scroll-link">Trang chủ</a>
-			            </li>
-			            <li class="nav-item">
-			              <a href="#" class="nav-link">Khóa học của tôi</a>
-			            </li>
-			            <li class="nav-item">
-			              <a href="#" class="nav-link scroll-link">Danh sách khóa học</a>
-			            </li>
-		             	<li class="nav-item">
-			              	<a href="${pageContext.request.contextPath }/note/" class="nav-link scroll-link">Ghi chú</a>
-			            </li>
-					</ul>
-				</div>
-				
-				<div class="container-user-setting">
-					<a href="#" class="user-icon">
-       	        		<i class='bx bx-user-circle'></i>
-		        	</a>
-		        	<div class="setting-user">
-		        		<div class="setting-user-item">
-		        			<i class='bx bxs-edit-alt'></i> <span>Cập nhật thông tin</span>
-		        		</div>
-		        		<div class="setting-user-item">
-		        			<i class='bx bxs-log-out' ></i> <span>Đăng xuất</span>
-		        		</div>
-		        	</div>
-				</div>
-				
-		       
-		        <div class="hamburger">
-		          	<i class="bx bx-menu"></i>
-		        </div>
-	
-			</div>
-		</nav>
-	</header>
+	<jsp:include page="header-general.jsp" />
 	<main>
 		<div class="container-fluid">			
 			<div class="row">
@@ -92,13 +39,19 @@
 					  <tbody>
 					  	<c:forEach var="f" items="${listVocanote }">
 					  		 <tr class="row-item-word">
-							  <td><i class="fas fa-minus action-delete-word" id-note-detail="${f.id }"></i></td>	
-						      <td>${f.vocabulary }</td>
-						      <td>${f.mean_vocabulary }</td>
-						      <td>
+							  <td class="group-action-word">
+							  	<i class="fas fa-minus action-delete-word" id-note-detail="${f.id }"></i>
+							  	<i class="far fa-save action-update-word" id-note-detail="${f.id }"></i>	
+							  </td>	
+ 						      <td><input type="text" value="${f.vocabulary }"></td>
+						      <td><input type="text" value="${f.mean_vocabulary }"></td>
+						      <td class="td-upload-audio">
 						      	<audio controls>
 						      		<source src='<c:url value="/resources/audio/${f.audio_vocabulary }" />' type="audio/mp3">
-								</audio>						
+								</audio>
+								<div>
+  									<input type="file" name="update-file" class="btn-update-file" accept="audio/mp3">
+								</div>
 							  </td>
 						    </tr>
 					  	</c:forEach>
@@ -135,7 +88,7 @@
 				$(labelName).text(file_audio.name);
 			});
 		} 
-		
+	
 		$(document).ready(function() {
 			
 			$("#table-word-note").on('click', '.action-delete-word', function() {
@@ -144,21 +97,25 @@
 			    if (checkConfirm == true){
 			    	var idWordDelete = $(this).attr("id-note-detail")
 			    	$.ajax({
-	                    type: "DELETE",
-	                    url: '${pageContext.request.contextPath }/note/detail/delete/' + idWordDelete,
-	                    contentType: false,
-	                    success: function (data) {
-	                        alert("Xóa thành công !!!");
-	                        currentRow.remove();
-	                    },
-	                    error: function (data) {
-	                    	console.log(data);
-	                    	alert("Xóa thất bại !!!");
-	                    }
-                	});		
+		                type: "DELETE",
+		                url: '${pageContext.request.contextPath }/note/detail/delete/' + idWordDelete,
+		                contentType: false,
+		                success: function (data) {
+		                    alert("Xóa thành công !!!");
+		                    currentRow.remove();
+		                },
+		                error: function (data) {
+		                	console.log(data);
+		                	alert("Xóa thất bại !!!");
+		                }
+		        	});		
 			    } else {
 			    	
 			    }		
+			})
+			
+			$("#table-word-note").on('click', '.action-update-word', function() {
+				alert("Update thôi nào");
 			})
 			
 			$("i.fas.fa-plus.action-add-word").click(function() {
@@ -192,20 +149,25 @@
 		                row = table.insertRow(index);
 		                $(row).addClass("row-item-word");
 		                cell0 = row.insertCell(0);
+		                $(cell0).addClass("group-action-word");
 		                cell1 = row.insertCell(1);
 		                cell2 = row.insertCell(2);
 		                cell3 = row.insertCell(3);
+		                $(cell0).addClass("td-upload-audio");
 		                
-		                cell0.innerHTML = '<i class="fas fa-minus action-delete-word" id-note-detail="' + data.id  + '"></i>';
-		                cell1.innerHTML = data.vocabulary;
-		                cell2.innerHTML = data.mean_vocabulary;
-		                cell3.innerHTML = '<audio controls><source src="/BoxEnglish/resources/audio/' + data.audio_vocabulary + '" type="audio/mp3"></audio>';
+		                
+		                cell0.innerHTML = '<i class="fas fa-minus action-delete-word" id-note-detail="' + data.id  + '"></i>'
+		                				  + '<i class="far fa-save action-update-word" id-note-detail=' + data.id  + '"></i>';
+		                cell1.innerHTML = '<input type="text" value="'+ data.vocabulary  + '">';
+		                cell2.innerHTML = '<input type="text" value="'+ data.mean_vocabulary + '">';
+		                cell3.innerHTML = '<audio controls><source src="/BoxEnglish/resources/audio/' + data.audio_vocabulary + '" type="audio/mp3"></audio>'
+		                				  + '<div><input type="file" name="update-file" class="btn-update-file" accept="audio/mp3"></div>';
 		            	
 		                $( ".input_vocabulary" )[0].innerHTML = '<input type="text">'
-	                	$( ".input_mean_vocabulary" )[0].innerHTML = '<input type="text">'
-                		$( ".file_audio" ).val("")
-               			file_audio = null
-               			var labelName = document.getElementById('labelNameFile');
+		            	$( ".input_mean_vocabulary" )[0].innerHTML = '<input type="text">'
+		        		$( ".file_audio" ).val("")
+		       			file_audio = null
+		       			var labelName = document.getElementById('labelNameFile');
 						$(labelName).text("");
 		            },
 		            error: function (res) {
@@ -214,9 +176,6 @@
 				})
 			})
 		})
-		
-		
-		
 	</script>
 </body>
 </html>
