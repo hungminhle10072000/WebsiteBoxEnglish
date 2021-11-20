@@ -17,4 +17,9 @@ public class UserService implements UserDao{
 		// TODO Auto-generated method stub
 		return userimp.GetUser(id);
 	}
+
+	@Override
+	public boolean updatePassWord(UserEntity userUpdate) {
+		return userimp.updatePassWord(userUpdate);
+	}
 }

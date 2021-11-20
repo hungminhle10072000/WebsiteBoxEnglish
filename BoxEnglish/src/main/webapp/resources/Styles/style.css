@@ -446,11 +446,44 @@ i.fas.fa-minus {
 	display: none;
 }
 
+i.far.fa-save.action-update-word {
+	cursor: pointer;
+	font-size: 1.5rem;
+	display: none !important;
+	margin-left: 20px;
+}
+
 tr.row-item-word:hover td i.fas.fa-minus {
 	display: block;
 }
 
+tr.row-item-word:hover td i.far.fa-save.action-update-word {
+	display: block !important;
+}
 
 
+.group-action-word {
+	display: flex;
+	flex-direction: row;
+}
 
+.btn-update-file {
+	display: none;
+}
+
+tr.row-item-word:hover .btn-update-file {
+	display: block !important;
+}
+
+/* edit info user */
+#upload-update-image {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+}
+
+
+label.label-upload-image_update {
+   cursor: pointer;
+}
 

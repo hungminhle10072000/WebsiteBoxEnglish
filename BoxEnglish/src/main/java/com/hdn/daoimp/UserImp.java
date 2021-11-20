@@ -1,13 +1,17 @@
 package com.hdn.daoimp;
 
+import java.io.File;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hdn.dao.UserDao;
 import com.hdn.daoimp.UserImp;
+import com.hdn.entity.CategoryEntity;
 import com.hdn.entity.UserEntity;
 
 @Repository
@@ -48,4 +52,21 @@ public class UserImp implements UserDao{
 			return null;
 		}
     }
+
+	@Override
+	public boolean updatePassWord(UserEntity userUpdate) {
+		boolean checkUpdatePassword = false;
+		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			session.update(userUpdate);
+			checkUpdatePassword = true;
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+		} finally {
+			session.close();
+		}
+		return checkUpdatePassword;
+	}
 }
