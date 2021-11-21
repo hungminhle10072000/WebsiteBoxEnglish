@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.hdn.entity.CategoryEntity;
@@ -20,7 +21,6 @@ import com.sun.jdi.Method;
 
 @Controller
 @RequestMapping("/")
-@SessionAttributes("user")
 public class HomController {
 
 	@Autowired
@@ -67,7 +67,7 @@ public class HomController {
 	}
 	
 	@GetMapping("edit-info-user")
-	public String editInfoUser(ModelMap model,@ModelAttribute("user") UserEntity user) {
+	public String editInfoUser(ModelMap model,@SessionAttribute("user") UserEntity user) {
 		model.addAttribute("user", user);
 		return "edit-info-user";
 	}
