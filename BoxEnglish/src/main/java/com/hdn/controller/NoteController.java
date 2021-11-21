@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,7 +32,6 @@ import com.hdn.service.UserService;
 
 
 @Controller
-@SessionAttributes("user")
 @RequestMapping("/note/")
 public class NoteController {
 	
@@ -46,7 +46,7 @@ public class NoteController {
 	
 	
 	@GetMapping
-	public String defaultNote(ModelMap model, @ModelAttribute("user") UserEntity user) {
+	public String defaultNote(ModelMap model, @SessionAttribute("user") UserEntity user) {
 		List<CategoryEntity> noteList = noteService.getAllNote(user.getId());
 		model.addAttribute("noteEntity", new CategoryEntity());
 		model.addAttribute("noteList", noteList);
@@ -54,7 +54,7 @@ public class NoteController {
 	}
 	
 	@PostMapping("add")
-	public String addNote(ModelMap model, @ModelAttribute("noteEntity") CategoryEntity note, @ModelAttribute("user") UserEntity user) {
+	public String addNote(ModelMap model, @ModelAttribute("noteEntity") CategoryEntity note, @SessionAttribute("user") UserEntity user) {
 		note.setIsDelete(0);
 		note.setUserEntity(user);
 		try {
@@ -80,7 +80,7 @@ public class NoteController {
 	}
 	
 	@GetMapping("delete/{idNote}")
-	public String deleteNote(@PathVariable("idNote") Long idNote, ModelMap model, @ModelAttribute("user") UserEntity user) {
+	public String deleteNote(@PathVariable("idNote") Long idNote, ModelMap model, @SessionAttribute("user") UserEntity user) {
 		try {
 			if(noteService.deleteNote(idNote)) {
 				model.addAttribute("message","Xóa ghi chú thành công !!!");
@@ -103,7 +103,7 @@ public class NoteController {
 	}
 	
 	@PostMapping("update/{idNote}")
-	public String updateNote(@PathVariable("idNote") Long idNote, ModelMap model, @ModelAttribute("user") UserEntity user, @ModelAttribute("noteEdit") CategoryEntity note) {
+	public String updateNote(@PathVariable("idNote") Long idNote, ModelMap model, @SessionAttribute("user") UserEntity user, @ModelAttribute("noteEdit") CategoryEntity note) {
 		if(noteService.UpdateNote(idNote, note)) {
 			model.addAttribute("message", "Cập nhật ghi chú thành công !!!");
 		} else {
