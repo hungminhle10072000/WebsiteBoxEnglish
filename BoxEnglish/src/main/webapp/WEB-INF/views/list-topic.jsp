@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <title>Title</title>
@@ -8,8 +9,9 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<jsp:include page="header.jsp"></jsp:include>
 <style type="text/css">
-* {
+/* * {
 	margin: 0px;
 	padding: 0px;
 }
@@ -17,16 +19,15 @@
 body {
 	font-family: arial;
 }
-
-.main {
+ */
+/* .main {
 	margin: 2%;
-}
-
+} */
 .card {
 	width: 20%;
 	display: inline-block;
 	box-shadow: 2px 2px 20px black;
-	border-radius: 5px;
+	/* border-radius: 0px; */
 	margin: 2%;
 }
 
@@ -42,7 +43,7 @@ body {
 }
 
 h1 {
-	font-size: 20px;
+	font-size: 5px;
 }
 
 .des {
@@ -69,7 +70,7 @@ button:hover {
 	cursor: pointer;
 }
 </style>
-<jsp:include page="header.jsp"></jsp:include>
+
 </head>
 <body>
 	<header id="home" class="header">
@@ -91,14 +92,14 @@ button:hover {
 						</div>
 					</div>
 					<ul class="nav-list">
-						<li class="nav-item"><a href="#home"
-							class="nav-link scroll-link">Home</a></li>
-						<li class="nav-item"><a href="#" class="nav-link">My
-								Course</a></li>
-						<li class="nav-item"><a href="#" class="nav-link scroll-link">Course</a>
-						</li>
-						<li class="nav-item"><a href="#" class="nav-link scroll-link">Note</a>
-						</li>
+						<li class="nav-item"><a href="/BoxEnglish/"
+							class="nav-link scroll-link">Trang chủ</a></li>
+						<li class="nav-item"><a href="#" class="nav-link">Khóa
+								học của tôi</a></li>
+						<li class="nav-item"><a href="#" class="nav-link scroll-link">Danh
+								sách khóa học</a></li>
+						<li class="nav-item"><a href="list-note"
+							class="nav-link scroll-link">Ghi chú</a></li>
 					</ul>
 				</div>
 
@@ -107,10 +108,10 @@ button:hover {
 					</a>
 					<div class="setting-user">
 						<div class="setting-user-item">
-							<i class='bx bxs-edit-alt'></i> <span>Edit profile</span>
+							<i class='bx bxs-edit-alt'></i> <span>Cập nhật thông tin</span>
 						</div>
 						<div class="setting-user-item">
-							<i class='bx bxs-log-out'></i> <span>Logout</span>
+							<i class='bx bxs-log-out'></i> <span>Đăng xuất</span>
 						</div>
 					</div>
 				</div>

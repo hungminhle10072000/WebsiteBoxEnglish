@@ -71,5 +71,14 @@ public class HomController {
 		model.addAttribute("user", user);
 		return "edit-info-user";
 	}
+	
+	@GetMapping(value = "/list-topic")
+	public String Topic() {
+		return "list-topic";
+	}
+	@GetMapping(value = "/list-box")
+	public String Box() {
+		return "list-box";
+	}
 
 }
