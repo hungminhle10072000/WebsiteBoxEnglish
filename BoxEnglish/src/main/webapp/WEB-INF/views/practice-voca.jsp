@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<c:url value="/api/review/insert" var="APIurl"></c:url>
+<c:url value="/api/review/update" var="APIurl"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -196,12 +196,11 @@
         } else if (voca.value.trim().toUpperCase() == jsonVocaList[i].vocabulary.trim().toUpperCase()) {
             alert("Success")
             var review = {
-                "user_id": 1,
+                "id":jsonVocaList[i].reviewId,
                 "vocabulary_id": jsonVocaList[i].id,
-                "level":1,
-                "status":1,
+                "status":1
             }
-            insertReview(review);
+            updateReview(review);
             jsonVocaList.push(review);
 
             i++;
@@ -219,12 +218,11 @@
         } else {
             alert("Error")
             var review = {
-                "user_id": 1,
+                "id":jsonVocaList[i].reviewId,
                 "vocabulary_id": jsonVocaList[i].id,
-                "level":1,
-                "status":0,
+                "status":0
             }
-            insertReview(review);
+            updateReview(review);
             jsonVocaList.push(review);
             showFormResult();
         }
@@ -248,10 +246,10 @@
         window.location.href = "${pageContext.request.contextPath}/client/donepractice";
     }
 
-    function insertReview(data){
+    function updateReview(data){
         $.ajax({
             url: '${APIurl}',
-            type: 'POST',
+            type: 'PUT',
             enctype: 'multipart/form-data',
             processData:false,
             contentType: 'application/json',

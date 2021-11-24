@@ -31,7 +31,7 @@ public class ReviewConverter {
         ReviewKey reviewKey = new ReviewKey();
         reviewKey.setUser_id(reviewDto.getUser_id());
         reviewKey.setVocabulary_id(reviewDto.getVocabulary_id());
-
+        reviewEntity.setId(reviewDto.getId());
         reviewEntity.setKey(reviewKey);
         reviewEntity.setUserEntity(userImp.GetUser(reviewDto.getUser_id()));
         VocabularyEntity voca = vocabularyImpl.getVocabulary(reviewDto.getVocabulary_id());
@@ -45,8 +45,10 @@ public class ReviewConverter {
 
     public ReviewDto toDto(ReviewEntity reviewEntity) {
         ReviewDto reviewDto = new ReviewDto();
+        reviewDto.setId(reviewEntity.getId());
         reviewDto.setUserDto(userConverter.toDto(reviewEntity.getUserEntity()));
         reviewDto.setVocabularyDto(vocabularyConverter.toDto(reviewEntity.getVocabularyEntity()));
+        reviewDto.setVocabulary_id(reviewEntity.getVocabularyEntity().getId());
         reviewDto.setDate_practice(reviewEntity.getDate_practice());
         reviewDto.setLevel(reviewEntity.getLevel());
         reviewDto.setStatus(reviewDto.getStatus());

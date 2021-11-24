@@ -13,6 +13,15 @@ public class VocabularyDto {
     private String audio_vocabulary;
     private int isDelete;
     private CategoryDto categoryDto;
+    private long reviewId;
+
+    public long getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(long reviewId) {
+        this.reviewId = reviewId;
+    }
 
     public long getId() {
         return id;

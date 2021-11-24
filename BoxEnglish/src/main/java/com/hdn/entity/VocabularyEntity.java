@@ -85,9 +85,9 @@ public class VocabularyEntity {
 	}
 
 
-
+/*
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "vocabularyEntity", cascade =CascadeType.ALL)
-	private List<ReviewEntity> listReviewEntities; //What is??
+	private List<ReviewEntity> listReviewEntities; //What is??*/
 
 
 	public long getId() {
@@ -187,14 +187,14 @@ public class VocabularyEntity {
 	}
 
 
-	public List<ReviewEntity> getListReviewEntities() {
+	/*public List<ReviewEntity> getListReviewEntities() {
 		return listReviewEntities;
 	}
 
 
 	public void setListReviewEntities(List<ReviewEntity> listReviewEntities) {
 		this.listReviewEntities = listReviewEntities;
-	}
+	}*/
 
 
 

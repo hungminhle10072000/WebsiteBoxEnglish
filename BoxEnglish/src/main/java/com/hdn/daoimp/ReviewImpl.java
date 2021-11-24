@@ -30,6 +30,16 @@ public class ReviewImpl implements ReviewDao {
             return null;
         }
     }
+    public Integer updateReview(ReviewEntity reviewEntity) {
+        Session session  = sessionFactory.getCurrentSession();
+        try {
+            session.update(reviewEntity);
+            return 1;
+        } catch ( Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
     
     
     public ReviewEntity getReviewById(Long id) {
@@ -39,6 +49,41 @@ public class ReviewImpl implements ReviewDao {
             query.setLong("id",id);
             ReviewEntity reviewEntity = (ReviewEntity) query.uniqueResult();
             return reviewEntity;
+        } catch ( Exception e) {
+            return null;
+        }
+    }
+    public List<ReviewEntity> getReviewsByUserIdAndLevel(Long userId, int level) {
+        Session session  = sessionFactory.getCurrentSession();
+        try {
+            Query query = session.createQuery("FROM  ReviewEntity as R where R.userEntity.id=:userId  and R.level =:level");
+            query.setParameter("userId",userId);
+            query.setParameter("level",level);
+            List<ReviewEntity> reviewEntities = query.getResultList();
+            return reviewEntities;
+        } catch ( Exception e) {
+            return null;
+        }
+    }
+    public List<ReviewEntity> getReviewsByUserIdAndStatus(Long userId,int status) {
+        Session session  = sessionFactory.getCurrentSession();
+        try {
+            Query query = session.createQuery("FROM  ReviewEntity as R where R.userEntity.id=:userId  and R.status =:status");
+            query.setParameter("userId",userId);
+            query.setParameter("status",status);
+            List<ReviewEntity> reviewEntities = query.getResultList();
+            return reviewEntities;
+        } catch ( Exception e) {
+            return null;
+        }
+    }
+    public ReviewEntity getReviewEntityLatest(Long userId) {
+        Session session  = sessionFactory.getCurrentSession();
+        try {
+            Query query = session.createQuery("FROM  ReviewEntity as R where R.userEntity.id=:userId  ORDER BY R.date_practice Desc");
+            query.setParameter("userId",userId);
+            List<ReviewEntity> reviewEntities = query.getResultList();
+            return reviewEntities!=null? reviewEntities.get(0):null;
         } catch ( Exception e) {
             return null;
         }

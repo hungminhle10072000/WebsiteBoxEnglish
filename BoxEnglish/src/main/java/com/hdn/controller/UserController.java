@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.hdn.cons.Cons;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -78,6 +79,7 @@ public class UserController {
 	
 	@GetMapping("logout")
 	public String userLogout(HttpSession session) {
+		Cons.USER_ID=-1;
 		session.invalidate();
 		return "redirect:/";
 	}

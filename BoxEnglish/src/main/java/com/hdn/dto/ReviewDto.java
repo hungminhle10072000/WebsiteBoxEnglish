@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class ReviewDto {
+    private long id;
     private long user_id;
     private long vocabulary_id;
     private UserDto userDto;
@@ -14,6 +15,14 @@ public class ReviewDto {
     private int level;
     private int status;
     private int isDeletel;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public ReviewDto() {
         this.date_practice =new Timestamp(System.currentTimeMillis());
