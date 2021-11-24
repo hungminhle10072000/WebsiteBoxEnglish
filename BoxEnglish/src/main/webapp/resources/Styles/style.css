@@ -467,13 +467,13 @@ tr.row-item-word:hover td i.far.fa-save.action-update-word {
 	flex-direction: row;
 }
 
-.btn-update-file {
+/* .btn-update-file {
 	display: none;
 }
 
 tr.row-item-word:hover .btn-update-file {
 	display: block !important;
-}
+} */
 
 /* edit info user */
 #upload-update-image {
