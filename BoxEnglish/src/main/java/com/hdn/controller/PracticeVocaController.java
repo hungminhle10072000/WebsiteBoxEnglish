@@ -1,6 +1,7 @@
 package com.hdn.controller;
 
 import com.google.gson.Gson;
+import com.hdn.cons.Cons;
 import com.hdn.dto.CategoryDto;
 import com.hdn.dto.VocabularyDto;
 import com.hdn.service.CategoryService;
@@ -28,6 +29,15 @@ public class PracticeVocaController {
         ModelAndView mav = new ModelAndView("practice-voca");
         mav.addObject("lstVoca",jsonVocaList);
         System.out.println("GetAllVocaa");
+        return mav;
+    }
+
+    @GetMapping("/getVocaForPractice")
+    public ModelAndView getVocabularyForPractice() {
+        List<VocabularyDto> vocabularyDtoList = vocabularyService.getVocabularyForPractice(Cons.USER_ID,3);
+        String jsonVocaList = new Gson().toJson(vocabularyDtoList);
+        ModelAndView mav = new ModelAndView("practice-voca");
+        mav.addObject("lstVoca",jsonVocaList);
         return mav;
     }
 }

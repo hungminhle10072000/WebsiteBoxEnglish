@@ -3,6 +3,7 @@ package com.hdn.api;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.hdn.cons.Cons;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,7 @@ public class HomeAPI {
 		if (userEntity != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", userEntity);
+			Cons.USER_ID=userEntity.getId();
 			if (userEntity.getRole().equals("1") || userEntity.getRole().equals("2")
 					|| userEntity.getRole().equals("3")) {
 				return "admin/index";

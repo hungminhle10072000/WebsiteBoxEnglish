@@ -30,7 +30,7 @@ public class ReviewEntity {
 	 
 	@Column(name = "date_practice", nullable = false)
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private Date date_practice;
 	
 	@Column(name = "level", nullable = false)

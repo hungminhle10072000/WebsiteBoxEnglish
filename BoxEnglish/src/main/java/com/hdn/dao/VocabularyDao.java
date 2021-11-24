@@ -12,4 +12,5 @@ public interface VocabularyDao {
     VocabularyEntity getVocabulary(Long id);
     List<VocabularyEntity> findAll();
     Integer addVocabulary(VocabularyEntity vocabularyEntity);
+
 }

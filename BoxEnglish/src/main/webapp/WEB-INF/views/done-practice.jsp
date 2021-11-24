@@ -12,6 +12,6 @@
 </head>
 <body>
     <h1>Bạn đã hoàn thành bài tập</h1>
-    <button>Tiếp tục</button>
+    <button onclick=${window.location.href = "${pageContext.request.contextPath}"}>Tiếp tục</button>
 </body>
 </html>
