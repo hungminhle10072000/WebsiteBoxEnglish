@@ -13,6 +13,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hdn.dao.NoteDao;
 import com.hdn.entity.CategoryEntity;
@@ -82,6 +83,8 @@ public class NoteImp implements NoteDao{
 		CategoryEntity noteResult = query.getSingleResult();
 		return noteResult;
 	}
+	
+	
 
 	@Override
 	public boolean UpdateNote(Long id,CategoryEntity noteEntity) {
@@ -161,6 +164,41 @@ public class NoteImp implements NoteDao{
 			session.close();
 		}
 		return checkResult;
+	}
+
+	@Override
+	public boolean UpdateWordNote(Long idWord, String vocabulary, String mean_vocabulary, MultipartFile file_audio) {
+		boolean checkResult = false;
+		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
+		VocabularyEntity wordNote = session.get(VocabularyEntity.class, idWord);
+		try {
+			if(file_audio != null) {
+				String path = context.getRealPath("/") + "resources/audio/" + file_audio.getOriginalFilename();
+				file_audio.transferTo(new File(path));
+				wordNote.setAudio_vocabulary(file_audio.getOriginalFilename());
+			}
+			wordNote.setVocabulary(vocabulary);
+			wordNote.setMean_vocabulary(mean_vocabulary);
+			session.update(wordNote);
+			t.commit();
+			checkResult = true;
+		} catch (Exception e) {
+			t.rollback();
+		} finally {
+			session.close();
+		}
+		return checkResult;
+	}
+
+	@Override
+	public VocabularyEntity getWordNoteById(Long idWord) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM VocabularyEntity c WHERE c.id = :id and c.isDelete = 0";
+		Query<VocabularyEntity> query = session.createQuery(hql);
+		query.setParameter("id", idWord);
+		VocabularyEntity wordResult = query.getSingleResult();
+		return wordResult;
 	}
 
 }

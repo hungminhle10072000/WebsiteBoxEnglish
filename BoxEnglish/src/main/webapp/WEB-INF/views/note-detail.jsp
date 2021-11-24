@@ -25,6 +25,9 @@
 				</div>
 			</div>
 			<hr style="width: 100%; border: 1px solid #cdbbbb;">
+			<div class="alert-page-note-detail">
+				
+			</div>	
 			<div class="row">
 				<div class="col-md-12 table-responsive" style="overflow: hidden;">
 					<table class="table table-hover" id="table-word-note">
@@ -101,12 +104,13 @@
 		                url: '${pageContext.request.contextPath }/note/detail/delete/' + idWordDelete,
 		                contentType: false,
 		                success: function (data) {
-		                    alert("Xóa thành công !!!");
+		                	$(".alert-page-note-detail").html('<div class="alert alert-warning" role="alert"> Xóa thành công !!! </div>')
+							window.scrollTo({ top: 0, behavior: 'smooth' });
 		                    currentRow.remove();
 		                },
 		                error: function (data) {
-		                	console.log(data);
-		                	alert("Xóa thất bại !!!");
+		                	$(".alert-page-note-detail").html('<div class="alert alert-danger" role="alert"> Xóa thất bại !!! </div>')
+							window.scrollTo({ top: 0, behavior: 'smooth' });
 		                }
 		        	});		
 			    } else {
@@ -115,7 +119,49 @@
 			})
 			
 			$("#table-word-note").on('click', '.action-update-word', function() {
-				alert("Update thôi nào");
+				let currentRow=$(this).closest("tr")
+				let idWordUpdate = $(this).attr("id-note-detail")
+				let vocabulary = currentRow.find("td:eq(1) input[type='text']").val();
+				let mean_vocabulary = currentRow.find("td:eq(2) input[type='text']").val();			
+				let cellAudio = currentRow.find("td:eq(3)");
+				
+				let audio_update = currentRow.find("td:eq(3) input[type='file']");
+				if(vocabulary === ''){
+					$(".alert-page-note-detail").html('<div class="alert alert-warning" role="alert">Yêu cầu nhập nội dung từ !!!</div>')
+					window.scrollTo({ top: 0, behavior: 'smooth' });
+					return;
+				}
+				if(mean_vocabulary === ''){
+					$(".alert-page-note-detail").html('<div class="alert alert-warning" role="alert">Yêu cầu nhập nghĩa của từ !!!</div>')
+					window.scrollTo({ top: 0, behavior: 'smooth' });
+					return;
+				}
+				let formData = new FormData();
+				formData.append("vocabulary",vocabulary);
+				formData.append("mean_vocabulary", mean_vocabulary);
+				formData.append("file_audio", audio_update[0].files[0]);
+				$.ajax({
+					type: "POST",
+					enctype: 'multipart/form-data',
+					url: '${pageContext.request.contextPath }/note/detail/update/' + idWordUpdate,
+					data: formData,
+					processData: false,
+			        contentType: false,
+			        dataType:"text",
+			        cache: false,
+		            timeout: 600000,
+		            success: function (data) {
+		            	$(cellAudio[0]).html('<audio controls><source src="/BoxEnglish/resources/audio/' + data + '" type="audio/mp3"></audio>'
+              				  				+ '<div><input type="file" name="update-file" class="btn-update-file" accept="audio/mp3"></div>')
+		            	$(".alert-page-note-detail").html('<div class="alert alert-warning" role="alert"> Cập nhật thành công !!! </div>')
+						window.scrollTo({ top: 0, behavior: 'smooth' });
+		            },
+		            error: function (res) {
+	            	    /* res.responseText */ 
+		            	$(".alert-page-note-detail").html('<div class="alert alert-danger" role="alert"> Cập nhật thất bại !!! </div>')
+						window.scrollTo({ top: 0, behavior: 'smooth' });
+		            }
+				})
 			})
 			
 			$("i.fas.fa-plus.action-add-word").click(function() {
@@ -124,7 +170,8 @@
 				var vocabulary = currentRow.find("td:eq(1) input[type='text']").val();
 				var mean_vocabulary = currentRow.find("td:eq(2) input[type='text']").val();
 				if(vocabulary === '' || mean_vocabulary === '' ||file_audio === null){
-					alert("Bạn chưa nhập đầy đủ !!!!!!")
+					$(".alert-page-note-detail").html('<div class="alert alert-warning" role="alert">Bạn chưa nhập đầy đủ !!!!!!</div>')
+					window.scrollTo({ top: 0, behavior: 'smooth' });
 					return;
 				}
 				let formData = new FormData();
@@ -142,7 +189,8 @@
 			        cache: false,
 		            timeout: 600000,
 		            success: function (data) {
-		            	alert("Thêm thành công !!!")
+		            	$(".alert-page-note-detail").html('<div class="alert alert-warning" role="alert"> Thêm thành công !!! </div>')
+						window.scrollTo({ top: 0, behavior: 'smooth' });
 		            	var table = document.getElementById("table-word-note");
 		                var index = table.rows.length - 1
 		                
@@ -153,11 +201,11 @@
 		                cell1 = row.insertCell(1);
 		                cell2 = row.insertCell(2);
 		                cell3 = row.insertCell(3);
-		                $(cell0).addClass("td-upload-audio");
+		                $(cell3).addClass("td-upload-audio");
 		                
 		                
-		                cell0.innerHTML = '<i class="fas fa-minus action-delete-word" id-note-detail="' + data.id  + '"></i>'
-		                				  + '<i class="far fa-save action-update-word" id-note-detail=' + data.id  + '"></i>';
+		                cell0.innerHTML = '<i class="fas fa-minus action-delete-word" id-note-detail="'+data.id+'"></i>'
+		                				  + '<i class="far fa-save action-update-word" id-note-detail="'+data.id+'"></i>';
 		                cell1.innerHTML = '<input type="text" value="'+ data.vocabulary  + '">';
 		                cell2.innerHTML = '<input type="text" value="'+ data.mean_vocabulary + '">';
 		                cell3.innerHTML = '<audio controls><source src="/BoxEnglish/resources/audio/' + data.audio_vocabulary + '" type="audio/mp3"></audio>'
@@ -171,7 +219,8 @@
 						$(labelName).text("");
 		            },
 		            error: function (res) {
-		               	alert("Thêm thất bại !!!")
+		            	$(".alert-page-note-detail").html('<div class="alert alert-danger" role="alert"> Thêm thất bại !!! </div>')
+						window.scrollTo({ top: 0, behavior: 'smooth' });
 		            }
 				})
 			})

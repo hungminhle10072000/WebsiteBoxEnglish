@@ -155,5 +155,15 @@ public class NoteController {
 		}
 		
 	}
+	
+	@PostMapping(value = "detail/update/{idWord}", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public ResponseEntity<String> updateWordNote(@PathVariable("idWord") Long idWord, @RequestParam("vocabulary") String vocabulary, @RequestParam("mean_vocabulary") String mean_vocabulary, @RequestParam(name ="file_audio", required = false) MultipartFile file_audio){
+		if(noteService.UpdateWordNote(idWord, vocabulary, mean_vocabulary, file_audio)) {
+			String pathAdudioNew = noteService.getWordNoteById(idWord).getAudio_vocabulary();
+			return ResponseEntity.ok(pathAdudioNew);
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cập nhật thất bại !!!");
+	}
 	 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hdn.dao.NoteDao;
 import com.hdn.daoimp.NoteImp;
@@ -56,6 +57,16 @@ public class NoteService implements NoteDao{
 	@Override
 	public boolean deleteWordNote(Long idWord) {
 		return noteImp.deleteWordNote(idWord);
+	}
+
+	@Override
+	public boolean UpdateWordNote(Long idWord, String vocabulary, String mean_vocabulary, MultipartFile file_audio) {
+		return noteImp.UpdateWordNote(idWord, vocabulary, mean_vocabulary, file_audio);
+	}
+
+	@Override
+	public VocabularyEntity getWordNoteById(Long idWord) {
+		return noteImp.getWordNoteById(idWord);
 	}
 
 }
