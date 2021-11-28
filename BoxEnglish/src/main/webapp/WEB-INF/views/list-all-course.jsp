@@ -31,22 +31,13 @@
 				
 				<!--display all course-->
 				<div class="row mt-3 pb-3">
-					<%-- <div class="col-md-3 mt-3">
-						<div class="card" style="width: 100%;">
-						  <img class="card-img-top img-fluid" src='<c:url value="/resources/img/${f.image }" />' alt="Ảnh ghi chú" style="height: 250px">
-						  <div class="card-body">
-						    <h4 class="card-title">Hello</h4>
-						    <a href="${pageContext.request.contextPath }/note/detail/${f.id }" class="btn btn-success">Thêm khóa học</a>
-						  </div>
-						</div>
-					</div> --%>
 					<c:forEach var="f" items="${listAllCourse }">				
 							<div class="col-md-3 mt-3">
 								<div class="card" style="width: 100%;">
 								  <img class="card-img-top img-fluid" src='<c:url value="/resources/img/${f.image }" />' alt="Ảnh ghi chú" style="height: 250px">
 								  <div class="card-body">
 								    <h4 class="card-title">${f.title }</h4>
-							        <a href="${pageContext.request.contextPath }/note/detail/${f.id }" class="btn btn-success">Thêm khóa học</a>
+							        <a href="${pageContext.request.contextPath }/course/${f.id }" class="btn btn-success" onclick="addCourse(event, ${f.id})">Thêm khóa học</a>
 								  </div>
 								</div>
 							</div>
@@ -55,5 +46,24 @@
 			</div>
 		</main>	
 	<jsp:include page="footer.jsp" />
+	<script type="text/javascript">
+		function addCourse(event, idCourse) {
+		    event.preventDefault()
+		    $.ajax({
+                type: "POST",
+                url: '${pageContext.request.contextPath }/course/addCourse/' + idCourse,
+                contentType: false,
+                dataType:"text",
+                success: function (data) {
+                	$(".alert-page-list-all-course").html('<div class="alert alert-warning" role="alert">' +data+ '</div>')
+					window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+                error: function (data) {
+                	$(".alert-page-list-all-course").html('<div class="alert alert-danger" role="alert"> Thêm khóa học thất bại !!! </div>')
+					window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+        	});		
+		}
+	</script>
 </body>
 </html>

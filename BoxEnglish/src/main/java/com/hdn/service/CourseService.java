@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.hdn.dao.CourseDao;
 import com.hdn.daoimp.CourseImp;
 import com.hdn.entity.CategoryEntity;
+import com.hdn.entity.UserEntity;
 
 @Service
 public class CourseService implements CourseDao{
@@ -18,6 +19,11 @@ public class CourseService implements CourseDao{
 	@Override
 	public List<CategoryEntity> findAllCourse() {
 		return courseImp.findAllCourse();
+	}
+
+	@Override
+	public boolean AddCourseUser(Long idCourse, UserEntity userEntity) {
+		return courseImp.AddCourseUser(idCourse, userEntity);
 	}
 
 }
