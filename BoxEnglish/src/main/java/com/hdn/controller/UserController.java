@@ -68,7 +68,7 @@ public class UserController {
 			if(userUpdate != null) {
 				user = userUpdate;
 				map.put("success", "Cập nhật thành công !!!");
-				map.put("userUpdate", userUpdate);
+				map.put("pathImgNew", user.getAvatar());
 				return ResponseEntity.ok(map);
 			} else {
 				map.put("error", "Cập nhật thất bại !!!");

@@ -116,7 +116,7 @@
 						$(labelName).text("");
 						$(".alert-page-edit-info").html('<div class="alert alert-warning" role="alert">' + data.success + '</div>')
 						window.scrollTo({ top: 0, behavior: 'smooth' });
-						let pathUrlImage = '/BoxEnglish/resources/img/' + data.userUpdate.avatar;
+						let pathUrlImage = '/BoxEnglish/resources/img/' + data.pathImgNew;
 						$('.img-avatar-edit-info').attr('src', pathUrlImage); 
 						$('.img-avatar-edit-info').css('display', 'inline');
 		            },
