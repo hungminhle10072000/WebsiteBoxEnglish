@@ -12,7 +12,7 @@
 </head>
 <body>
     <h1>Bạn đã hoàn thành bài tập</h1>
-    <button >Tiếp tục</button>
+    <div class="container"><form method="get" action="${pageContext.request.contextPath }/list-box"><button type="submit">Practice</button></form></div>
 <%--    onclick=${window.location.href = "${pageContext.request.contextPath}"}--%>
 </body>
 </html>

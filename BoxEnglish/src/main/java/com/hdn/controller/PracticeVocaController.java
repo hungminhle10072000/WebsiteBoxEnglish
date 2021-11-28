@@ -36,7 +36,13 @@ public class PracticeVocaController {
     public ModelAndView getVocabularyForPractice() {
         List<VocabularyDto> vocabularyDtoList = vocabularyService.getVocabularyForPractice(Cons.USER_ID,3);
         String jsonVocaList = new Gson().toJson(vocabularyDtoList);
-        ModelAndView mav = new ModelAndView("practice-voca");
+        ModelAndView mav;
+        if (vocabularyDtoList.size() < 1) {
+            mav = new ModelAndView("done-practice");
+        } else {
+            mav = new ModelAndView("practice-voca");
+        }
+
         mav.addObject("lstVoca",jsonVocaList);
         return mav;
     }

@@ -54,6 +54,7 @@ public class ReviewService {
         ReviewEntity reviewOld = getReviewById(reviewDto.getId());
         reviewOld.setStatus(reviewDto.getStatus());
         reviewOld.setLevel(reviewOld.getLevel()+1);
+        reviewImpl.syncLevelByUserIdAndVocabularyId(reviewDto.getUser_id(),reviewDto.getVocabulary_id(),reviewOld.getLevel());
         return reviewImpl.updateReview(reviewOld);
     }
 
@@ -102,6 +103,9 @@ public class ReviewService {
         combineList(box,box3);
         combineList(box,box4);
         combineList(box,box5);
+        /*if (isNewDay(Cons.USER_ID)) {
+            addReviewList(box);
+        }*/
         return box;
     }
     private void combineList(List<ReviewEntity> lstDes, List<ReviewEntity> lstSrc) {

@@ -53,10 +53,23 @@ public class ReviewImpl implements ReviewDao {
             return null;
         }
     }
+    public Integer syncLevelByUserIdAndVocabularyId(Long userId, Long vocabularyId,Integer level) {
+        Session session  = sessionFactory.getCurrentSession();
+        try {
+            Query query = session.createQuery("update ReviewEntity R set R.level=:level where R.userEntity.id = :userId and R.vocabularyEntity.id=:vocabularyId");
+            query.setParameter("userId",userId);
+            query.setParameter("vocabularyId",vocabularyId);
+            query.setParameter("level",level);
+            int result = query.executeUpdate();
+            return result;
+        } catch ( Exception e) {
+            return -1;
+        }
+    }
     public List<ReviewEntity> getReviewsByUserIdAndLevel(Long userId, int level) {
         Session session  = sessionFactory.getCurrentSession();
         try {
-            Query query = session.createQuery("FROM  ReviewEntity as R where R.userEntity.id=:userId  and R.level =:level");
+            Query query = session.createQuery("FROM  ReviewEntity as R where R.userEntity.id=:userId  and R.level =:level and R.isDeletel !=1 Group by R.vocabularyEntity.id");
             query.setParameter("userId",userId);
             query.setParameter("level",level);
             List<ReviewEntity> reviewEntities = query.getResultList();

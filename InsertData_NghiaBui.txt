@@ -1,0 +1,62 @@
+SELECT * FROM dbboxenglish.category;
+
+use dbboxenglish;
+insert into category(description,image,isDelete,title,user_id,createDate)
+values(N'Description','img/inventory.jpg',0,'inventory',1,now());
+insert into category(description,image,isDelete,title,user_id,createDate)
+values(N'Description','img/Pharmacy.jpg',0,'Pharmacy',1,now());
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('audio/adjustment.mp3','I have made a few adjustments to the design','a small change made to something in order to correct or improve it',
+'image/adjustment.jpg',0,N'Tôi đã thực hiện một vài điều chỉnh để thiết kế.',N'(n): điều chỉnh, chỉnh lý, sự sửa lại cho đúng','noun','adjustment',8);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('audio/automatically.mp3','The door opens automatically','having controls that work without needing a person to operate them',
+'image/automatically.jpg',0,N'Cửa mở một cách tự động.',N'(adv): ‹một cách› tự động','noun','automatically',8);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('audio/crucial.mp3','Inventory is a crucial process and must be taken seriously by all staff','extremely important, because it will affect other things',
+'image/crucial.jpg',0,N'Kiểm kê là một quá trình cốt yếu và phải được thực hiện nghiêm túc bởi mọi nhân viên',N'(adj): cốt yếu, chủ yếu, có tính quyết định','noun','crucial',8);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('audio/discrepancy.mp3','We easily explained the discrepancy between the two counts','a difference between two or more things that should be the same',
+'image/discrepancy.jpg',0,N'Chúng tôi giải thích rõ ràng sự khác nhau giữa 2 con số tổng',N'(n): ‹sự› khác nhau, trái ngược nhau; không nhất quán/thống nhất','noun','discrepancy',8);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('audio/disturb.mp3','Let''s see how many products we can count in advance of inventory so we disturb fewer customers',' to interrupt somebody when they are trying to work',
+'image/disturb.jpg',0,N'Hãy xem có bao nhiêu sản phẩm chúng ta có thể đếm trước khi kiểm kê để cho chúng ta làm phiền khách hàng ít hơn',N'(v): quấy rầy, quấy rối, làm náo động, gây náo loạn, làm ồn, làm phiền','noun','disturb',8);
+
+
+
+
+-- Insert Pharmacy
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('audio/consult.mp3','If the pain continues, consult your doctor.','to go to someone for information or advice',
+'image/consult.jpg',0,N'Nếu cơn đau vẫn tiếp tục, thì bạn tham khảo ý kiến bác sĩ của bạn',N'(v): hỏi ý kiến, tham khảo','noun','consult',9);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('audio/control.mp3','Please take your medication every day to control your high blood pressure','the ability to make someone or something do what you want',
+'image/control.jpg',0,N'Vui lòng uống thuốc mỗi ngày để kiểm soát huyết áp cao của ông',N' (v): kiểm tra, kiểm soát; điều khiển, chỉ huy','noun','control',9);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('audio/convenient.mp3','Is this a convenient location for you to pick up your prescription?','useful, easy, or quick to do; not causing problems',
+'image/convenient.jpg',0,N'Is this a convenient location for you to pick up your prescription?',N'(adj): thuận lợi, thuận tiện; ở gần, dễ đi đến','noun','convenient',9);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('audio/detect.mp3',' (v): dò ra, tìm ra, khám phá ra, phát hiện ra',' to discover something',
+'image/detect.jpg',0,N'Các xét nghiệm này được thiết kế để phát hiện bệnh sớm.',N' (v): dò ra, tìm ra, khám phá ra, phát hiện ra','noun','detect',9);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('audio/factor.mp3','Could my cat be a factor contributing to my asthma?','one of several things that cause or influence something',
+'image/factor.jpg',0,N'Con mèo của tôi có thể là một yếu tố góp phần cho bệnh hen suyễn của tôi hay không?',N' (n): nhân tố, yếu tố','noun','factor',9); 
