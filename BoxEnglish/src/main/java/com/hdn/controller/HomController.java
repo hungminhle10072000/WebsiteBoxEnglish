@@ -1,5 +1,7 @@
 package com.hdn.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.hdn.entity.CategoryEntity;
 import com.hdn.entity.UserEntity;
+import com.hdn.service.CategoryService;
+import com.hdn.service.CourseService;
 import com.hdn.service.UserService;
 import com.sun.jdi.Method;
 
@@ -26,6 +30,9 @@ public class HomController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private CourseService courseService;
+	
 	@GetMapping
 	public String Home(HttpSession session) {
 		if (session.getAttribute("user") != null) {
@@ -76,9 +83,17 @@ public class HomController {
 	public String Topic() {
 		return "list-topic";
 	}
+	
 	@GetMapping(value = "/list-box")
 	public String Box() {
 		return "list-box";
+	}
+	
+	@GetMapping("list-all-course")
+	public String listAllCourse(ModelMap model) {
+		List<CategoryEntity> listAllCourse = courseService.findAllCourse();
+		model.addAttribute("listAllCourse", listAllCourse);
+		return "list-all-course";
 	}
 
 }

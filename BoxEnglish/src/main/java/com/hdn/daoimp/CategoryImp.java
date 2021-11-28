@@ -14,6 +14,7 @@ import java.util.List;
 
 @Repository
 public class CategoryImp implements CategoryDao {
+	
     @Autowired
     SessionFactory sessionFactory;
 

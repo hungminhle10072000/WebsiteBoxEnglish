@@ -25,7 +25,7 @@
 		              <a href="#" class="nav-link">Khóa học của tôi</a>
 		            </li>
 		            <li class="nav-item">
-		              <a href="#" class="nav-link scroll-link">Danh sách khóa học</a>
+		              <a href="${pageContext.request.contextPath }/list-all-course/" class="nav-link scroll-link">Danh sách khóa học</a>
 		            </li>
 	             	<li class="nav-item">
 		              	<a href="${pageContext.request.contextPath }/note/" class="nav-link scroll-link">Ghi chú</a>

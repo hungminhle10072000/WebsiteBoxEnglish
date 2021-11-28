@@ -49,6 +49,21 @@ public class UserEntity {
 	
 	@Column(name = "isDelete", nullable = false)
 	private int isDelete;
+	
+	@Column(name = "email", nullable = false)
+	private String email;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userEntity")
+	private List<Cate_User_Entity> cate_User_Entities;
+	
+	
+	public List<Cate_User_Entity> getCate_User_Entities() {
+		return cate_User_Entities;
+	}
+
+	public void setCate_User_Entities(List<Cate_User_Entity> cate_User_Entities) {
+		this.cate_User_Entities = cate_User_Entities;
+	}
 
 	public long getId() {
 		return id;
@@ -113,6 +128,14 @@ public class UserEntity {
 
 	public void setIsDelete(int isDelete) {
 		this.isDelete = isDelete;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public UserEntity() {
