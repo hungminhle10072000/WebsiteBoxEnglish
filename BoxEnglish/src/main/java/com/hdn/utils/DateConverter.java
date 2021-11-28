@@ -30,7 +30,7 @@ public class DateConverter {
 
         int valueNow = 366*yearNow+12*monthNow+dayNow;
         int valueLatest = 366*yearLatest+12*monthLatest+dayLatest;
-        if (valueNow > valueLatest) {
+        if (valueNow == valueLatest) {
             return true;
         } else {
             return false;

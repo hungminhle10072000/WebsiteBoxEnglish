@@ -37,6 +37,18 @@ public class VocabularyService {
         VocabularyEntity voca = vocabularyDao.getVocabulary(id);
         return vocabularyConverter.toDto(voca);
     }
+    public List<VocabularyDto> getVocabularyByUserIdAndLevel(long userId, int level) {
+        List<ReviewEntity> reviewEntities = reviewDao.getReviewsByUserIdAndLevel(userId,level);
+        List<VocabularyDto> lstVoca = new ArrayList<>();
+        if (reviewEntities !=null) {
+            for (int i=0;i<reviewEntities.size();i++) {
+                VocabularyEntity vocabularyEntity = reviewEntities.get(i).getVocabularyEntity();
+                VocabularyDto vocabularyDto = vocabularyConverter.toDto(vocabularyEntity);
+                lstVoca.add(vocabularyDto);
+            }
+        }
+        return lstVoca;
+    }
     public Integer addVocabulary(VocabularyEntity voca) {
         Integer vocaId = vocabularyDao.addVocabulary(voca);
         return vocaId;

@@ -227,53 +227,52 @@ a {
 		<div class="box">
 			<div class="icon">01</div>
 			<div class="content">
-				<h3>BOX1</h3>
-				<a href="#">Read more</a>
+				<h3>(${numOfBox1})</h3>
+				<a href="${pageContext.request.contextPath }/getVocaInBox/1">Read more</a>
 			</div>
 		</div>
 
 		<div class="box">
 			<div class="icon">02</div>
 			<div class="content">
-				<h3>BOX2</h3>
-				<a href="#">Read more</a>
+				<h3>(${numOfBox2})</h3>
+				<a href="${pageContext.request.contextPath }/getVocaInBox/2">Read more</a>
 			</div>
 		</div>
 
 		<div class="box">
 			<div class="icon">03</div>
 			<div class="content">
-				<h3>BOX3</h3>
-				<a href="#">Read more</a>
+				<h3>(${numOfBox3})</h3>
+				<a href="${pageContext.request.contextPath }/getVocaInBox/3">Read more</a>
 			</div>
 		</div>
 
 		<div class="box">
 			<div class="icon">04</div>
 			<div class="content">
-				<h3>BOX4</h3>
-				<a href="#">Read more</a>
+				<h3>(${numOfBox4})</h3>
+				<a href="${pageContext.request.contextPath }/getVocaInBox/4">Read more</a>
 			</div>
 		</div>
 
 		<div class="box">
 			<div class="icon">05</div>
 			<div class="content">
-				<h3>BOX5</h3>
-				<a href="#">Read more</a>
+				<h3>(${numOfBox5})</h3>
+				<a href="${pageContext.request.contextPath }/getVocaInBox/5">Read more</a>
 			</div>
 		</div>
 
 		<div class="box">
 			<div class="icon">06</div>
 			<div class="content">
-				<h3>DONE</h3>
-				<a href="#">Read more</a>
+				<h3>(${numOfBox6})</h3>
+				<a href="${pageContext.request.contextPath }/getVocaInBox/6">Read more</a>
 			</div>
 		</div>
 	</div>
 	<div class="container"></div>
-
-
+	<div class="container"><form method="get" action="${pageContext.request.contextPath }/api/practice/getVocaForPractice"><button type="submit">Practice</button></form></div>
 </body>
 </html>

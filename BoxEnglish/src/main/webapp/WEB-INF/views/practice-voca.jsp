@@ -194,40 +194,50 @@
         if ( voca.value == undefined || voca.value.trim() =="" || voca.value.trim().length < 1) {
             alert("Vui lòng điền từ vựng")
         } else if (voca.value.trim().toUpperCase() == jsonVocaList[i].vocabulary.trim().toUpperCase()) {
-            alert("Success")
             var review = {
                 "id":jsonVocaList[i].reviewId,
                 "vocabulary_id": jsonVocaList[i].id,
                 "status":1
             }
             updateReview(review);
-            jsonVocaList.push(review);
+            // jsonVocaList.push(review);
+            voca.style.background="#74d56a";
 
-            i++;
-            if (i < size) {
-                calculateProgress();
-                voca.value='';
-                question.innerText=jsonVocaList[i].mean_vocabulary;
+            setTimeout(()=>{
+                i++;
+                if (i < size) {
+                    calculateProgress();
+                    voca.value='';
+                    voca.style.background="#ffffff";
+                    question.innerText=jsonVocaList[i].mean_vocabulary;
 
-                hideSuggestions();
-            } else {
-                //UpdateData
-                window.location.href = "${pageContext.request.contextPath}/client/donepractice";
-            }
+                    hideSuggestions();
+                } else {
+                    //UpdateData
+                    window.location.href = "${pageContext.request.contextPath}/client/donepractice";
+                }
+            },1000);
+
 
         } else {
-            alert("Error")
             var review = {
                 "id":jsonVocaList[i].reviewId,
                 "vocabulary_id": jsonVocaList[i].id,
                 "status":0
             }
             updateReview(review);
-            jsonVocaList.push(review);
-            showFormResult();
+            // jsonVocaList.push(review);
+            voca.style.background="#fd5656";
+            // showFormResult();
+
+            setTimeout(()=>{
+                console.log("Delay 1s")
+                voca.style.background="#ffffff";
+                showFormResult();
+                question.innerText=jsonVocaList[i+1].mean_vocabulary;
+            },1000);
+
         }
-
-
     }
     function calculateProgress() {
         progress.style.width= (i/size)*100+'%'
@@ -236,14 +246,13 @@
         form_practice.style.display = "block";
         voca.value='';
         question.innerText=jsonVocaList[i].mean_vocabulary;
-
     }
     function show_alert() {
         if(!confirm("Do you really want to do this?")) {
             return false;
         }
         //update
-        window.location.href = "${pageContext.request.contextPath}/client/donepractice";
+        window.location.href = "${pageContext.request.contextPath}/list-box";
     }
 
     function updateReview(data){

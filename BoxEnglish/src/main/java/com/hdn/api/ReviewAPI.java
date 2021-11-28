@@ -25,12 +25,12 @@ public class ReviewAPI {
 
     @GetMapping("/practice")
     public List<ReviewEntity> getReviewForPractice() {
-        List<ReviewEntity> reviewEntities = reviewService.getReviewForPractice((long)2,1);
+        List<ReviewEntity> reviewEntities = reviewService.getReviewForPractice(Cons.USER_ID,1);
         if (reviewService.isNewDay(Cons.USER_ID)) {
             reviewService.addReviewList(reviewEntities);
         }
         System.out.println(reviewEntities);
-        return null;
+        return reviewEntities;
     }
     @PutMapping("/update")
     public Integer updateReview(@RequestBody ReviewDto reviewDto) {
