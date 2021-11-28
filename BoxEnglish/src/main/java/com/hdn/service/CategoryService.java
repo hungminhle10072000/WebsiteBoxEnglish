@@ -2,6 +2,7 @@ package com.hdn.service;
 
 import com.hdn.converter.CategoryConverter;
 import com.hdn.dao.CategoryDao;
+import com.hdn.daoimp.CategoryImp;
 import com.hdn.dto.CategoryDto;
 import com.hdn.entity.CategoryEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class CategoryService {
 
 	@Autowired
     private CategoryDao categoryDao;
+	
+	@Autowired
+	private CategoryImp categoryImp;
 
     @Autowired
     private CategoryConverter categoryConverter;
@@ -37,5 +41,4 @@ public class CategoryService {
         CategoryDto category = getCategory((Long.parseLong(categoryId.toString())));
         return category;
     }
-
 }

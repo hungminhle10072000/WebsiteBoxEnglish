@@ -53,9 +53,21 @@ public class CategoryEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryEntity", cascade=CascadeType.ALL) 
 	private List<VocabularyEntity> listVocabularyEntities;
 	
+	
 	@Transient
 	private MultipartFile fileImage;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryEntity", cascade=CascadeType.ALL) 
+	private List<Cate_User_Entity> cate_User_Entities;
+	
+	public List<Cate_User_Entity> getCate_User_Entities() {
+		return cate_User_Entities;
+	}
+
+	public void setCate_User_Entities(List<Cate_User_Entity> cate_User_Entities) {
+		this.cate_User_Entities = cate_User_Entities;
+	}
+
 	public Date getCreateDate() {
 		return createDate;
 	}
