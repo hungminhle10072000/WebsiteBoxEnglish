@@ -26,4 +26,24 @@ public class CourseService implements CourseDao{
 		return courseImp.AddCourseUser(idCourse, userEntity);
 	}
 
+	@Override
+	public boolean deleteCourse(Long idCourse) {
+		return courseImp.deleteCourse(idCourse);
+	}
+
+	@Override
+	public boolean addCourse(UserEntity userEntity, CategoryEntity courseEntity) {
+		return courseImp.addCourse(userEntity, courseEntity);
+	}
+
+	@Override
+	public CategoryEntity findCourseById(Long idCourse) {
+		return courseImp.findCourseById(idCourse);
+	}
+
+	@Override
+	public boolean updateCourse(CategoryEntity courseEntity) {
+		return courseImp.updateCourse(courseEntity);
+	}
+
 }
