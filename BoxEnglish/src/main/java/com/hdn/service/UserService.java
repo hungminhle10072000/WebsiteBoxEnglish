@@ -1,5 +1,9 @@
 package com.hdn.service;
 
+import java.util.List;
+import java.util.Map;
+
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,4 +37,47 @@ public class UserService implements UserDao{
 	public boolean checkExistUsername(String username) {
 		return userimp.checkExistUsername(username);
 	}
+
+	@Override
+	public List<UserEntity> getAllUser() {
+		return userimp.getAllUser();
+	}
+
+	@Override
+	public boolean deleteUser(Long idUser) {
+		return userimp.deleteUser(idUser);
+	}
+
+	@Override
+	public boolean checkExistEmail(String email) {
+		return userimp.checkExistEmail(email);
+	}
+
+	@Override
+	public boolean addAccount(UserEntity userEntity) {
+		return userimp.addAccount(userEntity);
+	}
+
+	@Override
+	public boolean resetPassWord(UserEntity userUpdate) {
+		return userimp.resetPassWord(userUpdate);
+	}
+
+	@Override
+	public boolean updateAccount(UserEntity userUpdate) {
+		// TODO Auto-generated method stub
+		return userimp.updateAccount(userUpdate);
+	}
+
+	@Override
+	public UserEntity getUserByEmail(String email) {
+		return userimp.getUserByEmail(email);
+	}
+
+	@Override
+	public UserEntity getuserByUserName(String username) {
+		// TODO Auto-generated method stub
+		return userimp.getuserByUserName(username);
+	}
+
 }
