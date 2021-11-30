@@ -10,6 +10,8 @@ public interface CourseDao {
 	
     List<CategoryEntity> findAllCourse();
     boolean AddCourseUser(Long idCourse, UserEntity userEntity);
-
-    
+    boolean deleteCourse(Long idCourse);
+    boolean addCourse(UserEntity userEntity, CategoryEntity courseEntity);
+    CategoryEntity findCourseById(Long idCourse);
+    boolean updateCourse(CategoryEntity courseEntity);
 }

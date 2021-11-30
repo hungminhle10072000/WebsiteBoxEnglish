@@ -13,11 +13,8 @@
 					class="fa fa-dashboard fa-3x"></i> Bảng điều khiển</a></li>
 			<li><a href='<c:url value="/admin/user/"/>'><i
 					class="fa fa-desktop fa-3x"></i> Quản lí tài khoản</a></li>
-			<li><a href='<c:url value="/admin-category-list?type=list"/>'><i
-					class="fa fa-desktop fa-3x"></i> Quản lí loại hàng</a></li>
-			<li><a
-				href='<c:url value="/admin-detailcategory-list?type=list"/>'><i
-					class="fa fa-desktop fa-3x"></i> Quản lí chi tiết loại hàng</a></li>
+			<li><a href='<c:url value="/admin/course/"/>'><i
+					class="fa fa-desktop fa-3x"></i> Quản lí khóa học</a></li>
 		</ul>
 	</div>
 </nav>
