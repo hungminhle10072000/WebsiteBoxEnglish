@@ -11,8 +11,8 @@
 				src="${url}/img/find_user.png" class="user-image img-responsive" /></li>
 			<li><a class="active-menu" href="#"><i
 					class="fa fa-dashboard fa-3x"></i> Bảng điều khiển</a></li>
-			<li><a href='<c:url value="/admin-product-list?type=list"/>'><i
-					class="fa fa-desktop fa-3x"></i> Quản lí sản phẩm</a></li>
+			<li><a href='<c:url value="/admin/user/"/>'><i
+					class="fa fa-desktop fa-3x"></i> Quản lí tài khoản</a></li>
 			<li><a href='<c:url value="/admin-category-list?type=list"/>'><i
 					class="fa fa-desktop fa-3x"></i> Quản lí loại hàng</a></li>
 			<li><a

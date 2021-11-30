@@ -1,0 +1,26 @@
+@charset "ISO-8859-1";
+
+/*start page admin-user*/
+
+.row-table-user {
+	margin-top: 30px
+}
+
+/*pagination*/
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}

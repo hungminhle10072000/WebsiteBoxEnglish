@@ -10,10 +10,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Nationalized;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "USER")
@@ -56,7 +60,28 @@ public class UserEntity {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userEntity")
 	private List<Cate_User_Entity> cate_User_Entities;
 	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userEntity")
+	private List<CategoryEntity> categoryEntities;
 	
+	@Transient
+	private MultipartFile fileAvatar;
+	
+	public MultipartFile getFileAvatar() {
+		return fileAvatar;
+	}
+
+	public void setFileAvatar(MultipartFile fileAvatar) {
+		this.fileAvatar = fileAvatar;
+	}
+
+	public List<CategoryEntity> getCategoryEntities() {
+		return categoryEntities;
+	}
+
+	public void setCategoryEntities(List<CategoryEntity> categoryEntities) {
+		this.categoryEntities = categoryEntities;
+	}
+
 	public List<Cate_User_Entity> getCate_User_Entities() {
 		return cate_User_Entities;
 	}
