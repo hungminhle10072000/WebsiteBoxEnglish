@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.jvnet.fastinfoset.Vocabulary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,9 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.hdn.entity.CategoryEntity;
 import com.hdn.entity.UserEntity;
+import com.hdn.entity.VocabularyEntity;
 import com.hdn.service.CourseService;
+import com.hdn.service.VocabularyService;
 
 @Controller
 @RequestMapping("/admin/course/")
@@ -29,6 +32,9 @@ public class AdminCourseController {
 	
 	@Autowired
 	CourseService courseService;
+	
+	@Autowired
+	VocabularyService vocabularyService;
 	
 	@GetMapping
 	public String defaultAdminCourse(ModelMap model) {
@@ -49,6 +55,18 @@ public class AdminCourseController {
 		}
 	}
 	
+	@DeleteMapping("deleteVoca/{idCourse}")
+	@ResponseBody
+	public ResponseEntity<String> deleteVocaCouse(ModelMap model, @PathVariable("idCourse") Long idCourse) {
+		if(vocabularyService.deleteVocaCouse(idCourse)) {
+			List<VocabularyEntity> listAllVocaCourse = vocabularyService.findVocaCourse(idCourse);
+			model.addAttribute("listAllVocaCourse",listAllVocaCourse);
+			return ResponseEntity.ok("Xóa thành công !!!");
+		} else {
+			return ResponseEntity.badRequest().body("Xóa thất bại !!!");
+		}
+	}
+	
 	@GetMapping("addCourse")
 	public String addCourse(ModelMap model){
 		CategoryEntity addCourse = new CategoryEntity();
@@ -62,9 +80,9 @@ public class AdminCourseController {
 		if(courseService.addCourse(user, courseAddEntity)) {
 			CategoryEntity addCourse = new CategoryEntity();
 			model.addAttribute("courseAddEntity",addCourse);
-			model.addAttribute("messageSuccess","Thêm tài khoản thành công !!!");
+			model.addAttribute("messageSuccess","Thêm khóa học thành công !!!");
 		} else {
-			model.addAttribute("message","Thêm tài khoản thất bại !!!");
+			model.addAttribute("message","Thêm khóa học thất bại !!!");
 		}
 		return "admin/add-course";
 	}
@@ -88,5 +106,59 @@ public class AdminCourseController {
 			model.addAttribute("message","Cập nhật thất bại !!!");
 		}
 		return "admin/edit-course";
+	}
+	
+	@GetMapping("detail/{idCourse}")
+	public String detailCourse(ModelMap model, @PathVariable("idCourse") Long idCourse) {
+		CategoryEntity course = courseService.findCourseById(idCourse);
+		model.addAttribute("courseDetail", course);
+		model.addAttribute("idCourse",idCourse);
+		List<VocabularyEntity> listAllVocaCourse = vocabularyService.findVocaCourse(idCourse);
+		model.addAttribute("listAllVocaCourse",listAllVocaCourse);
+		return "admin/detail-course";
+	}
+	
+	@GetMapping("detail/addVoca/{idCourse}")
+	public String addVocaCourse(ModelMap model, @PathVariable("idCourse") Long idCourse) {
+		VocabularyEntity vocabularyAddEntity  = new VocabularyEntity();
+		model.addAttribute("idCourse", idCourse);
+		model.addAttribute("vocabularyAddEntity",vocabularyAddEntity);
+		return "admin/add-vocabulary";
+	}
+	
+	@PostMapping("detail/addVoca/{idCourse}")
+	public String addVocaCourse(ModelMap model, @PathVariable("idCourse") Long idCourse, @ModelAttribute("vocabularyAddEntity") VocabularyEntity vocabularyAddEntity)
+	{
+		CategoryEntity course = courseService.findCourseById(idCourse);
+		vocabularyAddEntity.setCategoryEntity(course);
+		if(vocabularyService.addVocaCourse(vocabularyAddEntity)) {
+			model.addAttribute("idCourse", idCourse);
+			model.addAttribute("vocabularyAddEntity",new VocabularyEntity());
+			model.addAttribute("messageSuccess","Thêm từ mới thành công !!!");
+		} else {
+			model.addAttribute("message","Thêm từ mới thất bại !!!");
+		}
+		return "admin/add-vocabulary";
+	}
+
+	@GetMapping("detail/edit/{idCourse}/{idVoca}")
+	public String editVocaCouse(ModelMap model, @PathVariable("idCourse") Long idCourse,@PathVariable("idVoca") Long idVoca) {
+		VocabularyEntity vocaEdit = vocabularyService.getVocaById(idVoca);
+		model.addAttribute("idCourse", idCourse);
+		model.addAttribute("vocabularyEditEntity",vocaEdit);
+		return "admin/edit-vocabulary";
+	}
+	
+	@PostMapping("detail/edit/{idCourse}/{idVoca}")
+	public String updateVocaCouse(ModelMap model, @PathVariable("idCourse") Long idCourse,@PathVariable("idVoca") Long idVoca,@ModelAttribute("vocabularyEditEntity") VocabularyEntity vocabularyEditEntity) {
+		if(vocabularyService.updateVocaCourse(idVoca, vocabularyEditEntity)) {
+			VocabularyEntity voca = vocabularyService.getVocaById(vocabularyEditEntity.getId());
+			model.addAttribute("vocabularyEditEntity",voca);
+			model.addAttribute("messageSuccess","Cập nhật thành công !!!");
+		} else {
+			model.addAttribute("message","Cập nhật thất bại !!!");
+		}
+		model.addAttribute("idCourse", idCourse);
+		return "admin/edit-vocabulary";
 	}
 }

@@ -57,6 +57,9 @@ public class VocabularyEntity {
 	@Transient
 	private MultipartFile fileAudio;
 	
+	@Transient
+	private MultipartFile fileImage;
+	
 	@Column(name = "isDelete", nullable = false)
 	private int isDelete;
 	
@@ -65,6 +68,16 @@ public class VocabularyEntity {
 	private CategoryEntity categoryEntity;
 
 	
+	public MultipartFile getFileImage() {
+		return fileImage;
+	}
+
+
+	public void setFileImage(MultipartFile fileImage) {
+		this.fileImage = fileImage;
+	}
+
+
 	public String getMean_example_vocabulary() {
 		return mean_example_vocabulary;
 	}

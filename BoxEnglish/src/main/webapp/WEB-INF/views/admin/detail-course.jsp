@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Quản lí tài khoản</title>
+<title>Danh sách từ vựng bài : ${courseDetail.title }</title>
 <!-- BOOTSTRAP STYLES-->
 <link href="${url}/css/bootstrap.css" rel="stylesheet" />
 <!-- FONTAWESOME STYLES-->
@@ -35,12 +35,12 @@
 			<div id="page-inner">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Quản lý tài khoản</h2>
-						<button class="btn btn-success" type="button"><a href="${pageContext.request.contextPath }/admin/user/addAccount" style=" text-decoration: none; color: white;">Thêm tài khoản</a></button>
-						<button class="btn btn-info"><a href="${pageContext.request.contextPath }/admin/user/" style=" text-decoration: none; color: white;">Làm mới</a></button>
+						<h2>Danh sách từ vựng bài : ${courseDetail.title }</h2>
+						<button class="btn btn-success" type="button"><a href="${pageContext.request.contextPath }/admin/course/detail/addVoca/${idCourse}" style=" text-decoration: none; color: white;">Thêm từ mới</a></button>
+						<button class="btn btn-info"><a href="${pageContext.request.contextPath }/admin/course/detail/${idCourse}" style=" text-decoration: none; color: white;">Làm mới</a></button>
 					</div>	
 				</div>
-				<div class="alert-page-admin-user" style="margin-top: 10px">
+				<div class="alert-page-admin-course-voca" style="margin-top: 10px">
 				
 				</div>	
 				<!-- /. ROW  -->
@@ -49,7 +49,7 @@
 					<div class="col-md-12">
 						<!-- Advanced Tables -->
 						<div class="panel panel-default">
-							<div class="panel-heading">Danh sách tài khoản</div>
+							<div class="panel-heading">Danh sách từ vựng</div>
 							<div class="panel-body">
 								<div class="table-responsive">
 									<table class="table table-striped table-bordered table-hover"
@@ -57,38 +57,39 @@
 										<thead>
 											<tr>
 												<th>ID</th>
-												<th>Avatar</th>
-												<th>Họ tên</th>
-												<th>Tên đăng nhập</th>
-												<th>Mật khẩu</th>
-												<th>Email</th>
-												<th>Quyền</th>
+												<th>Ảnh mô tả</th>
+												<th>File nghe</th>
+												<th>Nội dung</th>
 												<th></th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${listAllUser}" var="user">
-										  		<tr>
-											      <th scope="row">${user.id }</th>
+											<c:forEach items="${listAllVocaCourse}" var="voca">
+												<tr>
+											      <td scope="row">${voca.id }</td>
 											      <td>
-											      	<img alt="Ảnh đại diện" src='<c:url value="/resources/img/${user.avatar }"/>' style="width: 150px; height: 150px"/>
+											      	<img alt="Ảnh mô tả" src='<c:url value="/resources/img/${voca.image_vocabulary }"/>' style="width: 150px; height: 150px"/>
 											      </td>
-											      <td>${user.fullname }</td>
-											      <td>${user.username }</td>
-											      <td>${user.password }</td>
-											      <td>${user.email }</td>
-											      <c:if test="${user.role == 1}">
-											      		<td>Admin</td>
-											      </c:if>
-											      <c:if test="${user.role == 0}">
-											      		<td>User</td>
-											      </c:if>
 											      <td>
-											      	<button class="btn btn-warning" type="button" style="margin-bottom: 5px"><a href="${pageContext.request.contextPath }/admin/user/editAccount/${user.id}" style=" text-decoration: none; color: white;">Chỉnh sửa</a></button>
-											      	<button class="btn btn-danger btn-delete-admin-user" id-user="${user.id }" style="margin-bottom: 5px">Xóa</button>
+											      	<audio controls>
+											      		<source src='<c:url value="/resources/audio/${voca.audio_vocabulary }" />' type="audio/mp3">
+													</audio>
 											      </td>
-										    	</tr>
-										  	</c:forEach>
+											      <td>
+										      		<div>
+										      			<span style="color: #004FFB; font-weight: bold">${voca.vocabulary }</span> <br/>
+										      			<span style="color: #000000; font-weight: bold">Giải thích: </span><span>${voca.explain_vocabulary }</span><br>
+										      			<span style="color: #000000; font-weight: bold">Từ loại: </span><span>${voca.mean_vocabulary }</span><br>
+										      			<span style="color: #000000; font-weight: bold">Ví dụ: </span><span>${voca.mean_vocabulary }</span><br>
+										      			<span style="color: #000000; font-weight: bold">${voca.mean_example_vocabulary }</span>
+										      		</div>
+											      </td>
+											      <td>
+											      	<button class="btn btn-warning" type="button" style="margin-bottom: 5px"><a href="${pageContext.request.contextPath }/admin/course/detail/edit/${idCourse}/${voca.id}" style=" text-decoration: none; color: white;">Chỉnh sửa</a></button>
+											      	<br><button class="btn btn-danger btn-delete-admin-course-voca" id-voca="${voca.id }" style="margin-bottom: 5px">Xóa</button>
+											      </td>
+									    		</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -119,21 +120,21 @@
 		$(document).ready(function() {
 			$('#dataTables-example').dataTable();
 			
-			$(".btn-delete-admin-user").click(function() {
+			$(".btn-delete-admin-course-voca").click(function() {
 				var currentRow= $(this).closest("tr");
 				 var checkConfirm = confirm("Bạn chắc chắn muốn xóa !!!!");
 				    if (checkConfirm == true){
-				    	let idUser = $(this).attr("id-user")
+				    	let idVoca = $(this).attr("id-voca")
 				    	$.ajax({
 			                type: "DELETE",
-			                url: '${pageContext.request.contextPath }/admin/user/delete/' + idUser,
+			                url: '${pageContext.request.contextPath }/admin/course/deleteVoca/' + idVoca,
 			                success: function (data) {
-			                	$(".alert-page-admin-user").html('<div class="alert alert-warning" role="alert"> Xóa thành công !!! </div>')
+			                	$(".alert-page-admin-course-voca").html('<div class="alert alert-warning" role="alert"> Xóa thành công !!! </div>')
 								window.scrollTo({ top: 0, behavior: 'smooth' });
 			                    currentRow.remove();
 			                },
 			                error: function (data) {
-			                	$(".alert-page-admin-user").html('<div class="alert alert-danger" role="alert"> Xóa thất bại !!! </div>')
+			                	$(".alert-page-admin-course-voca").html('<div class="alert alert-danger" role="alert"> Xóa thất bại !!! </div>')
 								window.scrollTo({ top: 0, behavior: 'smooth' });
 			                }
 			        	});

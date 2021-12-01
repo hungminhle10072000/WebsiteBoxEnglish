@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.hdn.dto.PaginationResult;
 import com.hdn.entity.CategoryEntity;
@@ -147,4 +148,9 @@ public class AdminUserController {
 		return "admin/edit-account";
 	}
 	
+	@GetMapping("edit-info-user")
+	public String editInfoUser(ModelMap model,@SessionAttribute("user") UserEntity user) {
+		model.addAttribute("user", user);
+		return "admin/admin-edit-info";
+	}
 }

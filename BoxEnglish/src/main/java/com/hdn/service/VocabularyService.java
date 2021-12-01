@@ -4,15 +4,22 @@ import com.hdn.converter.VocabularyConverter;
 import com.hdn.dao.ReviewDao;
 import com.hdn.dao.VocabularyDao;
 import com.hdn.daoimp.ReviewImpl;
+import com.hdn.daoimp.VocabularyImpl;
 import com.hdn.dto.ReviewDto;
 import com.hdn.dto.VocabularyDto;
 import com.hdn.entity.ReviewEntity;
 import com.hdn.entity.VocabularyEntity;
 import com.hdn.utils.DateConverter;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
+
+import java.io.File;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,6 +35,9 @@ public class VocabularyService {
     private ReviewDao reviewDao;
     @Autowired
     private VocabularyConverter vocabularyConverter;
+    
+    @Autowired
+    private VocabularyImpl vocabularyImpl;
 
     public List<VocabularyDto> getAllVocabulary() {
         List<VocabularyEntity> vocabularyEntities = vocabularyDao.findAll();
@@ -71,5 +81,25 @@ public class VocabularyService {
             }
         }
         return vocabularyDtos;
+    }
+    
+    public boolean addVocaCourse(VocabularyEntity vocabularyEntity) {
+		return vocabularyImpl.addVocaCourse(vocabularyEntity);
+	}
+    
+    public List<VocabularyEntity> findVocaCourse(Long idCourse) {
+		return vocabularyImpl.findVocaCourse(idCourse);
+	}
+    
+    public boolean deleteVocaCouse(Long idVoca) {
+    	return vocabularyImpl.deleteVocaCouse(idVoca);
+    }
+    
+    public VocabularyEntity getVocaById(Long idVoca) {
+    	return vocabularyImpl.getVocabulary(idVoca);
+    }
+    
+    public boolean updateVocaCourse(Long idVoca, VocabularyEntity vocabularyEntity) {
+    	return vocabularyImpl.updateVocaCourse(idVoca, vocabularyEntity);
     }
 }

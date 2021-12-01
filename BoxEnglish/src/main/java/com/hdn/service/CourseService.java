@@ -45,5 +45,5 @@ public class CourseService implements CourseDao{
 	public boolean updateCourse(CategoryEntity courseEntity) {
 		return courseImp.updateCourse(courseEntity);
 	}
-
+	
 }

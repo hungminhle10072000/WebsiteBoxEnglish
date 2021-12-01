@@ -15,6 +15,8 @@
 					class="fa fa-desktop fa-3x"></i> Quản lí tài khoản</a></li>
 			<li><a href='<c:url value="/admin/course/"/>'><i
 					class="fa fa-desktop fa-3x"></i> Quản lí khóa học</a></li>
+			<li><a href='<c:url value="/admin/user/edit-info-user"/>'><i
+					class="fa fa-desktop fa-3x"></i> Chỉnh sửa thông tin</a></li>
 		</ul>
 	</div>
 </nav>

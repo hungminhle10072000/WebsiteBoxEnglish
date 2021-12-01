@@ -5,6 +5,9 @@ import com.hdn.dao.CategoryDao;
 import com.hdn.daoimp.CategoryImp;
 import com.hdn.dto.CategoryDto;
 import com.hdn.entity.CategoryEntity;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,4 +44,5 @@ public class CategoryService {
         CategoryDto category = getCategory((Long.parseLong(categoryId.toString())));
         return category;
     }
+    
 }

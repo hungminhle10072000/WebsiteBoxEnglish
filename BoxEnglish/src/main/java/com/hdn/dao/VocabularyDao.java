@@ -9,8 +9,12 @@ import java.util.List;
 
 
 public interface VocabularyDao {
+	
     VocabularyEntity getVocabulary(Long id);
     List<VocabularyEntity> findAll();
     Integer addVocabulary(VocabularyEntity vocabularyEntity);
-
+    boolean addVocaCourse(VocabularyEntity vocabularyEntity);
+    List<VocabularyEntity> findVocaCourse(Long idCourse);
+    boolean deleteVocaCouse(Long idVoca);
+    boolean updateVocaCourse(Long idVoca, VocabularyEntity vocabularyEntity);
 }

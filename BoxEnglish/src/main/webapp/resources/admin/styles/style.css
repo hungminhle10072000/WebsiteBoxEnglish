@@ -24,3 +24,16 @@
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+/* edit info user */
+#upload-update-image {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+}
+
+
+label.label-upload-image_update {
+   cursor: pointer;
+}
+

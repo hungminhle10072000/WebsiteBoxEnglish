@@ -37,6 +37,7 @@
 					<div class="col-md-12">
 						<h2>Quản lý khóa học</h2>
 						<button class="btn btn-success" type="button"><a href="${pageContext.request.contextPath }/admin/course/addCourse" style=" text-decoration: none; color: white;">Thêm khóa học</a></button>
+						<button class="btn btn-info"><a href="${pageContext.request.contextPath }/admin/course/" style=" text-decoration: none; color: white;">Làm mới</a></button>
 					</div>	
 				</div>
 				<div class="alert-page-admin-course" style="margin-top: 10px">
@@ -74,6 +75,7 @@
 											      <td>
 											      	<button class="btn btn-warning" type="button" style="margin-bottom: 5px"><a href="${pageContext.request.contextPath }/admin/course/editCourse/${course.id}" style=" text-decoration: none; color: white;">Chỉnh sửa</a></button>
 											      	<button class="btn btn-danger btn-delete-admin-acount" id-course="${course.id }" style="margin-bottom: 5px">Xóa</button>
+											      	<button class="btn btn-info" style="margin-bottom: 5px"><a href="${pageContext.request.contextPath }/admin/course/detail/${course.id}" style=" text-decoration: none; color: white;">Chi tiết</a></button>
 											      </td>
 									    		</tr>
 											</c:forEach>
