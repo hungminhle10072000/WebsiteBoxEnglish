@@ -21,6 +21,9 @@ public interface UserDao {
 	boolean updateAccount(UserEntity userUpdate);
 	UserEntity getUserByEmail(String email);
 	UserEntity getuserByUserName(String username);
+	boolean checkUserNameEmail(String username, String email);
+	String sendVali(String email);
+	boolean resetPassword(String username, String password);
 	
 }
 
