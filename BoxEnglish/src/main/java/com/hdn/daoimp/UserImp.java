@@ -316,6 +316,65 @@ public class UserImp implements UserDao{
 			return null;
 		}
 	}
-	
-	
+
+	@Override
+	public boolean checkUserNameEmail(String username, String email) {
+		Session session  = sessionFactory.getCurrentSession();
+        try {
+        	String hql = "FROM UserEntity c WHERE c.username = :username and c.isDelete = 0 and c.email = :email";
+    		Query<UserEntity> query = session.createQuery(hql);
+    		query.setParameter("username", username);
+    		query.setParameter("email", email);
+            if (query.list().size() > 0) {
+            	return true;
+            }else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public String sendVali(String email) {
+		String checkResult = "";
+		String newPassWord = generateRandomPassword(6);
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			helper.setFrom("websiteBoxEnglish@gmail.com");
+			helper.setTo(email);
+			helper.setSubject("Gửi mã xác thực !!");
+			helper.setText("Đây là mã xác thực của bạn:  " + newPassWord + "  \n. Mã xác thực có thời hạn 10 phút. !! Hãy nhập mã xác thực và thay đổi mật khẩu !", true);
+			helper.setReplyTo(email);
+			mailSender.send(message);	
+			checkResult = newPassWord;
+		} catch(Exception ex) {
+			return checkResult;
+		}
+		return checkResult;
+	}
+
+	@Override
+	public boolean resetPassword(String username, String password) {
+		boolean checkResult = false;
+		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			String hql = "FROM UserEntity c WHERE c.username = :username and c.isDelete = 0";
+    		Query<UserEntity> query = session.createQuery(hql);
+    		query.setParameter("username", username);
+            UserEntity userUpdate = query.getSingleResult();
+			userUpdate.setPassword(password);
+			session.update(userUpdate);
+			t.commit();
+			checkResult = true;
+		} catch (Exception e) {
+			t.rollback();
+		} finally {
+			session.close();
+		}
+		return checkResult;
+	}
+		
 }

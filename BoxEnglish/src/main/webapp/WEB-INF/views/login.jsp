@@ -29,7 +29,7 @@
                 <div class="col-4">
                     <h4>Đăng nhập</h4>
                     <div class="login-form">
-                        <form action="validationlogin" method="post" id="login-form">
+                        <form action="${pageContext.request.contextPath }/validationlogin" method="post" id="login-form">
                             <div class="form-group">
                                 <h5>Tên đăng nhập</h5>
                                 <input id="username" name="username" type="text" class="form-control" placeholder="Tên đăng nhập" required="">
@@ -56,36 +56,55 @@
                 <div class="col-5" >
                     <div class="col-8">
                         <h4>Quên mật khẩu</h4>
-                        <form action="${pageContext.request.contextPath }/trang-chu" method="post" id="register-form">
+                        <c:if test="${message != null }">
+							<div class="alert alert-danger" role="alert">${message }</div>
+						</c:if>
+						<c:if test="${messageSuccess != null }">
+							<div class="alert alert-success" role="alert">${messageSuccess }</div>
+						</c:if>
+                        <form action="${pageContext.request.contextPath }/user/sendVali" method="post" id="register-form">
                             <div class="form-group">
-                                <h5>Tên tài khoản</h5>
-                                <input id="username2" name="userName" type="text" class="form-control" value="${username}" placeholder="Nhập tên tài khoản">
+                                <h5>Tên đăng nhập</h5>
+                                <input name="username" type="text" class="form-control" placeholder="Nhập tên đăng nhập" required>
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
                                 <h5>Nhập email</h5>
-                                <input id="email" name="emailReset" type="text" value="${email}" class="form-control" placeholder="Nhập email">
+                                <input name="email" type="email" class="form-control" placeholder="Nhập email" required>
                                 <span class="form-message"></span>
                             </div>
-
-                            <label style="color: green">${msg}</label><br>
-                            <button type="submit" class="btn btn-success btn-primary " style="margin-top: 10px; color: white; background-color: #696763; border: none;" >Lấy mã xác thực </button>
-                            <div class="form-group">
-                                <h5>Nhập mật khẩu mới</h5>
-                                <input id="newpassword" type="password" value="" class="form-control" placeholder="Nhập mật khẩu mới">
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <h5>Nhập mã xác thực</h5>
-                                <input id="code" type="text" value="" class="form-control" placeholder="Nhập mã xác thực">
-                                <span class="form-message"></span>
-                            </div>
-                            <button type="button" class="btn btn-success btn-primary " onclick="resetPassword()" style="margin-top: 10px; color: white; background-color: #696763; border: none;" >Reset mật khẩu </button>
-                            <input type="hidden" name="action" value="login">
-                            <div id="notification"></div>
-                            <span class="form-message"></span>
-
+                        	<button type="submit" class="btn btn-success btn-primary " style="margin-top: 10px; color: white; background-color: #696763; border: none;" >Lấy mã xác thực </button>
                         </form>
+                        <div class="form-reset-password">
+                        	<c:if test="${message2 != null }">
+							<div class="alert alert-danger" role="alert">${message2 }</div>
+							</c:if>
+							<c:if test="${messageSuccess2 != null }">
+								<div class="alert alert-success" role="alert">${messageSuccess2 }</div>
+							</c:if>
+							<form action="${pageContext.request.contextPath }/user/resetPassWord" method="post">
+	                        	 <div class="form-group">
+		                            <h5>Nhập mật khẩu mới</h5>
+		                            <input name="newpassword" type="password" value="${newpassword }" class="form-control" placeholder="Nhập mật khẩu mới" minlength="6" required>
+	                       		 </div> 	
+	                        	<div class="form-group">
+		                            <h5>Nhập lại mật khẩu mới</h5>
+		                            <input name="repeat_password" type="password" value="${repeat_password }" class="form-control" placeholder="Nhập lại mật khẩu mới" minlength="6" required> 
+	                        	</div>
+	                        	<div class="form-group">
+		                            <h5>Tên đăng nhập</h5>
+		                            <input name="username" type="text" value="${username }" class="form-control" placeholder="Nhập tên đăng nhập" required> 
+	                        	</div>
+	                        	<div class="form-group">
+		                            <h5>Nhập mã xác thực</h5>
+		                            <input name="code" type="text" value="${code }" class="form-control" placeholder="Nhập mã xác thực" required>        
+	                       		</div>
+	                       		<button type="submit" class="btn btn-success btn-primary " style="margin-top: 10px; color: white; background-color: #696763; border: none;" >Xác nhận</button>
+                       		 </form>
+                        </div>
+                        <input type="hidden" name="action" value="login">
+                        <div id="notification"></div>
+                        <span class="form-message"></span>
                     </div>
                 </div>
             </div>
@@ -97,6 +116,20 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
 <script src='${pageContext.request.contextPath }/Validation.js'></script>
 <script>
+
+	/*new*/
+	function closeFormResetPassWord(event) {
+		event.preventDefault()
+		$('.form-reset-password').css('display', 'none');
+	}
+	
+	function openFormResetPassWord(event){
+		event.preventDefault()
+		$('.form-reset-password').css('display', 'block');			
+	}
+	
+	/*end-new*/
+	
     Validator({
         form: '#login-form',
         formGroupSelector: '.form-group',
@@ -106,16 +139,18 @@
             Validator.minLength('#password', '6')
         ]
     });
+    
     Validator({
         form: '#register-form',
         formGroupSelector: '.form-group',
         errorSelector : '.form-message',
         rules: [
-            Validator.isRequired('#username2', 'Vui lòng nhập đầy đủ tên tài khoản của bạn'),
+            Validator.isRequired('#username2', 'Vui lòng nhập đầy đủ tên đăng nhập của bạn'),
             Validator.isEmail('#email')
         ]
     });
 
+    /*Reset password*/
     function resetPassword(){
 
         var username= $('#username2').val();
@@ -147,7 +182,6 @@
             success: function (result){
                 console.log("Success");
                 notify.innerHTML="<label style=\"color: green\">Đổi mật khẩu thành công</label>";
-                <%--window.location.href = "${PCurl}?type=list&message=insert_success";--%>
             },
             error: function (error){
                 console.log("Error");

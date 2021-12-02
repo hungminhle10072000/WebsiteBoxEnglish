@@ -80,4 +80,22 @@ public class UserService implements UserDao{
 		return userimp.getuserByUserName(username);
 	}
 
+	@Override
+	public boolean checkUserNameEmail(String username, String email) {
+		// TODO Auto-generated method stub
+		return userimp.checkUserNameEmail(username, email);
+	}
+
+	@Override
+	public String sendVali(String email) {
+		// TODO Auto-generated method stub
+		return userimp.sendVali(email);
+	}
+
+	@Override
+	public boolean resetPassword(String username, String password) {
+		// TODO Auto-generated method stub
+		return userimp.resetPassword(username, password);
+	}
+
 }
