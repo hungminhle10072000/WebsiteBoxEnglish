@@ -29,7 +29,7 @@
                 <div class="col-4">
                     <h4>Đăng nhập</h4>
                     <div class="login-form">
-                        <form action="${pageContext.request.contextPath }/validationlogin" method="post" id="login-form">
+                        <form action="${pageContext.request.contextPath }/validationlogin" method="post" id="login-form" style="display: inline;">
                             <div class="form-group">
                                 <h5>Tên đăng nhập</h5>
                                 <input id="username" name="username" type="text" class="form-control" placeholder="Tên đăng nhập" required="">
@@ -43,12 +43,8 @@
                             <label>${msg}</label><br>
                             <button type="submit" class="btn btn-success btn-primary" style="margin-top: 10px; color: white; background-color: #696763; border: none;">Đăng nhập</button>
                             <input type="hidden" name="action" value="login">
-                        </form>
-                        <form action="register" method="get ">
-                            <button type="submit" class="btn btn-link">Đăng kí</button>
-                            <input type="hidden" name="type" value="register">
-                            <%--                <button type="button" class="btn btn-link" style="padding-left: 180px">Quên mật khẩu?</button>--%>
-                        </form>
+                        </form>                       
+                        <button class="btn btn-secondary" style="display: inline; margin-top: 10px"><a href="${pageContext.request.contextPath }/register" style="text-decoration: none; color: white;">Đăng ký</a></button>
                     </div>
                 </div>
                 <div class="col-1" ></div>

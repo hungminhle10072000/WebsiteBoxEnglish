@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
-<c:url value="/api-admin-user" var ="APIurl"></c:url>
-<c:url value="/validationlogin" var="url"> </c:url>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,125 +20,47 @@
 </head>
 <body>
 <div class="container">
-    <div class="register-form">
-        <form class="panel-body" id="register-form">
+    <div class="register-form mt-3">
+        <form:form class="panel-body" method="post" enctype="multipart/form-data" modelAttribute="userAddEntity">
             <div class="panel-heading">
                 <h2 class="text-center">Đăng ký tài khoản</h2>
             </div>
-
-            <div class="form-group">
-                <label for="fullname">Full Name:</label>
-                <input required="true" type="text" value="${user.fullname}" class="form-control" id="fullname" name="fullname" placeholder = "Nhập full name" />
-                <span style="color: red" class="form-message"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="username">User Name:</label>
-                <input required="true" type="text" value="${user.username}" class="form-control" id="username" name="username" placeholder = "Nhập User" />
-                <span style="color: red" class="form-message"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input required="true" type="email" value="${user.email}" class="form-control" id="email" name="email" placeholder="Nhập email" />
-                <span style="color: red" class="form-message"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="phone">Phone number:</label>
-                <input required="true" type="number" min="0" class="form-control" value="${user.phonenumber}" id="phone" placeholder="Nhập số điện thoại"/>
-                <span style="color: red" class="form-message"></span>
-            </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input required="true" type="password" value="${user.passWord}" class="form-control" id="pwd" placeholder="Nhập mật khẩu"/>
-                <span style="color: red" class="form-message"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="confirmation_pwd">Confirmation Password:</label>
-                <input required="true" type="password" class="form-control" placeholder="Xác nhận mật khẩu" id="confirmation_pwd">
-                <span style="color: red" class="form-message"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="address">Address:</label>
-                <input type="text" class="form-control" value="${user.address}" id="address" placeholder="Nhập địa chỉ" />
-                <span style="color: red" class="form-message"></span>
-            </div>
-
-            <button type="submit" class="btn btn-success" id="btnRegister">Register</button>
-            <button class="btn btn-success" onclick="document.location='${pageContext.request.contextPath}/views/web/login.jsp'">Cancel</button>
-        </form>
+            <c:if test="${message != null }">
+				<div class="alert alert-danger" role="alert">${message }</div>
+			</c:if>
+			<c:if test="${messageSuccess != null }">
+				<div class="alert alert-success" role="alert">${messageSuccess }</div>
+			</c:if>
+			<form:hidden path = "role" value="0"/>
+			<div class="form-group">
+	            <label for=fileAvatar class="col-form-label">Ảnh đại diện:</label> <br>
+	            <form:input path="fileAvatar" type="file" accept="image/*" required="required"/>
+	         </div>
+			<div class="form-group">
+	            <label for="fullname" class="col-form-label">Họ tên:</label>
+	            <form:input class="form-control" path="fullname" type="text" required="required"/>
+	         </div>
+	         <div class="form-group">
+	            <label for="username" class="col-form-label">Tên đăng nhập:</label>
+	            <form:input class="form-control" path="username" type="text" required="required"/>
+	         </div>
+	          <div class="form-group">
+	            <label for="password" class="col-form-label">Mật khẩu:</label>
+	            <form:input class="form-control" path="password" type="password" required="required" minlength="6"/>
+	         </div>
+	          <div class="form-group">
+	            <label for="repeat-password" class="col-form-label">Nhập lại mật khẩu:</label>
+	            <input class="form-control" name="repeat-password" type="password" required="required" minlength="6"/>
+	         </div>
+	         <div class="form-group">
+	            <label for="email" class="col-form-label">Email:</label>
+	            <form:input class="form-control" path="email" type="email" required="required"/>
+	         </div> 
+            <button type="submit" class="btn btn-success" id="btnRegister" style="margin-bottom: 10px">Đăng ký</button>
+            <button class="btn btn-danger" style="margin-bottom: 10px" type="button"><a href="${pageContext.request.contextPath }/register/" style=" text-decoration: none; color: white;">Reset</a></button>
+            <button class="btn btn-warning" style="margin-bottom: 10px" onclick="document.location='${pageContext.request.contextPath}/'">Quay lại</button>
+        </form:form>
     </div>
 </div>
-<script src='${pageContext.request.contextPath }/Validation.js'></script>
-<script>
-    ///Mong muon cua chung ta khi su dung thu vien nay
-    Validator({
-        form: '#register-form',
-        formGroupSelector: '.form-group',
-        errorSelector : '.form-message',
-        rules: [
-            Validator.isRequired('#fullname'),
-            Validator.isRequired('#username'),
-            Validator.minLength('#username','6'),
-            Validator.isRequired('#email'),
-            Validator.isEmail('#email'),
-            Validator.isRequired('#phone'),
-            Validator.minLength('#pwd', '6'),
-            Validator.isRequired('#address'),
-            Validator.minLength('#confirmation_pwd','6'),
-            Validator.isConfirmed('#confirmation_pwd',function () {
-                return document.querySelector('#register-form #pwd').value;
-            })
-        ],
-        onSubmit: function (data) {
-            ///call API
-            var fullname=$('#fullname').val();
-            var username= $('#username').val();
-            var email= $('#email').val();
-            var phone= $('#phone').val();
-            var pwd= $('#pwd').val();
-            var address= $('#address').val();
-            var data={
-                "fullname":fullname,
-                "username":username,
-                "email":email,
-                "phone_number":phone,
-                "passWord":pwd,
-                "address":address,
-                "role": "0"
-            }
-            registerAccount(data)
-        }
-    });
-    function registerAccount(data){
-        console.log(data);
-        $.ajax({
-            url: '${APIurl}',
-            type: 'POST',
-            enctype: 'multipart/form-data',
-            processData:false,
-            contentType: 'application/json',
-            data:JSON.stringify(data),
-            dataType: 'json',
-
-            success: function (result){
-                if(result == 0){
-                    alert("Tên đăng nhập đã có người sử dụng !  Yêu cầu nhập tên đăng nhập khác. ")
-                } else {
-                    console.log("Success");
-                    window.location.href = "${url}?type=logout";
-                }
-            },
-            error: function (error){
-                console.log("Error");
-                window.location.href = "${url}?type=register";
-            }
-        })
-    }
-</script>
 </body>
-
 </html>
