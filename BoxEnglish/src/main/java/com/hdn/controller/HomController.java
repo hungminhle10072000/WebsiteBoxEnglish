@@ -1,6 +1,8 @@
 package com.hdn.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -48,7 +51,6 @@ public class HomController {
 		} else {
 			return "redirect:/login";
 		}
-
 	}
 
 	@GetMapping(value = "/practice-voca")
@@ -77,7 +79,31 @@ public class HomController {
 	}
 
 	@GetMapping(value = "/register")
-	public String Register() {
+	public String Register(ModelMap model) {
+		model.addAttribute("userAddEntity", new UserEntity());
+		return "register";
+	}
+	
+	@PostMapping("/register")
+	public String addAccount(ModelMap model, @ModelAttribute("userAddEntity") UserEntity userAdd, @RequestParam("repeat-password") String repeat_password) {
+		if(!userAdd.getPassword().equals(repeat_password)) {
+			model.addAttribute("message","Mật khẩu nhập lại không trùng khớp !!!");
+			return "register";
+		}
+		if(userService.checkExistUsername(userAdd.getUsername()) == false) {
+			model.addAttribute("message","Tên đăng nhập đã tồn tại !!! Yêu cầu đổi tên đăng nhập khác !");
+			return "register";
+		}
+		if(userService.checkExistEmail(userAdd.getEmail()) == false) {
+			model.addAttribute("message","Email đã đăng ký cho tài khoản khác !!! Yêu cầu sử dụng email khác !");
+			return "register";
+		}
+		if(userService.addAccount(userAdd)) {
+			model.addAttribute("userAddEntity", new UserEntity());	
+			model.addAttribute("messageSuccess","Thêm tài khoản thành công !!!");
+		} else {
+			model.addAttribute("message","Thêm tài khoản thất bại !!!");
+		}
 		return "register";
 	}
 	
