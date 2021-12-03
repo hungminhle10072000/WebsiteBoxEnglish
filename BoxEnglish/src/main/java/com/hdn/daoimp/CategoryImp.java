@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class CategoryImp implements CategoryDao {
 	
     @Autowired
@@ -27,8 +28,6 @@ public class CategoryImp implements CategoryDao {
             return categoryEntity;
         } catch ( Exception e) {
             return null;
-        } finally {
-            session.close();
         }
     }
 
@@ -52,8 +51,6 @@ public class CategoryImp implements CategoryDao {
             return categoryId;
         } catch ( Exception e) {
             return null;
-        } finally {
-            session.close();
         }
     }
 }

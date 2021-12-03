@@ -6,18 +6,14 @@ import javax.servlet.http.HttpSession;
 
 import com.hdn.cons.Cons;
 import com.hdn.daoimp.ReviewImpl;
+import com.hdn.dto.CategoryDto;
+import com.hdn.dto.CommentDto;
 import com.hdn.entity.ReviewEntity;
+import com.hdn.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import com.hdn.entity.CategoryEntity;
 import com.hdn.entity.UserEntity;
@@ -40,6 +36,10 @@ public class HomController {
 
 	@Autowired
 	private CourseService courseService;
+	@Autowired
+	private CategoryService categoryService;
+	@Autowired
+	private CommentService commentService;
 	
 	@GetMapping
 	public String Home(HttpSession session) {
@@ -90,6 +90,17 @@ public class HomController {
 	@GetMapping(value = "/list-topic")
 	public String Topic() {
 		return "list-topic";
+	}
+
+
+	@GetMapping(value = "/comment-box/{id}")
+	public ModelAndView CommentBox(@PathVariable Long id) {
+		CategoryDto category = categoryService.getCategory(id);
+		List<CommentDto> commentDtos = commentService.getCommentByCategoryId(id);
+		ModelAndView mav = new ModelAndView("course-description");
+		mav.addObject("category",category);
+		mav.addObject("commentDtos",commentDtos);
+		return mav;
 	}
 	
 	@GetMapping(value = "/list-box")

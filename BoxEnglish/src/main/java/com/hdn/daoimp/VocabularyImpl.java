@@ -56,8 +56,6 @@ public class VocabularyImpl implements VocabularyDao {
             return vocabularyId;
         } catch ( Exception e) {
             return null;
-        } finally {
-            session.close();
-        }
+        } 
     }
 }
