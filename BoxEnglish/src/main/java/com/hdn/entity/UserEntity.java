@@ -59,6 +59,20 @@ public class UserEntity {
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userEntity")
 	private List<Cate_User_Entity> cate_User_Entities;
+
+	//Created By Nghia
+	@OneToMany(mappedBy="user")
+	private List<CommentEntity> commentEntities;
+
+	public List<CommentEntity> getCommentEntities() {
+		return commentEntities;
+	}
+
+	public void setCommentEntities(List<CommentEntity> commentEntities) {
+		this.commentEntities = commentEntities;
+	}
+
+	//
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userEntity")
 	private List<CategoryEntity> categoryEntities;

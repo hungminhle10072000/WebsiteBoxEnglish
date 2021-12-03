@@ -33,6 +33,7 @@
 				<div class="row mt-3 pb-3">
 					<c:forEach var="f" items="${listAllCourse }">				
 							<div class="col-md-3 mt-3">
+								<a href="${pageContext.request.contextPath }/comment-box/${f.id}">
 								<div class="card" style="width: 100%;">
 								  <img class="card-img-top img-fluid" src='<c:url value="/resources/img/${f.image }" />' alt="Ảnh ghi chú" style="height: 250px">
 								  <div class="card-body">
@@ -40,6 +41,7 @@
 							        <a href="${pageContext.request.contextPath }/course/${f.id }" class="btn btn-success" onclick="addCourse(event, ${f.id})">Thêm khóa học</a>
 								  </div>
 								</div>
+								</a>
 							</div>
 					</c:forEach>
 				</div>		

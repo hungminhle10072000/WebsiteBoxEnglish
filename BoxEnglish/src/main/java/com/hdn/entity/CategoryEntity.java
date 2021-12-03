@@ -59,7 +59,23 @@ public class CategoryEntity {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryEntity", cascade=CascadeType.ALL) 
 	private List<Cate_User_Entity> cate_User_Entities;
-	
+
+
+	//Created By Nghia
+	@OneToMany(mappedBy="cate")
+	private List<CommentEntity> commentEntities;
+
+	public List<CommentEntity> getCommentEntities() {
+		return commentEntities;
+	}
+
+	public void setCommentEntities(List<CommentEntity> commentEntities) {
+		this.commentEntities = commentEntities;
+	}
+
+	//
+
+
 	public List<Cate_User_Entity> getCate_User_Entities() {
 		return cate_User_Entities;
 	}

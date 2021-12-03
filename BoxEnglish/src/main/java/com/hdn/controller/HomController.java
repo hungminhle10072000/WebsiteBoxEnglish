@@ -8,7 +8,10 @@ import javax.servlet.http.HttpSession;
 
 import com.hdn.cons.Cons;
 import com.hdn.daoimp.ReviewImpl;
+import com.hdn.dto.CategoryDto;
+import com.hdn.dto.CommentDto;
 import com.hdn.entity.ReviewEntity;
+import com.hdn.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -43,7 +45,11 @@ public class HomController {
 
 	@Autowired
 	private CourseService courseService;
-	
+	@Autowired
+	private CategoryService categoryService;
+	@Autowired
+	private CommentService commentService;
+
 	@GetMapping
 	public String Home(HttpSession session) {
 		if (session.getAttribute("user") != null) {
@@ -51,6 +57,7 @@ public class HomController {
 		} else {
 			return "redirect:/login";
 		}
+
 	}
 
 	@GetMapping(value = "/practice-voca")
@@ -83,7 +90,7 @@ public class HomController {
 		model.addAttribute("userAddEntity", new UserEntity());
 		return "register";
 	}
-	
+
 	@PostMapping("/register")
 	public String addAccount(ModelMap model, @ModelAttribute("userAddEntity") UserEntity userAdd, @RequestParam("repeat-password") String repeat_password) {
 		if(!userAdd.getPassword().equals(repeat_password)) {
@@ -99,7 +106,7 @@ public class HomController {
 			return "register";
 		}
 		if(userService.addAccount(userAdd)) {
-			model.addAttribute("userAddEntity", new UserEntity());	
+			model.addAttribute("userAddEntity", new UserEntity());
 			model.addAttribute("messageSuccess","Thêm tài khoản thành công !!!");
 		} else {
 			model.addAttribute("message","Thêm tài khoản thất bại !!!");
@@ -117,7 +124,18 @@ public class HomController {
 	public String Topic() {
 		return "list-topic";
 	}
-	
+
+
+	@GetMapping(value = "/comment-box/{id}")
+	public ModelAndView CommentBox(@PathVariable Long id) {
+		CategoryDto category = categoryService.getCategory(id);
+		List<CommentDto> commentDtos = commentService.getCommentByCategoryId(id);
+		ModelAndView mav = new ModelAndView("course-description");
+		mav.addObject("category",category);
+		mav.addObject("commentDtos",commentDtos);
+		return mav;
+	}
+
 	@GetMapping(value = "/list-box")
 	public ModelAndView Box() {
 		ModelAndView mav = new ModelAndView("list-box");
