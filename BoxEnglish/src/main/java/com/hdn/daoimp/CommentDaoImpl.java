@@ -3,8 +3,11 @@ package com.hdn.daoimp;
 import com.hdn.dao.CommentDao;
 import com.hdn.entity.CommentEntity;
 import com.hdn.entity.ReviewEntity;
+import com.hdn.entity.UserEntity;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -52,4 +55,34 @@ public class CommentDaoImpl implements CommentDao {
             return null;
         }
     }
+
+	@Override
+	public List<CommentEntity> getAllComment() {
+		Session session  = sessionFactory.getCurrentSession();
+        try {
+            Query query = session.createQuery("from CommentEntity");
+            List<CommentEntity> commentEntities = query.getResultList();
+            return commentEntities;
+        } catch ( Exception e) {
+            return null;
+        }
+	}
+
+	@Override
+	public boolean deleteComment(Long idComment) {
+		boolean checkDelete = false;
+		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			CommentEntity commentDelete = session.get(CommentEntity.class, idComment);
+			session.delete(commentDelete);
+			t.commit();
+			checkDelete = true;
+		} catch (Exception e) {
+			t.rollback();
+		} finally {
+			session.close();
+		}
+		return checkDelete;
+	}
 }
