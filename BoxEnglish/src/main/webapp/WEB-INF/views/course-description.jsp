@@ -41,7 +41,7 @@
     	</div>
         <div class="row">
             <div class="col-sm-3">
-                <img src='<c:url value="/resources/img/avatarronaldo.jpg"/>'/>
+                <img width="100%" height="100%" src='<c:url value="/resources/img/${category.image}"/>'/>
             </div>
             <div class="col-sm-6">
                 <h3>${category.title}</h3>
