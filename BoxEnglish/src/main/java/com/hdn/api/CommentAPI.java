@@ -30,7 +30,7 @@ public class CommentAPI {
     private UserService userService;
     @Autowired
     private UserConverter userConverter;
-    @PostMapping("/insert")
+    @PostMapping(value = "/insert" , produces = "application/json; charset=UTF-8")
     public String insertComment(@RequestBody CommentDto commentDto) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         UserDto userCurrent = new UserDto();

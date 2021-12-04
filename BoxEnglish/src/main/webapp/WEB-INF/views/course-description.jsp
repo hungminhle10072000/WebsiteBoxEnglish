@@ -34,9 +34,14 @@
 <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
+    	<div class="row">
+    		<div class="alert-page-list-all-course">
+
+			</div>
+    	</div>
         <div class="row">
             <div class="col-sm-3">
-                <img width="100%" height="100%" src='<c:url value="/resources/img/${category.image}"/>'/>
+                <img src='<c:url value="/resources/img/avatarronaldo.jpg"/>'/>
             </div>
             <div class="col-sm-6">
                 <h3>${category.title}</h3>
@@ -47,8 +52,8 @@
             <div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6">
-                    <button>Đăng ký</button>
-                    <button>Xem chi tiết</button>
+                    <button><a href="${pageContext.request.contextPath }/course/${category.id }" style=" text-decoration: none; color: #000000;" onclick="addCourse(event, ${category.id})">Thêm khóa học</a></button>
+                    <button style="color: #000000">Xem chi tiết</button>
                 </div>
             </div>
         </div>
@@ -63,7 +68,25 @@
 
 </div>
 
-
+<script type="text/javascript">
+	function addCourse(event, idCourse) {
+	    event.preventDefault()
+	    $.ajax({
+               type: "POST",
+               url: '${pageContext.request.contextPath }/course/addCourse/' + idCourse,
+               contentType: false,
+               dataType:"text",
+               success: function (data) {
+               	$(".alert-page-list-all-course").html('<div class="alert alert-warning" role="alert">' +data+ '</div>')
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+               },
+               error: function (data) {
+               	$(".alert-page-list-all-course").html('<div class="alert alert-danger" role="alert"> Thêm khóa học thất bại !!! </div>')
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+               }
+       	});
+	}
+</script>
 </body>
 
 </html>

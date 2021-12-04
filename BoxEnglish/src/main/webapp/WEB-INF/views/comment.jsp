@@ -5,7 +5,7 @@
   Time: 1:53 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%--<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>--%>
@@ -82,6 +82,7 @@
             margin-bottom: 0rem;
         }
     </style>
+    <meta charset="utf-8">
     <title>Title</title>
 </head>
 <body class="bodyc">
@@ -159,7 +160,6 @@
             data:JSON.stringify(data),
             dataType: 'json',
             success: function (result){
-                console.log(result)
                 let imgLink = result.avatar;
                 // console.log(imgLink);
                 // var new_comment = document.querySelector('.comment');
