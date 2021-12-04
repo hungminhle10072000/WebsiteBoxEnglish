@@ -8,4 +8,6 @@ public interface CommentDao {
     Long addComment(CommentEntity commentEntity);
     List<CommentEntity> getCommentByCategoryId(Long id);
     CommentEntity getById(Long id);
+    List<CommentEntity> getAllComment();
+    boolean deleteComment(Long idComment);
 }
