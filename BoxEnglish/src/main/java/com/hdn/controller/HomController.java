@@ -46,7 +46,7 @@ public class HomController {
 	@GetMapping
 	public String Home(HttpSession session) {
 		if (session.getAttribute("user") != null) {
-			return "home";
+			return "list-box";
 		} else {
 			return "redirect:/login";
 		}

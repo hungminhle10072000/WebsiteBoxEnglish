@@ -246,6 +246,8 @@
         form_practice.style.display = "block";
         voca.value='';
         question.innerText=jsonVocaList[i].mean_vocabulary;
+        imgImageVoca.src = "/resources/img/"+jsonVocaList[i].;
+
     }
     function show_alert() {
         if(!confirm("Do you really want to do this?")) {

@@ -15,6 +15,8 @@
 <!-- Box icons -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
 <title>Trang chủ</title>
 <style type="text/css">
 @import url(https://fonts.googleapis.com/css?family=Inconsolata);
@@ -26,7 +28,7 @@
     align-items: center;
     min-height: 100vh;
     font-family: 'Poppins',sans-serif;
-    
+
 
 } */
 .container1 {
@@ -172,57 +174,7 @@ a {
 
 </head>
 <body>
-	<header id="home" class="header">
-		<nav class="nav">
-			<div class="navigation container">
-				<div class="logo">
-					<a href=""><img alt="anhlogo"
-						src='<c:url value="/resources/img/logo.jpg" />' /></a>
-				</div>
-
-				<div class="menu">
-					<div class="top-nav">
-						<div class="logo">
-							<a href=""><img alt="anhlogo"
-								src='<c:url value="/resources/img/logo.jpg" />' /></a>
-						</div>
-						<div class="close">
-							<i class="bx bx-x"></i>
-						</div>
-					</div>
-					<ul class="nav-list">
-						<li class="nav-item"><a href="/BoxEnglish/"
-							class="nav-link scroll-link">Trang chủ</a></li>
-						<li class="nav-item"><a href="#" class="nav-link">Khóa
-								học của tôi</a></li>
-						<li class="nav-item"><a href="#" class="nav-link scroll-link">Danh
-								sách khóa học</a></li>
-						<li class="nav-item"><a href="list-note"
-							class="nav-link scroll-link">Ghi chú</a></li>
-					</ul>
-				</div>
-
-				<div class="container-user-setting">
-					<a href="#" class="user-icon"> <i class='bx bx-user-circle'></i>
-					</a>
-					<div class="setting-user">
-						<div class="setting-user-item">
-							<i class='bx bxs-edit-alt'></i> <span>Cập nhật thông tin</span>
-						</div>
-						<div class="setting-user-item">
-							<i class='bx bxs-log-out'></i> <span>Đăng xuất</span>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="hamburger">
-					<i class="bx bx-menu"></i>
-				</div>
-
-			</div>
-		</nav>
-	</header>
+	<jsp:include page="header-general.jsp" />
 	<div class="container1">
 		<div class="box">
 			<div class="icon">01</div>

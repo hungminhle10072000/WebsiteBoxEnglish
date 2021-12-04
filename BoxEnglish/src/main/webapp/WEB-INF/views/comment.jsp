@@ -105,7 +105,7 @@
             <img width="100%" src="/BoxEnglish_war_exploded/resources/img/avatarronaldo.jpg" class="img img-responsive img-thumbnail">
         </div>
         <div class="col-md-10 panel-footer">
-            <p style="color:green;"> user</p>
+            <p style="color:green;"> ${comment.user.fullname}</p>
             <fmt:formatdate value="" var="parsedMyDate" datestyle="short" type="both" pattern="MM-dd-yyyy hh:mm:ss a">
                 <p style="color: #000;">${comment.createDate}</p>								<p>${comment.content}</p>
             </fmt:formatdate></div>
