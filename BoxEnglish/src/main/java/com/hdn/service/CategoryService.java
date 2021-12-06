@@ -44,5 +44,10 @@ public class CategoryService {
         CategoryDto category = getCategory((Long.parseLong(categoryId.toString())));
         return category;
     }
+
+    public List<CategoryDto> findCourseByUserId(Long userId) {
+        List<CategoryEntity> categoryEntities = categoryImp.findCourseByUserId(userId);
+        return categoryConverter.toListDto(categoryEntities);
+    }
     
 }

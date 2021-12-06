@@ -1,5 +1,8 @@
 package com.hdn.controller;
 
+import com.hdn.cons.Cons;
+import com.hdn.dto.CategoryDto;
+import com.hdn.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,9 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.hdn.entity.UserEntity;
 import com.hdn.service.Cate_User_Service;
 import com.hdn.service.CourseService;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/course/")
@@ -22,6 +28,8 @@ public class CourseController {
 	
 	@Autowired
 	CourseService courseService;
+	@Autowired
+	private CategoryService categoryService;
 	
 	@Autowired
 	Cate_User_Service cate_User_Service;
@@ -39,5 +47,14 @@ public class CourseController {
 			return ResponseEntity.ok("Khóa học đã đăng ký rồi !!!");
 		}
 	}
-	
+
+	@GetMapping("/getMyCourse")
+	public ModelAndView getAllMyCourse() {
+		Long userId = Cons.USER_ID;
+		List<CategoryDto> listMyCourse = cate_User_Service.findCourseByUserId(userId);
+		ModelAndView mav = new ModelAndView("list-my-course");
+		mav.addObject("listMyCourse",listMyCourse);
+		return mav;
+	}
+
 }

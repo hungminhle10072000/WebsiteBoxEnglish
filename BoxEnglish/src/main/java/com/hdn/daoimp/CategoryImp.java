@@ -1,6 +1,7 @@
 package com.hdn.daoimp;
 
 import com.hdn.dao.CategoryDao;
+import com.hdn.entity.Cate_User_Entity;
 import com.hdn.entity.CategoryEntity;
 import com.hdn.entity.UserEntity;
 import org.hibernate.Session;
@@ -49,6 +50,19 @@ public class CategoryImp implements CategoryDao {
         try {
             Integer categoryId = (Integer)session.save(categoryEntity);
             return categoryId;
+        } catch ( Exception e) {
+            return null;
+        }
+    }
+
+    public List<CategoryEntity> findCourseByUserId(Long userId) {
+
+        Session session  = sessionFactory.getCurrentSession();
+        try {
+            Query query = session.createQuery("from CategoryEntity c WHERE c.userEntity.id = :userId");
+            query.setParameter("userId", userId);
+            List<CategoryEntity> categoryEntities = query.getResultList();
+            return categoryEntities;
         } catch ( Exception e) {
             return null;
         }

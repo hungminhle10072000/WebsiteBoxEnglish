@@ -90,6 +90,44 @@ public class ReviewImpl implements ReviewDao {
             return null;
         }
     }
+    // New
+    public List<ReviewEntity> getReviewsByUserIdAndVocaID(Long userId,Long vocaId) {
+        Session session  = sessionFactory.getCurrentSession();
+        try {
+            Query query = session.createQuery("FROM  ReviewEntity as R where R.userEntity.id=:userId  and R.vocabularyEntity.id =:vocaId");
+            query.setParameter("userId",userId);
+            query.setParameter("vocaId",vocaId);
+            List<ReviewEntity> reviewEntities = query.getResultList();
+            return reviewEntities;
+        } catch ( Exception e) {
+            return null;
+        }
+    }
+    public List<ReviewEntity> getReviewsByUserIdAndVocaIDAndCateId(Long userId, Long cateId) {
+        Session session  = sessionFactory.getCurrentSession();
+        try {
+            Query query = session.createQuery("FROM  ReviewEntity as R where R.userEntity.id=:userId  and R.vocabularyEntity.categoryEntity.id =:cateId");
+            query.setParameter("userId",userId);
+            query.setParameter("cateId",cateId);
+            List<ReviewEntity> reviewEntities = query.getResultList();
+            return reviewEntities;
+        } catch ( Exception e) {
+            return null;
+        }
+    }
+    public List<ReviewEntity> getReviewsByUserIdAndLevelAndStatus(Long userId, int level, int status) {
+        Session session  = sessionFactory.getCurrentSession();
+        try {
+            Query query = session.createQuery("FROM  ReviewEntity as R where R.userEntity.id=:userId  and R.level =:level and R.isDeletel !=1  and R.status = 3 Group by R.vocabularyEntity.id");
+            query.setParameter("userId",userId);
+            query.setParameter("level",level);
+            List<ReviewEntity> reviewEntities = query.getResultList();
+            return reviewEntities;
+        } catch ( Exception e) {
+            return null;
+        }
+    }
+    //
     public ReviewEntity getReviewEntityLatest(Long userId) {
         Session session  = sessionFactory.getCurrentSession();
         try {

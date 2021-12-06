@@ -53,7 +53,7 @@
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6">
                     <button><a href="${pageContext.request.contextPath }/course/${category.id }" style=" text-decoration: none; color: #000000;" onclick="addCourse(event, ${category.id})">Thêm khóa học</a></button>
-                    <button style="color: #000000">Xem chi tiết</button>
+                    <button style="color: #000000" ><a href="${pageContext.request.contextPath }/voca/getVocaByCourseIdAllCourse/${category.id }" style=" text-decoration: none; color: #000000;">Xem chi tiết</a> </button>
                 </div>
             </div>
         </div>
