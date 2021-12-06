@@ -23,6 +23,14 @@ public class ReviewAPI {
         return id;
     }
 
+    @PostMapping("/addVocaToReview/{idVoca}")
+    public Integer addVocaToReview(@PathVariable("idVoca") Long idVoca) {
+        ReviewDto reviewDto = new ReviewDto();
+        reviewDto.setVocabulary_id(idVoca);
+        Integer id = reviewService.addVocaToReview(reviewDto);
+        return id;
+    }
+
     @GetMapping("/practice")
     public List<ReviewEntity> getReviewForPractice() {
         List<ReviewEntity> reviewEntities = reviewService.getReviewForPractice(Cons.USER_ID,1);

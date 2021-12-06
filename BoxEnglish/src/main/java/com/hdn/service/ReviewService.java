@@ -4,8 +4,10 @@ import com.hdn.cons.Cons;
 import com.hdn.converter.ReviewConverter;
 import com.hdn.daoimp.ReviewImpl;
 import com.hdn.dto.ReviewDto;
+import com.hdn.dto.VocabularyDto;
 import com.hdn.entity.ReviewEntity;
 import com.hdn.utils.DateConverter;
+import com.sun.xml.fastinfoset.vocab.Vocabulary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +25,33 @@ public class ReviewService {
     @Autowired
     private ReviewConverter reviewConverter;
 
+    public Integer addVocaToReview(ReviewDto reviewDto) {
+        List<ReviewEntity> reviewEntities = reviewImpl.getReviewsByUserIdAndVocaID(Cons.USER_ID,reviewDto.getVocabulary_id());
+
+        List<ReviewEntity> reviewEntities2 = reviewImpl.getReviewsByUserIdAndLevelAndStatus(Cons.USER_ID,1,3);
+        if (reviewEntities != null && reviewEntities.size() > 0) {
+            return -1; // Từ này đã tồn tại trong review
+        } else if(reviewEntities2 != null && reviewEntities2.size() > 5) {
+            return -2; // Hôm nay đã thêm 5 từ rồi.
+        } else {
+            reviewDto.setUser_id(Cons.USER_ID);
+            ReviewEntity reviewEntity = reviewConverter.toEntity(reviewDto);
+            reviewEntity.setDate_practice(new Date());
+            reviewEntity.setLevel(1);
+            reviewEntity.setStatus(3);
+            return reviewImpl.addReview(reviewEntity);
+        }
+    }
+
+    public List<ReviewDto> getReviewsByUserIdAndVocaIDAndCateId(Long userId, Long cateId) {
+        List<ReviewEntity> reviewEntities = reviewImpl.getReviewsByUserIdAndVocaIDAndCateId(userId,cateId);
+        return reviewConverter.toListDto(reviewEntities);
+    }
+
     public int addReview(ReviewDto reviewDto) {
         reviewDto.setUser_id(Cons.USER_ID);
         ReviewEntity reviewEntity = reviewConverter.toEntity(reviewDto);
+        reviewEntity.setDate_practice(new Date());
         return reviewImpl.addReview(reviewEntity);
     }
     public int addReviewList(List<ReviewEntity> reviewEntities) {

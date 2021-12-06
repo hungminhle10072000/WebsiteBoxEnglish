@@ -12,6 +12,8 @@ import com.hdn.entity.Cate_User_Entity;
 import com.hdn.entity.CategoryEntity;
 import com.hdn.entity.UserEntity;
 
+import java.util.List;
+
 @Repository
 @Transactional
 public class Cate_User_DaoImp implements Cate_User_Dao{
@@ -35,6 +37,18 @@ public class Cate_User_DaoImp implements Cate_User_Dao{
 		}
 		return true;
 	}
-	
+
+	public List<Cate_User_Entity> findCourseByUserId(Long userId) {
+
+		Session session  = sessionFactory.getCurrentSession();
+		try {
+			org.hibernate.query.Query query = session.createQuery("from Cate_User_Entity c WHERE c.userEntity.id = :userId");
+			query.setParameter("userId", userId);
+			List<Cate_User_Entity> cate_user_entities = query.getResultList();
+			return cate_user_entities;
+		} catch ( Exception e) {
+			return null;
+		}
+	}
 	
 }

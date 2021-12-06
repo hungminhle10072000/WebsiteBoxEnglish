@@ -22,7 +22,7 @@
 			             <a href="${pageContext.request.contextPath }/" class="nav-link scroll-link">Trang chủ</a>
 		            </li>
 		            <li class="nav-item">
-		              <a href="#" class="nav-link">Khóa học của tôi</a>
+		              <a href="${pageContext.request.contextPath }/course/getMyCourse" class="nav-link">Khóa học của tôi</a>
 		            </li>
 		            <li class="nav-item">
 		              <a href="${pageContext.request.contextPath }/list-all-course/" class="nav-link scroll-link">Danh sách khóa học</a>
