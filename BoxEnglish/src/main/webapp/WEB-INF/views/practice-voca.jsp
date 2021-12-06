@@ -62,23 +62,23 @@
                 <p><b>Từ loại:</b> <span id="part_of_speech_suggestion">(v): tôn trọng, tuân theo, giữ (lời)</span> </p>
                 <p><b>Ví dụ:</b> <span id="example_vocabulary_suggestion">The two parties agreed to abide by the judge's decision</span> </p>
                 <p><b> <span >Hai bên đã đồng ý tuân theo quyết định của tòa án.</span> </b></p>
-                <audio controls="">
-                    <source src="audio/abide_by.mp3" type="audio/mpeg">
+                <audio id="voiceSuggestion" controls="">
+                    <source src="audio/abide_by.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio>
             </label>
         </div>
         <div id="formResult" style="display: none; text-align: center;">
             <label style="text-align: left;">
-                <img class="mx-auto d-block" src='<c:url value="/resources/img/paris.jpeg" />' alt="not display"  style="width:35%">
+                <img id="imgFormResult" class="mx-auto d-block" src='<c:url value="/resources/img/paris.jpeg" />' alt="not display"  style="width:35%">
                 <p><b>Từ vựng:</b> <span id="vocabulary_result">to accept and act according to a law, an agreement</span> </p>
                 <p><b>Ý nghĩa:</b> <span id="mean_vocabulary_result">to accept and act according to a law, an agreement</span> </p>
                 <p><b>Giải thích:</b> <span id="explain_vocabulary_result">to accept and act according to a law, an agreement</span> </p>
                 <p><b>Từ loại:</b> <span id="part_of_speech_result">(v): tôn trọng, tuân theo, giữ (lời)</span> </p>
                 <p><b>Ví dụ:</b> <span id="example_vocabulary_result">The two parties agreed to abide by the judge's decision</span> </p>
                 <p><b> <span >Hai bên đã đồng ý tuân theo quyết định của tòa án.</span> </b></p>
-                <audio controls="">
-                    <source src="audio/abide_by.mp3" type="audio/mpeg">
+                <audio id="voiceResult" controls="">
+                    <source src="audio/abide_by.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio>
             </label>
@@ -115,7 +115,9 @@
     const suggestion =document.getElementById("suggestion");
     const progress = document.getElementById("progress");
     const imgImageVoca = document.getElementById("imgVoca");
-
+    const imgFormResult = document.getElementById("imgFormResult");
+    const voiceSuggestion = document.getElementById("voiceSuggestion")
+    const voiceResult = document.getElementById("voiceResult")
     // -----------------------------------------------------------------------------//
     function hideOrShowPractice() {
         form_practice.style.display == "none" ? showFormPractice():hideFormPractice()
@@ -140,6 +142,7 @@
             form_result.style.display="none";
             form_practice.style.display="block";
             voca.value='';
+            imgImageVoca.src = "${pageContext.request.contextPath}"+"/resources/img/"+jsonVocaList[i].image_vocabulary;
 
             calculateProgress();
         } else {
@@ -158,6 +161,7 @@
             voca.value='';
             question.innerText=jsonVocaList[i].mean_vocabulary;
             btnIdontKnow.innerHTML="I<br/> don't <br/>know";
+            imgImageVoca.src = "${pageContext.request.contextPath}"+"/resources/img/"+jsonVocaList[i].image_vocabulary;
         } else {
             //Update data
 
@@ -172,6 +176,7 @@
             document.getElementById("explain_vocabulary_suggestion").innerText=jsonVocaList[i].explain_vocabulary.trim()
             document.getElementById("part_of_speech_suggestion").innerText=jsonVocaList[i].partOfSpeech.trim()
             document.getElementById("example_vocabulary_suggestion").innerText=jsonVocaList[i].example_vocabulary.trim()
+            voiceSuggestion.innerHTML='<audio controls><source src="${pageContext.request.contextPath}/resources/audio/' + jsonVocaList[i].audio_vocabulary + '" type="audio/mp3"></audio>'
         }
     }
 
@@ -180,7 +185,8 @@
         hideSuggestions();
         btnIdontKnow.innerText="Next"
         form_result.style.display="block";
-
+        imgFormResult.src = "${pageContext.request.contextPath}"+"/resources/img/"+jsonVocaList[i].image_vocabulary;
+        voiceResult.innerHTML='<audio controls><source src="${pageContext.request.contextPath}/resources/audio/' + jsonVocaList[i].audio_vocabulary + '" type="audio/mp3"></audio>'
         document.getElementById("vocabulary_result").innerText=jsonVocaList[i].vocabulary.trim()
         document.getElementById("mean_vocabulary_result").innerText=jsonVocaList[i].mean_vocabulary.trim()
         document.getElementById("explain_vocabulary_result").innerText=jsonVocaList[i].explain_vocabulary.trim()
@@ -210,7 +216,7 @@
                     voca.value='';
                     voca.style.background="#ffffff";
                     question.innerText=jsonVocaList[i].mean_vocabulary;
-
+                    imgImageVoca.src = "${pageContext.request.contextPath}"+"/resources/img/"+jsonVocaList[i].image_vocabulary;
                     hideSuggestions();
                 } else {
                     //UpdateData
@@ -235,6 +241,7 @@
                 voca.style.background="#ffffff";
                 showFormResult();
                 question.innerText=jsonVocaList[i+1].mean_vocabulary;
+                imgImageVoca.src = "${pageContext.request.contextPath}"+"/resources/img/"+jsonVocaList[i].image_vocabulary;
             },1000);
 
         }
@@ -246,8 +253,7 @@
         form_practice.style.display = "block";
         voca.value='';
         question.innerText=jsonVocaList[i].mean_vocabulary;
-        imgImageVoca.src = "/resources/img/"+jsonVocaList[i].;
-
+        imgImageVoca.src = "${pageContext.request.contextPath}"+"/resources/img/"+jsonVocaList[i].image_vocabulary;
     }
     function show_alert() {
         if(!confirm("Do you really want to do this?")) {
