@@ -1,6 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/api/review/update" var="APIurl"></c:url>
 <!DOCTYPE html>
 <html>
@@ -61,10 +60,10 @@
                 <p><b>Giải thích:</b> <span id="explain_vocabulary_suggestion">to accept and act according to a law, an agreement</span> </p>
                 <p><b>Ví dụ:</b> <span id="example_vocabulary_suggestion">The two parties agreed to abide by the judge's decision</span> </p>
                 <p><b> <span id="mean_example_vocabulary_suggestion">Hai bên đã đồng ý tuân theo quyết định của tòa án.</span> </b></p>
-                <audio id="voiceSuggestion" controls="">
-                    <source src="audio/abide_by.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
+                <div id="voiceSuggestion">
+                    <!-- <source src="audio/abide_by.mp3" type="audio/mp3">
+                    Your browser does not support the audio element. -->
+                </div>
             </label>
         </div>
         <div id="formResult" style="display: none; text-align: center;">
@@ -75,10 +74,10 @@
                 <p><b>Giải thích:</b> <span id="explain_vocabulary_result">to accept and act according to a law, an agreement</span> </p>
                 <p><b>Ví dụ:</b> <span id="example_vocabulary_result">The two parties agreed to abide by the judge's decision</span> </p>
                 <p><b> <span id="mean_example_vocabulary_result" >Hai bên đã đồng ý tuân theo quyết định của tòa án.</span> </b></p>
-                <audio id="voiceResult" controls="">
-                    <source src="audio/abide_by.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
+                <div id="voiceResult">
+                    <!-- <source src="audio/abide_by.mp3" type="audio/mp3">
+                    Your browser does not support the audio element. -->
+                </div>
             </label>
         </div>
 
