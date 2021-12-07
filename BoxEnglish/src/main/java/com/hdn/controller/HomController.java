@@ -7,9 +7,11 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import com.hdn.cons.Cons;
+import com.hdn.converter.UserConverter;
 import com.hdn.daoimp.ReviewImpl;
 import com.hdn.dto.CategoryDto;
 import com.hdn.dto.CommentDto;
+import com.hdn.dto.UserDto;
 import com.hdn.entity.ReviewEntity;
 import com.hdn.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class HomController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserConverter userConverter;
+
 	@Autowired
 	private ReviewImpl reviewImpl;
 
@@ -132,6 +137,10 @@ public class HomController {
 	@GetMapping(value = "/list-box")
 	public ModelAndView Box() {
 		ModelAndView mav = new ModelAndView("list-box");
+
+		UserEntity userEntity = userService.GetUser(Cons.USER_ID);
+		UserDto user = userConverter.toDto(userEntity);
+
 		int numOfBox1=0,numOfBox2=0,numOfBox3=0,numOfBox4=0,numOfBox5=0,numOfBox6=0;
 		List<ReviewEntity> reviewEntitiesBox1 = reviewImpl.getReviewsByUserIdAndLevel(Cons.USER_ID,1);
 		List<ReviewEntity> reviewEntitiesBox2 = reviewImpl.getReviewsByUserIdAndLevel(Cons.USER_ID,2);
@@ -163,6 +172,7 @@ public class HomController {
 		mav.addObject("numOfBox4",numOfBox4);
 		mav.addObject("numOfBox5",numOfBox5);
 		mav.addObject("numOfBox6",numOfBox6);
+		mav.addObject("user",user);
 		return mav;
 	}
 	@GetMapping(value = "/box-detail")

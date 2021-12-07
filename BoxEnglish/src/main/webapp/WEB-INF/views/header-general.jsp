@@ -6,12 +6,12 @@
 		<nav class="nav">
 			<div class="navigation container">
 				<div class="logo">
-					<a href=""><img alt="anhlogo" src='<c:url value="/resources/img/logo.jpg" />'/></a>
+					<a href="${pageContext.request.contextPath }/list-box"><img alt="anhlogo" src='<c:url value="/resources/img/logo.jpg" />'/></a>
 			</div>
 			<div class="menu">
 				<div class="top-nav">
 					<div class="logo">
-						<a href=""><img alt="anhlogo" src='<c:url value="/resources/img/logo.jpg" />'/></a>
+						<a href="${pageContext.request.contextPath }/list-box"><img alt="anhlogo" src='<c:url value="/resources/img/logo.jpg" />'/></a>
 					</div>
 					<div class="close">
 						<i class="bx bx-x"></i>
@@ -19,7 +19,7 @@
 				</div> 
 				<ul class="nav-list">
 					<li class="nav-item">
-			             <a href="${pageContext.request.contextPath }/" class="nav-link scroll-link">Trang chủ</a>
+			             <a href="${pageContext.request.contextPath }/list-box" class="nav-link scroll-link">Trang chủ</a>
 		            </li>
 		            <li class="nav-item">
 		              <a href="${pageContext.request.contextPath }/course/getMyCourse" class="nav-link">Khóa học của tôi</a>

@@ -123,9 +123,12 @@ public class ReviewService {
         }
     }
     public int updateReview(ReviewDto reviewDto) {
+        reviewDto.setUser_id(Cons.USER_ID);
         ReviewEntity reviewOld = getReviewById(reviewDto.getId());
         reviewOld.setStatus(reviewDto.getStatus());
-        reviewOld.setLevel(reviewOld.getLevel()+1);
+        if (reviewDto.getStatus() ==1 ) {
+            reviewOld.setLevel(reviewOld.getLevel()+1);
+        }
         reviewImpl.syncLevelByUserIdAndVocabularyId(reviewDto.getUser_id(),reviewDto.getVocabulary_id(),reviewOld.getLevel());
         return reviewImpl.updateReview(reviewOld);
     }

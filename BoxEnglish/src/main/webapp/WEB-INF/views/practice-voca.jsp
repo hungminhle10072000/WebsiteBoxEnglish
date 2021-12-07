@@ -59,9 +59,8 @@
         <div id="suggestion" style="display: none; text-align: center;">
             <label style="text-align: left;">
                 <p><b>Giải thích:</b> <span id="explain_vocabulary_suggestion">to accept and act according to a law, an agreement</span> </p>
-                <p><b>Từ loại:</b> <span id="part_of_speech_suggestion">(v): tôn trọng, tuân theo, giữ (lời)</span> </p>
                 <p><b>Ví dụ:</b> <span id="example_vocabulary_suggestion">The two parties agreed to abide by the judge's decision</span> </p>
-                <p><b> <span >Hai bên đã đồng ý tuân theo quyết định của tòa án.</span> </b></p>
+                <p><b> <span id="mean_example_vocabulary_suggestion">Hai bên đã đồng ý tuân theo quyết định của tòa án.</span> </b></p>
                 <audio id="voiceSuggestion" controls="">
                     <source src="audio/abide_by.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
@@ -74,9 +73,8 @@
                 <p><b>Từ vựng:</b> <span id="vocabulary_result">to accept and act according to a law, an agreement</span> </p>
                 <p><b>Ý nghĩa:</b> <span id="mean_vocabulary_result">to accept and act according to a law, an agreement</span> </p>
                 <p><b>Giải thích:</b> <span id="explain_vocabulary_result">to accept and act according to a law, an agreement</span> </p>
-                <p><b>Từ loại:</b> <span id="part_of_speech_result">(v): tôn trọng, tuân theo, giữ (lời)</span> </p>
                 <p><b>Ví dụ:</b> <span id="example_vocabulary_result">The two parties agreed to abide by the judge's decision</span> </p>
-                <p><b> <span >Hai bên đã đồng ý tuân theo quyết định của tòa án.</span> </b></p>
+                <p><b> <span id="mean_example_vocabulary_result" >Hai bên đã đồng ý tuân theo quyết định của tòa án.</span> </b></p>
                 <audio id="voiceResult" controls="">
                     <source src="audio/abide_by.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
@@ -136,13 +134,20 @@
         form_suggestion.style.display = "none";
     }
     function hideFormResult() {
+        var review = {
+            "id":jsonVocaList[i].reviewId,
+            "vocabulary_id": jsonVocaList[i].id,
+            "status":0
+        }
+        updateReview(review);
         i++;
         if (i <size) {
+            imgImageVoca.src = "${pageContext.request.contextPath}"+"/resources/img/"+jsonVocaList[i].image_vocabulary;
+            question.innerText=jsonVocaList[i].mean_vocabulary;
             btnIdontKnow.innerHTML="I<br/> don't <br/>know";
             form_result.style.display="none";
             form_practice.style.display="block";
             voca.value='';
-            imgImageVoca.src = "${pageContext.request.contextPath}"+"/resources/img/"+jsonVocaList[i].image_vocabulary;
 
             calculateProgress();
         } else {
@@ -174,8 +179,8 @@
         if (i < size) {
             form_suggestion.style.display = "block";
             document.getElementById("explain_vocabulary_suggestion").innerText=jsonVocaList[i].explain_vocabulary.trim()
-            document.getElementById("part_of_speech_suggestion").innerText=jsonVocaList[i].partOfSpeech.trim()
             document.getElementById("example_vocabulary_suggestion").innerText=jsonVocaList[i].example_vocabulary.trim()
+            document.getElementById("mean_example_vocabulary_suggestion").innerText=jsonVocaList[i].mean_example_vocabulary.trim()
             voiceSuggestion.innerHTML='<audio controls><source src="${pageContext.request.contextPath}/resources/audio/' + jsonVocaList[i].audio_vocabulary + '" type="audio/mp3"></audio>'
         }
     }
@@ -190,8 +195,8 @@
         document.getElementById("vocabulary_result").innerText=jsonVocaList[i].vocabulary.trim()
         document.getElementById("mean_vocabulary_result").innerText=jsonVocaList[i].mean_vocabulary.trim()
         document.getElementById("explain_vocabulary_result").innerText=jsonVocaList[i].explain_vocabulary.trim()
-        document.getElementById("part_of_speech_result").innerText=jsonVocaList[i].mean_vocabulary.trim()
         document.getElementById("example_vocabulary_result").innerText=jsonVocaList[i].example_vocabulary.trim()
+        document.getElementById("mean_example_vocabulary_result").innerText=jsonVocaList[i].mean_example_vocabulary.trim()
 
     }
     function checkVocabulary() {
