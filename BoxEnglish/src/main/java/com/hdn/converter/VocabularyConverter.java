@@ -20,6 +20,7 @@ public class VocabularyConverter {
         vocabularyEntity.setImage_vocabulary(vocabularyDto.getImage_vocabulary());
         vocabularyEntity.setAudio_vocabulary(vocabularyDto.getAudio_vocabulary());
         vocabularyEntity.setIsDelete(vocabularyDto.getIsDelete());
+        vocabularyEntity.setMean_example_vocabulary(vocabularyDto.getMean_example_vocabulary());
         return vocabularyEntity;
     }
 
@@ -34,7 +35,7 @@ public class VocabularyConverter {
         vocabularyDto.setImage_vocabulary(vocabularyEntity.getImage_vocabulary());
         vocabularyDto.setAudio_vocabulary(vocabularyEntity.getAudio_vocabulary());
         vocabularyDto.setIsDelete(vocabularyEntity.getIsDelete());
-
+        vocabularyDto.setMean_example_vocabulary(vocabularyEntity.getMean_example_vocabulary());
         return vocabularyDto;
     }
     public List<VocabularyDto> toListDto(List<VocabularyEntity> vocabularyEntities) {

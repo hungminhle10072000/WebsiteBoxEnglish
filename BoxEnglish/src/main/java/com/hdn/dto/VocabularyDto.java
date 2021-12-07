@@ -14,6 +14,15 @@ public class VocabularyDto {
     private int isDelete;
     private CategoryDto categoryDto;
     private long reviewId;
+    private String mean_example_vocabulary;
+
+    public String getMean_example_vocabulary() {
+        return mean_example_vocabulary;
+    }
+
+    public void setMean_example_vocabulary(String mean_example_vocabulary) {
+        this.mean_example_vocabulary = mean_example_vocabulary;
+    }
 
     public long getReviewId() {
         return reviewId;

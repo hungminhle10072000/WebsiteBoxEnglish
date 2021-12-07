@@ -39,7 +39,7 @@
 
 .container1 .box {
 	position: relative;
-	width: 200px;
+	width: 300px;
 	padding: 40px;
 	background: #fff;
 	box-shadow: 0 5px 15px rgba(0, 0, 0, .1);
@@ -175,56 +175,82 @@ a {
 </head>
 <body>
 	<jsp:include page="header-general.jsp" />
-	<div class="container1">
-		<div class="box">
-			<div class="icon">01</div>
-			<div class="content">
-				<h3>(${numOfBox1})</h3>
-				<a href="${pageContext.request.contextPath }/getVocaInBox/1">Read more</a>
-			</div>
-		</div>
+	<main>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="card avatar-card" style="width:100%">
+						<h4 class="card-title style-card-title">${user.fullname}</h4>
+						<img class="card-img-top card-img-left" src='<c:url value="/resources/img/${user.avatar}" />' alt="Avartar">
+						<div class="card-body container-wordlearned">
+							<span>${numOfBox6}</span>
+							<span>từ đã học.</span>
+						</div>
+					</div>
+					<br/>
+					<br/>
+					<div class="container">
+						<form method="get" action="${pageContext.request.contextPath }/api/practice/getVocaForPractice">
+							<button type="submit" style="border-radius: 12px; background-color: #e7e7e7; width: 300px; height: 80px; font-size: 24px;">Luyện Tập Từ Vựng</button>
+						</form>
+					</div>
+				</div>
+				<div class="col-sm-9">
+					<div class="container1">
+						<div class="box">
+							<div class="icon">01</div>
+							<div class="content">
+								<h3>(${numOfBox1})</h3>
+								<a href="${pageContext.request.contextPath }/getVocaInBox/1">Read more</a>
+							</div>
+						</div>
 
-		<div class="box">
-			<div class="icon">02</div>
-			<div class="content">
-				<h3>(${numOfBox2})</h3>
-				<a href="${pageContext.request.contextPath }/getVocaInBox/2">Read more</a>
-			</div>
-		</div>
+						<div class="box">
+							<div class="icon">02</div>
+							<div class="content">
+								<h3>(${numOfBox2})</h3>
+								<a href="${pageContext.request.contextPath }/getVocaInBox/2">Read more</a>
+							</div>
+						</div>
 
-		<div class="box">
-			<div class="icon">03</div>
-			<div class="content">
-				<h3>(${numOfBox3})</h3>
-				<a href="${pageContext.request.contextPath }/getVocaInBox/3">Read more</a>
-			</div>
-		</div>
+						<div class="box">
+							<div class="icon">03</div>
+							<div class="content">
+								<h3>(${numOfBox3})</h3>
+								<a href="${pageContext.request.contextPath }/getVocaInBox/3">Read more</a>
+							</div>
+						</div>
 
-		<div class="box">
-			<div class="icon">04</div>
-			<div class="content">
-				<h3>(${numOfBox4})</h3>
-				<a href="${pageContext.request.contextPath }/getVocaInBox/4">Read more</a>
-			</div>
-		</div>
+						<div class="box">
+							<div class="icon">04</div>
+							<div class="content">
+								<h3>(${numOfBox4})</h3>
+								<a href="${pageContext.request.contextPath }/getVocaInBox/4">Read more</a>
+							</div>
+						</div>
 
-		<div class="box">
-			<div class="icon">05</div>
-			<div class="content">
-				<h3>(${numOfBox5})</h3>
-				<a href="${pageContext.request.contextPath }/getVocaInBox/5">Read more</a>
-			</div>
-		</div>
+						<div class="box">
+							<div class="icon">05</div>
+							<div class="content">
+								<h3>(${numOfBox5})</h3>
+								<a href="${pageContext.request.contextPath }/getVocaInBox/5">Read more</a>
+							</div>
+						</div>
 
-		<div class="box">
-			<div class="icon">06</div>
-			<div class="content">
-				<h3>(${numOfBox6})</h3>
-				<a href="${pageContext.request.contextPath }/getVocaInBox/6">Read more</a>
+						<div class="box">
+							<div class="icon">06</div>
+							<div class="content">
+								<h3>(${numOfBox6})</h3>
+								<a href="${pageContext.request.contextPath }/getVocaInBox/6">Read more</a>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+	</main>
+
 	<div class="container"></div>
-	<div class="container"><form method="get" action="${pageContext.request.contextPath }/api/practice/getVocaForPractice"><button type="submit">Practice</button></form></div>
+
 </body>
 </html>
