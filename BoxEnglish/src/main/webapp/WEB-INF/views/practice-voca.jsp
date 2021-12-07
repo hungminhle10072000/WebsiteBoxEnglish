@@ -180,7 +180,7 @@
             document.getElementById("explain_vocabulary_suggestion").innerText=jsonVocaList[i].explain_vocabulary.trim()
             document.getElementById("example_vocabulary_suggestion").innerText=jsonVocaList[i].example_vocabulary.trim()
             document.getElementById("mean_example_vocabulary_suggestion").innerText=jsonVocaList[i].mean_example_vocabulary.trim()
-            voiceSuggestion.innerHTML='<source src="${pageContext.request.contextPath}/resources/audio/' + jsonVocaList[i].audio_vocabulary + '" type="audio/mp3">'
+            voiceSuggestion.innerHTML='<audio controls><source src="${pageContext.request.contextPath}/resources/audio/' + jsonVocaList[i].audio_vocabulary + '" type="audio/mp3"></audio>'
         }
     }
 
@@ -190,7 +190,7 @@
         btnIdontKnow.innerText="Next"
         form_result.style.display="block";
         imgFormResult.src = "${pageContext.request.contextPath}"+"/resources/img/"+jsonVocaList[i].image_vocabulary;
-        voiceResult.innerHTML='<source src="${pageContext.request.contextPath}/resources/audio/' + jsonVocaList[i].audio_vocabulary + '" type="audio/mp3">'
+        voiceResult.innerHTML='<audio controls><source src="${pageContext.request.contextPath}/resources/audio/' + jsonVocaList[i].audio_vocabulary + '" type="audio/mp3"></audio>'
         document.getElementById("vocabulary_result").innerText=jsonVocaList[i].vocabulary.trim()
         document.getElementById("mean_vocabulary_result").innerText=jsonVocaList[i].mean_vocabulary.trim()
         document.getElementById("explain_vocabulary_result").innerText=jsonVocaList[i].explain_vocabulary.trim()
