@@ -2,14 +2,21 @@ package com.hdn.service;
 
 import com.hdn.cons.Cons;
 import com.hdn.converter.ReviewConverter;
+import com.hdn.converter.VocabularyConverter;
+import com.hdn.daoimp.Cate_User_DaoImp;
+import com.hdn.daoimp.CategoryImp;
 import com.hdn.daoimp.ReviewImpl;
 import com.hdn.dto.ReviewDto;
 import com.hdn.dto.VocabularyDto;
+import com.hdn.entity.Cate_User_Entity;
+import com.hdn.entity.CategoryEntity;
 import com.hdn.entity.ReviewEntity;
+import com.hdn.entity.VocabularyEntity;
 import com.hdn.utils.DateConverter;
 import com.sun.xml.fastinfoset.vocab.Vocabulary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -24,11 +31,50 @@ public class ReviewService {
     private ReviewImpl reviewImpl;
     @Autowired
     private ReviewConverter reviewConverter;
+    @Autowired
+    private CategoryImp categoryImp;
+    @Autowired
+    private VocabularyConverter vocabularyConverter;
+    @Autowired
+    private Cate_User_DaoImp cate_user_daoImp;
+
+    @Transactional
+    public void autoAddVocaToReview() {
+        try {
+            List<ReviewEntity> vocabularyEntities = reviewImpl.getReviewsByUserIdAndLevelAndStatus(Cons.USER_ID,1,2);
+            if (vocabularyEntities.size() < 5 ) {
+                int flag = 5-vocabularyEntities.size();
+                int count =0;
+                List<Cate_User_Entity> cate_user_entities = cate_user_daoImp.findCourseByUserId(Cons.USER_ID);
+                if (cate_user_entities != null) {
+                    for (int i=0; i< cate_user_entities.size(); i++) {
+                        for (VocabularyEntity voca: cate_user_entities.get(i).getCategoryEntity().getListVocabularyEntities()){
+                            VocabularyDto vocabularyDto = vocabularyConverter.toDto(voca);
+                            ReviewDto reviewDto = new ReviewDto();
+                            reviewDto.setVocabulary_id(vocabularyDto.getId());
+                            reviewDto.setStatus(2);
+                            Integer result = addVocaToReview(reviewDto);
+                            if (result == 1) {
+                                count ++;
+                            }
+                            if (count == flag)
+                                break;
+                        }
+
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+
+        }
+
+    }
 
     public Integer addVocaToReview(ReviewDto reviewDto) {
         List<ReviewEntity> reviewEntities = reviewImpl.getReviewsByUserIdAndVocaID(Cons.USER_ID,reviewDto.getVocabulary_id());
 
-        List<ReviewEntity> reviewEntities2 = reviewImpl.getReviewsByUserIdAndLevelAndStatus(Cons.USER_ID,1,3);
+        List<ReviewEntity> reviewEntities2 = reviewImpl.getReviewsByUserIdAndLevelAndStatus(Cons.USER_ID,1,2);
         if (reviewEntities != null && reviewEntities.size() > 0) {
             return -1; // Từ này đã tồn tại trong review
         } else if(reviewEntities2 != null && reviewEntities2.size() > 5) {
@@ -38,7 +84,7 @@ public class ReviewService {
             ReviewEntity reviewEntity = reviewConverter.toEntity(reviewDto);
             reviewEntity.setDate_practice(new Date());
             reviewEntity.setLevel(1);
-            reviewEntity.setStatus(3);
+            reviewEntity.setStatus(2);
             return reviewImpl.addReview(reviewEntity);
         }
     }

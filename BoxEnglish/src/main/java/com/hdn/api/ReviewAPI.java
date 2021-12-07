@@ -27,6 +27,7 @@ public class ReviewAPI {
     public Integer addVocaToReview(@PathVariable("idVoca") Long idVoca) {
         ReviewDto reviewDto = new ReviewDto();
         reviewDto.setVocabulary_id(idVoca);
+        reviewDto.setStatus(2);
         Integer id = reviewService.addVocaToReview(reviewDto);
         return id;
     }

@@ -28,6 +28,8 @@ public class VocabularyImpl implements VocabularyDao {
     
     @Autowired
 	ServletContext context;
+
+
     
     
     public VocabularyEntity getVocabulary(Long id) {

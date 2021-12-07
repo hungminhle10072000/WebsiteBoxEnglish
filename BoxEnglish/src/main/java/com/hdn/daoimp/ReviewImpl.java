@@ -118,8 +118,9 @@ public class ReviewImpl implements ReviewDao {
     public List<ReviewEntity> getReviewsByUserIdAndLevelAndStatus(Long userId, int level, int status) {
         Session session  = sessionFactory.getCurrentSession();
         try {
-            Query query = session.createQuery("FROM  ReviewEntity as R where R.userEntity.id=:userId  and R.level =:level and R.isDeletel !=1  and R.status = 3 Group by R.vocabularyEntity.id");
+            Query query = session.createQuery("FROM  ReviewEntity as R where R.userEntity.id=:userId  and R.level =:level and R.isDeletel !=1  and R.status =:status Group by R.vocabularyEntity.id");
             query.setParameter("userId",userId);
+            query.setParameter("status",status);
             query.setParameter("level",level);
             List<ReviewEntity> reviewEntities = query.getResultList();
             return reviewEntities;
