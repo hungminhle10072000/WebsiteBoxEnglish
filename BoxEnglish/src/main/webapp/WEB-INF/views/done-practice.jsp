@@ -6,13 +6,116 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>Title</title>
+
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    <!-- Box icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <style>
+        .styled-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        .styled-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+        }
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+        .styled-table tbody tr.active-row {
+            font-weight: normal;
+            color: #009879;
+        }
+
+        .wrong-row {
+            font-weight: normal;
+            color: #b02a39;
+        }
+    </style>
 </head>
 <body>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
     <h1>Bạn đã hoàn thành bài tập</h1>
-    <div class="container"><form method="get" action="${pageContext.request.contextPath }/list-box"><button type="submit">Practice</button></form></div>
-<%--    onclick=${window.location.href = "${pageContext.request.contextPath}"}--%>
+    <div class="container"><form method="get" action="${pageContext.request.contextPath }/list-box"><button type="submit">Về trang chủ</button></form></div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th width="150px">Từ vựng</th>
+                    <th width="160px">Ý nghĩa</th>
+                    <th width="250px">Giải thích</th>
+                    <th >Ví dụ</th>
+                    <th width="50px">Audio</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="voca" items="${vocaCorrect}">
+                    <tr class="active-row">
+                        <td>${voca.vocabulary}</td>
+                        <td>${voca.mean_vocabulary}</td>
+                        <td>${voca.explain_vocabulary}</td>
+                        <td>${voca.example_vocabulary}</td>
+                        <td>
+                            <audio  style="width: 100px;"  controls="" class="mx-auto d-block">
+                                <source src='<c:url value="/resources/audio/${voca.audio_vocabulary }" />' type="audio/mp3">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </td>
+                    </tr>
+                </c:forEach>
+                <c:forEach var="voca" items="${vocaWrong}">
+                    <tr class="wrong-row">
+                        <td>${voca.vocabulary}</td>
+                        <td>${voca.mean_vocabulary}</td>
+                        <td>${voca.explain_vocabulary}</td>
+                        <td>${voca.example_vocabulary}</td>
+                        <td>
+                            <audio  style="width: 100px;" controls="" class="mx-auto d-block">
+                                <source src='<c:url value="/resources/audio/${voca.audio_vocabulary }" />' type="audio/mp3">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </td>
+                    </tr>
+                </c:forEach>
+                <!-- and so on... -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-sm-2"></div>`
+    </div>
 </body>
 </html>
