@@ -151,7 +151,7 @@
 			        cache: false,
 		            timeout: 600000,
 		            success: function (data) {
-		            	$(cellAudio[0]).html('<audio controls><source src="/BoxEnglish/resources/audio/' + data + '" type="audio/mp3"></audio>'
+		            	$(cellAudio[0]).html('<audio controls><source src="${pageContext.request.contextPath }/resources/audio/' + data + '" type="audio/mp3"></audio>'
               				  				+ '<div><input type="file" name="update-file" class="btn-update-file" accept="audio/mp3"></div>')
 		            	$(".alert-page-note-detail").html('<div class="alert alert-warning" role="alert"> Cập nhật thành công !!! </div>')
 						window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -208,7 +208,7 @@
 		                				  + '<i class="far fa-save action-update-word" id-note-detail="'+data.id+'"></i>';
 		                cell1.innerHTML = '<input type="text" value="'+ data.vocabulary  + '">';
 		                cell2.innerHTML = '<input type="text" value="'+ data.mean_vocabulary + '">';
-		                cell3.innerHTML = '<audio controls><source src="/BoxEnglish/resources/audio/' + data.audio_vocabulary + '" type="audio/mp3"></audio>'
+		                cell3.innerHTML = '<audio controls><source src="${pageContext.request.contextPath }/resources/audio/' + data.audio_vocabulary + '" type="audio/mp3"></audio>'
 		                				  + '<div><input type="file" name="update-file" class="btn-update-file" accept="audio/mp3"></div>';
 		            	
 		                $( ".input_vocabulary" )[0].innerHTML = '<input type="text">'
