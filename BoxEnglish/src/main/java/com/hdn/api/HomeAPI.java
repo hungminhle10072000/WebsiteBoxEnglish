@@ -44,7 +44,7 @@ public class HomeAPI {
 			if (userEntity.getRole().equals("1")) {
 				return "admin/index";
 			} else {
-				return "home";
+				return "redirect:/list-box";
 			}
 		} else {
 			msg = "Tên đăng nhập hoặc mật khẩu không chính xác.";

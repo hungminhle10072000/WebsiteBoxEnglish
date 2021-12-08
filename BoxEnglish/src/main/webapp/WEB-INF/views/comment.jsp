@@ -87,12 +87,12 @@
 </head>
 <body class="bodyc">
 <div class="containercom">
-    <h2>Leave Us a Comment</h2>
+    <h2>Để Lại Bình Luận </h2>
 <%--    <form>--%>
-        <textarea id="content" placeholder='Add Your Comment'></textarea>
+        <textarea id="content" placeholder='Thêm bình luận của bạn'></textarea>
         <div class="btn">
-            <input id="btnSubmit" type="submit" value='Comment' onclick="sendComment()" >
-            <button id='clear' href='#'>Cancel</button>
+            <input id="btnSubmit" type="submit" value='Bình luận' onclick="sendComment()" >
+            <button id='clear' href='#'>Huỷ bỏ</button>
         </div>
 <%--    </form>--%>
 
@@ -103,12 +103,12 @@
     <c:forEach var="comment" items="${commentDtos}">
     <div class="row style_comment">
         <div class="col-md-1">
-            <img width="100%" src="/BoxEnglish_war_exploded/resources/img/avatarronaldo.jpg" class="img img-responsive img-thumbnail">
+            <img width="100%" src='<c:url value="/resources/img/${comment.user.avatar}" />' class="img img-responsive img-thumbnail">
         </div>
         <div class="col-md-10 panel-footer">
             <p style="color:green;"> ${comment.user.fullname}</p>
             <fmt:formatdate value="" var="parsedMyDate" datestyle="short" type="both" pattern="MM-dd-yyyy hh:mm:ss a">
-                <p style="color: #000;">${comment.createDate}</p>								<p>${comment.content}</p>
+                <p  style="color: #2b73ff; font-size:12px">${comment.createDate}</p>								<p>${comment.content}</p>
             </fmt:formatdate></div>
         <div class="col-md-1 panel-footer" align="right">
             <p>.</p>
@@ -167,7 +167,7 @@
 
                 new_comment.innerHTML='<div class="row style_comment">\n' +
                     '\t\t\t\t\t\t\t<div class="col-md-1">\n' +
-                    '\t\t\t\t\t\t\t\t<img width="100%" src="<c:url value="/resources/img/avatarronaldo.jpg" />"\n' +
+                    '\t\t\t\t\t\t\t\t<img width="100%" src="${pageContext.request.contextPath}/resources/img/'+result.avatar+ '"\n' +
                     '\t\t\t\t\t\t\t\t\t class="img img-responsive img-thumbnail">\n' +
                     '\t\t\t\t\t\t\t</div>\n' +
                     '\t\t\t\t\t\t\t<div class="col-md-10 panel-footer">\n' +
