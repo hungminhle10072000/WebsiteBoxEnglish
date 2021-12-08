@@ -44,7 +44,7 @@
                             <button type="submit" class="btn btn-success btn-primary" style="margin-top: 10px; color: white; background-color: #696763; border: none;">Đăng nhập</button>
                             <input type="hidden" name="action" value="login">
                         </form>                       
-                        <button class="btn btn-secondary" style="display: inline; margin-top: 10px"><a href="${pageContext.request.contextPath }/register" style="text-decoration: none; color: white;">Đăng ký</a></button>
+                        <button class="btn btn-secondary" style="display: inline; margin-top: 10px; background-color: #696763"><a href="${pageContext.request.contextPath }/register" style="text-decoration: none; color: white;">Đăng ký</a></button>
                     </div>
                 </div>
                 <div class="col-1" ></div>
