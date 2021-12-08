@@ -19,6 +19,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Nationalized;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "VOCABULARY")
 public class VocabularyEntity {
@@ -97,11 +99,9 @@ public class VocabularyEntity {
 		this.fileAudio = fileAudio;
 	}
 
-
-/*
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "vocabularyEntity", cascade =CascadeType.ALL)
-	private List<ReviewEntity> listReviewEntities; //What is??*/
-
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vocabularyEntity", cascade =CascadeType.ALL)
+	private List<ReviewEntity> listReviewEntities; 
 
 	public long getId() {
 		return id;
@@ -200,14 +200,14 @@ public class VocabularyEntity {
 	}
 
 
-	/*public List<ReviewEntity> getListReviewEntities() {
+	public List<ReviewEntity> getListReviewEntities() {
 		return listReviewEntities;
 	}
 
 
 	public void setListReviewEntities(List<ReviewEntity> listReviewEntities) {
 		this.listReviewEntities = listReviewEntities;
-	}*/
+	}
 
 
 
