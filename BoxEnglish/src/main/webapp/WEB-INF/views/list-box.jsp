@@ -158,7 +158,7 @@
 	padding: 0;
 }
 /* hien thi the a nhu button */
-a {
+.a-button {
 	display: inline-block;
 	padding: 10px 20px;
 	background: #fff;
@@ -179,7 +179,7 @@ a {
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-3">
-					<div class="card avatar-card" style="width:100%">
+					<div class="card avatar-card" style="width:100%; background-color: #c4cd6f" >
 						<h4 class="card-title style-card-title">${user.fullname}</h4>
 						<img class="card-img-top card-img-left" src='<c:url value="/resources/img/${user.avatar}" />' alt="Avartar">
 						<div class="card-body container-wordlearned">
@@ -201,7 +201,7 @@ a {
 							<div class="icon">01</div>
 							<div class="content">
 								<h3>(${numOfBox1})</h3>
-								<a href="${pageContext.request.contextPath }/getVocaInBox/1">Chi tiết</a>
+								<a class="a-button" href="${pageContext.request.contextPath }/getVocaInBox/1">Chi tiết</a>
 							</div>
 						</div>
 
@@ -209,7 +209,7 @@ a {
 							<div class="icon">02</div>
 							<div class="content">
 								<h3>(${numOfBox2})</h3>
-								<a href="${pageContext.request.contextPath }/getVocaInBox/2">Chi tiết</a>
+								<a class="a-button" href="${pageContext.request.contextPath }/getVocaInBox/2">Chi tiết</a>
 							</div>
 						</div>
 
@@ -217,7 +217,7 @@ a {
 							<div class="icon">03</div>
 							<div class="content">
 								<h3>(${numOfBox3})</h3>
-								<a href="${pageContext.request.contextPath }/getVocaInBox/3">Chi tiết</a>
+								<a class="a-button" href="${pageContext.request.contextPath }/getVocaInBox/3">Chi tiết</a>
 							</div>
 						</div>
 
@@ -225,7 +225,7 @@ a {
 							<div class="icon">04</div>
 							<div class="content">
 								<h3>(${numOfBox4})</h3>
-								<a href="${pageContext.request.contextPath }/getVocaInBox/4">Chi tiết</a>
+								<a class="a-button" href="${pageContext.request.contextPath }/getVocaInBox/4">Chi tiết</a>
 							</div>
 						</div>
 
@@ -233,7 +233,7 @@ a {
 							<div class="icon">05</div>
 							<div class="content">
 								<h3>(${numOfBox5})</h3>
-								<a href="${pageContext.request.contextPath }/getVocaInBox/5">Chi tiết</a>
+								<a class="a-button" href="${pageContext.request.contextPath }/getVocaInBox/5">Chi tiết</a>
 							</div>
 						</div>
 
@@ -241,7 +241,7 @@ a {
 							<div class="icon">06</div>
 							<div class="content">
 								<h3>(${numOfBox6})</h3>
-								<a href="${pageContext.request.contextPath }/getVocaInBox/6">Chi tiết</a>
+								<a class="a-button" href="${pageContext.request.contextPath }/getVocaInBox/6">Chi tiết</a>
 							</div>
 						</div>
 					</div>
