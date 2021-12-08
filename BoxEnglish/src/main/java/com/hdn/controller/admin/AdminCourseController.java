@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.hdn.cons.Cons;
 import org.jvnet.fastinfoset.Vocabulary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,10 @@ public class AdminCourseController {
 	
 	@GetMapping
 	public String defaultAdminCourse(ModelMap model) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		List<CategoryEntity> listAllCourse = courseService.findAllCourse();
 		model.addAttribute("listAllCourse",listAllCourse);
 		return "admin/admin-course";
@@ -46,6 +51,7 @@ public class AdminCourseController {
 	@DeleteMapping("delete/{idCourse}")
 	@ResponseBody
 	public ResponseEntity<String> deleteCourse(ModelMap model, @PathVariable("idCourse") Long idCourse){
+
 		if(courseService.deleteCourse(idCourse)) {
 			List<CategoryEntity> listAllCourse = courseService.findAllCourse();
 			model.addAttribute("listAllCourse",listAllCourse);
@@ -69,6 +75,10 @@ public class AdminCourseController {
 	
 	@GetMapping("addCourse")
 	public String addCourse(ModelMap model){
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		CategoryEntity addCourse = new CategoryEntity();
 		model.addAttribute("courseAddEntity",addCourse);
 		return "admin/add-course";
@@ -76,6 +86,10 @@ public class AdminCourseController {
 	
 	@PostMapping("addCourse")
 	public String addCourse(ModelMap model, @ModelAttribute("courseAddEntity") CategoryEntity courseAddEntity, HttpSession session) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		UserEntity user = (UserEntity) session.getAttribute("user");
 		if(courseService.addCourse(user, courseAddEntity)) {
 			CategoryEntity addCourse = new CategoryEntity();
@@ -89,6 +103,10 @@ public class AdminCourseController {
 	
 	@GetMapping("editCourse/{idCourse}")
 	public String editCourse(ModelMap model, @PathVariable("idCourse") Long idCourse) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		CategoryEntity courseEdit = courseService.findCourseById(idCourse);
 		model.addAttribute("courseEditEntity",courseEdit);
 		return "admin/edit-course";
@@ -96,6 +114,11 @@ public class AdminCourseController {
 	
 	@PostMapping("editCourse/{idCourse}")
 	public String updateCourse(ModelMap model, @ModelAttribute("courseEditEntity") CategoryEntity courseEditEntity, HttpSession session) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
+
 		UserEntity user = (UserEntity) session.getAttribute("user");
 		courseEditEntity.setUserEntity(user);
 		if(courseService.updateCourse(courseEditEntity)) {
@@ -110,6 +133,10 @@ public class AdminCourseController {
 	
 	@GetMapping("detail/{idCourse}")
 	public String detailCourse(ModelMap model, @PathVariable("idCourse") Long idCourse) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		CategoryEntity course = courseService.findCourseById(idCourse);
 		model.addAttribute("courseDetail", course);
 		model.addAttribute("idCourse",idCourse);
@@ -120,6 +147,10 @@ public class AdminCourseController {
 	
 	@GetMapping("detail/addVoca/{idCourse}")
 	public String addVocaCourse(ModelMap model, @PathVariable("idCourse") Long idCourse) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		VocabularyEntity vocabularyAddEntity  = new VocabularyEntity();
 		model.addAttribute("idCourse", idCourse);
 		model.addAttribute("vocabularyAddEntity",vocabularyAddEntity);
@@ -129,6 +160,10 @@ public class AdminCourseController {
 	@PostMapping("detail/addVoca/{idCourse}")
 	public String addVocaCourse(ModelMap model, @PathVariable("idCourse") Long idCourse, @ModelAttribute("vocabularyAddEntity") VocabularyEntity vocabularyAddEntity)
 	{
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		CategoryEntity course = courseService.findCourseById(idCourse);
 		vocabularyAddEntity.setCategoryEntity(course);
 		if(vocabularyService.addVocaCourse(vocabularyAddEntity)) {
@@ -143,6 +178,10 @@ public class AdminCourseController {
 
 	@GetMapping("detail/edit/{idCourse}/{idVoca}")
 	public String editVocaCouse(ModelMap model, @PathVariable("idCourse") Long idCourse,@PathVariable("idVoca") Long idVoca) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		VocabularyEntity vocaEdit = vocabularyService.getVocaById(idVoca);
 		model.addAttribute("idCourse", idCourse);
 		model.addAttribute("vocabularyEditEntity",vocaEdit);
@@ -151,6 +190,10 @@ public class AdminCourseController {
 	
 	@PostMapping("detail/edit/{idCourse}/{idVoca}")
 	public String updateVocaCouse(ModelMap model, @PathVariable("idCourse") Long idCourse,@PathVariable("idVoca") Long idVoca,@ModelAttribute("vocabularyEditEntity") VocabularyEntity vocabularyEditEntity) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		if(vocabularyService.updateVocaCourse(idVoca, vocabularyEditEntity)) {
 			VocabularyEntity voca = vocabularyService.getVocaById(vocabularyEditEntity.getId());
 			model.addAttribute("vocabularyEditEntity",voca);

@@ -2,6 +2,7 @@ package com.hdn.controller.admin;
 
 import java.util.List;
 
+import com.hdn.cons.Cons;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,10 @@ public class AdminCommentController {
 	
 	@GetMapping
 	public String defaultAdminComment(ModelMap model) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		List<CommentEntity> listAllComment = commentService.getAllComment();
 		model.addAttribute("listAllComment",listAllComment);
 		return "admin/admin-comment";
@@ -32,6 +37,10 @@ public class AdminCommentController {
 	
 	@GetMapping("delete/{idComment}")
 	public String deleteUser(ModelMap model, @PathVariable("idComment") Long idComment) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		if(commentService.deleteComment(idComment)) {
 			model.addAttribute("messageSuccess", "Xóa thành công !!!");
 		} else {

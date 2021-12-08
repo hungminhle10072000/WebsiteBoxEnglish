@@ -30,6 +30,10 @@ public class VocabularyController {
 
     @GetMapping("/getVocaByCourseId/{courseId}")
     public ModelAndView getVocaByCourseId(@PathVariable Long courseId) {
+        if (Cons.USER_ID == -1) {
+            return new ModelAndView("login");
+        }
+
         List<VocabularyEntity> vocabularyEntities = vocabularyService.findVocaCourse(courseId);
         List<VocabularyDto> vocabularyDtos = vocabularyConverter.toListDto(vocabularyEntities);
         List<ReviewDto> reviewDtos = reviewService.getReviewsByUserIdAndVocaIDAndCateId(Cons.USER_ID,courseId);
@@ -44,6 +48,10 @@ public class VocabularyController {
 
     @GetMapping("/getVocaByCourseIdAllCourse/{courseId}")
     public ModelAndView getVocaByCourseId_AllCourse(@PathVariable Long courseId) {
+        if (Cons.USER_ID == -1) {
+            return new ModelAndView("login");
+        }
+
         List<VocabularyEntity> vocabularyEntities = vocabularyService.findVocaCourse(courseId);
         List<VocabularyDto> vocabularyDtos = vocabularyConverter.toListDto(vocabularyEntities);
 

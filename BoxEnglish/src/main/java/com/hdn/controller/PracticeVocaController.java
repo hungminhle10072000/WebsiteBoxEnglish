@@ -28,6 +28,10 @@ public class PracticeVocaController {
 
     @GetMapping("/getAll")
     public ModelAndView getAllVocabulary() {
+        if (Cons.USER_ID == -1) {
+            return new ModelAndView("login");
+        }
+
         List<VocabularyDto> vocabularyDtoList = vocabularyService.getAllVocabulary();
         String jsonVocaList = new Gson().toJson(vocabularyDtoList);
         ModelAndView mav = new ModelAndView("practice-voca");
@@ -38,6 +42,10 @@ public class PracticeVocaController {
 
     @GetMapping("/getVocaForPractice")
     public ModelAndView getVocabularyForPractice() {
+        if (Cons.USER_ID == -1) {
+            return new ModelAndView("login");
+        }
+
         // Auto Add Voca
         reviewService.autoAddVocaToReview();
         // Add New Day

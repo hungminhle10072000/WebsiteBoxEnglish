@@ -50,6 +50,10 @@ public class CourseController {
 
 	@GetMapping("/getMyCourse")
 	public ModelAndView getAllMyCourse() {
+		if (Cons.USER_ID == -1) {
+			return new ModelAndView("login");
+		}
+
 		Long userId = Cons.USER_ID;
 		List<CategoryDto> listMyCourse = cate_User_Service.findCourseByUserId(userId);
 		ModelAndView mav = new ModelAndView("list-my-course");

@@ -21,6 +21,11 @@ public class DonePracticeController {
     private VocabularyService vocabularyService;
     @GetMapping("/donepractice")
     public ModelAndView donePractice() {
+        if (Cons.USER_ID == -1) {
+            return new ModelAndView("login");
+        }
+
+
         List<VocabularyDto> vocaCorrect = vocabularyService.getVocabularyForPractice(Cons.USER_ID,1);
         List<VocabularyDto> vocaWrong = vocabularyService.getVocabularyForPractice(Cons.USER_ID,0);
         ModelAndView mav = new ModelAndView("done-practice");

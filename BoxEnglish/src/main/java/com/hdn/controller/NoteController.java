@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import com.hdn.cons.Cons;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +48,10 @@ public class NoteController {
 	
 	@GetMapping
 	public String defaultNote(ModelMap model, @SessionAttribute("user") UserEntity user) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		List<CategoryEntity> noteList = noteService.getAllNote(user.getId());
 		model.addAttribute("noteEntity", new CategoryEntity());
 		model.addAttribute("noteList", noteList);
@@ -55,6 +60,10 @@ public class NoteController {
 	
 	@PostMapping("add")
 	public String addNote(ModelMap model, @ModelAttribute("noteEntity") CategoryEntity note, @SessionAttribute("user") UserEntity user) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		note.setIsDelete(0);
 		note.setUserEntity(user);
 		try {
@@ -81,6 +90,10 @@ public class NoteController {
 	
 	@GetMapping("delete/{idNote}")
 	public String deleteNote(@PathVariable("idNote") Long idNote, ModelMap model, @SessionAttribute("user") UserEntity user) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		try {
 			if(noteService.deleteNote(idNote)) {
 				model.addAttribute("message","Xóa ghi chú thành công !!!");
@@ -97,6 +110,10 @@ public class NoteController {
 	
 	@GetMapping("edit/{idNote}")
 	public String editNote(@PathVariable("idNote") Long idNote, ModelMap model) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		CategoryEntity noteEdit = noteService.getNoteById(idNote);
 		model.addAttribute("noteEdit",noteEdit);
 		return "edit-note";
@@ -104,6 +121,10 @@ public class NoteController {
 	
 	@PostMapping("update/{idNote}")
 	public String updateNote(@PathVariable("idNote") Long idNote, ModelMap model, @SessionAttribute("user") UserEntity user, @ModelAttribute("noteEdit") CategoryEntity note) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		if(noteService.UpdateNote(idNote, note)) {
 			model.addAttribute("message", "Cập nhật ghi chú thành công !!!");
 		} else {
@@ -117,6 +138,10 @@ public class NoteController {
 	
 	@GetMapping("detail/{idNote}")
 	public String detailNote(@PathVariable("idNote") Long idNote, ModelMap model) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		List<VocabularyEntity> listVocanote = noteService.getAllNoteDetail(idNote);
 		model.addAttribute("listVocanote",listVocanote);
 		model.addAttribute("idNote",idNote);
@@ -126,6 +151,7 @@ public class NoteController {
 	@PostMapping("detail/addWord")
 	@ResponseBody
 	public VocabularyEntity addWordNote(@RequestParam("idNote") Long idNote,@RequestParam("vocabulary") String vocabulary, @RequestParam("mean_vocabulary") String mean_vocabulary, @RequestParam("file_audio") MultipartFile file_audio) throws JsonProcessingException {
+
 		VocabularyEntity wordNote = new VocabularyEntity();
 		CategoryEntity noteEntity = noteService.getNoteById(idNote);
 		wordNote.setCategoryEntity(noteEntity);

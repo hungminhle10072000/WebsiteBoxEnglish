@@ -114,18 +114,30 @@ public class HomController {
 	
 	@GetMapping("edit-info-user")
 	public String editInfoUser(ModelMap model,@SessionAttribute("user") UserEntity user) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		model.addAttribute("user", user);
 		return "edit-info-user";
 	}
 	
 	@GetMapping(value = "/list-topic")
 	public String Topic() {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		return "list-topic";
 	}
 
 
 	@GetMapping(value = "/comment-box/{id}")
 	public ModelAndView CommentBox(@PathVariable Long id) {
+		if (Cons.USER_ID == -1) {
+			return new ModelAndView("login");
+		}
+
 		CategoryDto category = categoryService.getCategory(id);
 		List<CommentDto> commentDtos = commentService.getCommentByCategoryId(id);
 		ModelAndView mav = new ModelAndView("course-description");
@@ -136,6 +148,10 @@ public class HomController {
 
 	@GetMapping(value = "/list-box")
 	public ModelAndView Box() {
+		if (Cons.USER_ID == -1) {
+			return new ModelAndView("login");
+		}
+
 		ModelAndView mav = new ModelAndView("list-box");
 
 		UserEntity userEntity = userService.GetUser(Cons.USER_ID);
@@ -177,11 +193,19 @@ public class HomController {
 	}
 	@GetMapping(value = "/box-detail")
 	public String BoxDetail() {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		return "box-detail";
 	}
 	
 	@GetMapping("list-all-course")
 	public String listAllCourse(ModelMap model) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		List<CategoryEntity> listAllCourse = courseService.findAllCourse();
 		model.addAttribute("listAllCourse", listAllCourse);
 		return "list-all-course";

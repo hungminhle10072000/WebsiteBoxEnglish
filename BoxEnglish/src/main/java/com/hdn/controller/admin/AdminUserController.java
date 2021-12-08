@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.hdn.cons.Cons;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -34,6 +35,10 @@ public class AdminUserController {
 	
 	@GetMapping
 	public String defaultAdminUser(ModelMap model) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		List<UserEntity> listAllUser = userService.getAllUser();
 		model.addAttribute("listAllUser",listAllUser);
 		return "admin/admin-user";
@@ -53,6 +58,10 @@ public class AdminUserController {
 	
 	@GetMapping("addAccount")
 	public String addAccount(ModelMap model) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		Map<Integer, String> mapRole = new HashMap<Integer, String>();
 		mapRole.put(0, "User");
 		mapRole.put(1, "Admin");
@@ -63,6 +72,10 @@ public class AdminUserController {
 	
 	@PostMapping("addAccount")
 	public String addAccount(ModelMap model, @ModelAttribute("userAddEntity") UserEntity userAdd, @RequestParam("repeat-password") String repeat_password) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		if(!userAdd.getPassword().equals(repeat_password)) {
 			model.addAttribute("message","Mật khẩu nhập lại không trùng khớp !!!");
 			return "admin/add-account";
@@ -90,6 +103,10 @@ public class AdminUserController {
 	
 	@GetMapping("editAccount/{idUserEdit}")
 	public String editAccount(@PathVariable("idUserEdit") Long idUserEdit, ModelMap model) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		UserEntity userEdit = userService.GetUser(idUserEdit);
 		model.addAttribute("userEditEntity",userEdit);
 		Map<String, String> mapRole = new HashMap<String, String>();
@@ -101,6 +118,10 @@ public class AdminUserController {
 	
 	@GetMapping("editAccount/resetPassword/{idUserEdit}")
 	public String resetPassWord(@PathVariable("idUserEdit") Long idUserEdit, ModelMap model) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		UserEntity userEdit = userService.GetUser(idUserEdit);
 		model.addAttribute("userEditEntity",userEdit);
 		Map<String, String> mapRole = new HashMap<String, String>();
@@ -117,6 +138,10 @@ public class AdminUserController {
 	
 	@PostMapping("editAccount")
 	public String updateAccount(ModelMap model, @ModelAttribute("userEditEntity") UserEntity accountUpdate) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		Map<String, String> mapRole = new HashMap<String, String>();
 		mapRole.put("0", "User");
 		mapRole.put("1", "Admin");
@@ -150,6 +175,10 @@ public class AdminUserController {
 	
 	@GetMapping("edit-info-user")
 	public String editInfoUser(ModelMap model,@SessionAttribute("user") UserEntity user) {
+		if (Cons.USER_ID == -1) {
+			return "login";
+		}
+
 		model.addAttribute("user", user);
 		return "admin/admin-edit-info";
 	}

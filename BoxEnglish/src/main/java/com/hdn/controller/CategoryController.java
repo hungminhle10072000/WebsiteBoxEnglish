@@ -1,5 +1,6 @@
 package com.hdn.controller;
 
+import com.hdn.cons.Cons;
 import com.hdn.dto.CategoryDto;
 import com.hdn.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class CategoryController {
 
     @GetMapping("/getOne/{id}")
     public ModelAndView getCategory(@PathVariable("id") Long id) {
+        if (Cons.USER_ID == -1) {
+            return new ModelAndView("login");
+        }
+
         CategoryDto category = categoryService.getCategory(id);
         ModelAndView mav = new ModelAndView("practice-voca");
         mav.addObject("category",category);

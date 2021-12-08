@@ -19,6 +19,10 @@ public class BoxController {
 
     @GetMapping("/getVocaInBox/{level}")
     public ModelAndView getVocaInBox(@PathVariable int level) {
+        if (Cons.USER_ID == -1) {
+            return new ModelAndView("login");
+        }
+
         List<VocabularyDto> vocabularyDtoList = vocabularyService.getVocabularyByUserIdAndLevel(Cons.USER_ID,level);
 //        String jsonVocaList = new Gson().toJson(vocabularyDtoList);
         ModelAndView mav = new ModelAndView("box-detail");
