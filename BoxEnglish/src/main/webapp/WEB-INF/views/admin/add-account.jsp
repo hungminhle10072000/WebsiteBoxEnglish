@@ -63,11 +63,11 @@
 									         </div>
 									          <div class="form-group">
 									            <label for="password" class="col-form-label">Mật khẩu:</label>
-									            <form:input class="form-control" path="password" type="password" required="required"/>
+									            <form:input class="form-control" path="password" type="password" required="required" minlength="6"/>
 									         </div>
 									          <div class="form-group">
 									            <label for="repeat-password" class="col-form-label">Nhập lại mật khẩu:</label>
-									            <input class="form-control" name="repeat-password" type="password" required="required"/>
+									            <input class="form-control" name="repeat-password" type="password" required="required" minlength="6"/>
 									         </div>
 									         <div class="form-group">
 									            <label for="email" class="col-form-label">Email:</label>
