@@ -75,7 +75,10 @@ public class AdminUserController {
 		if (Cons.USER_ID == -1) {
 			return "login";
 		}
-
+		Map<Integer, String> mapRole = new HashMap<Integer, String>();
+		mapRole.put(0, "User");
+		mapRole.put(1, "Admin");
+		model.addAttribute("mapRole",mapRole);
 		if(!userAdd.getPassword().equals(repeat_password)) {
 			model.addAttribute("message","Mật khẩu nhập lại không trùng khớp !!!");
 			return "admin/add-account";
@@ -89,11 +92,12 @@ public class AdminUserController {
 			return "admin/add-account";
 		}
 		if(userService.addAccount(userAdd)) {
-			Map<Integer, String> mapRole = new HashMap<Integer, String>();
-			mapRole.put(0, "User");
-			mapRole.put(1, "Admin");
+			/*
+			 * Map<Integer, String> mapRole = new HashMap<Integer, String>(); mapRole.put(0,
+			 * "User"); mapRole.put(1, "Admin");
+			 */
 			model.addAttribute("userAddEntity", new UserEntity());
-			model.addAttribute("mapRole",mapRole);
+			/* model.addAttribute("mapRole",mapRole); */
 			model.addAttribute("messageSuccess","Thêm tài khoản thành công !!!");
 		} else {
 			model.addAttribute("message","Thêm tài khoản thất bại !!!");

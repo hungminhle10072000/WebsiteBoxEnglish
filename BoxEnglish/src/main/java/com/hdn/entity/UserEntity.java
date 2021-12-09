@@ -19,6 +19,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Nationalized;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "USER")
 public class UserEntity {
@@ -74,6 +76,20 @@ public class UserEntity {
 
 	//
 	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userEntity")
+	private List<ReviewEntity> liReviewEntities;
+	
+	
+	
+	public List<ReviewEntity> getLiReviewEntities() {
+		return liReviewEntities;
+	}
+
+	public void setLiReviewEntities(List<ReviewEntity> liReviewEntities) {
+		this.liReviewEntities = liReviewEntities;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userEntity")
 	private List<CategoryEntity> categoryEntities;
 	

@@ -79,7 +79,7 @@
 									         </div>
 											<div>
 												<button class="btn btn-success" type="submit">Thêm</button>
-												<button class="btn btn-warning ml-2" type="reset">Reset</button>
+												<button class="btn btn-warning ml-2" type="reset"><a href="${pageContext.request.contextPath }/admin/user/addAccount" style=" text-decoration: none; color: white;">Reset</a></button>
 												<button class="btn btn-danger ml-2" type="button"><a href="${pageContext.request.contextPath }/admin/user/" style=" text-decoration: none; color: white;">Quay lại</a></button>
 											</div>
 										</form:form>
