@@ -38,7 +38,7 @@
         </div>
             <br/>
         <div id="form_practice" style="display: none;">
-            <img id="imgVoca" class="mx-auto d-block" src='<c:url value="/resources/img/paris.jpeg" />' alt="not display"  style="width:35%">
+            <img id="imgVoca" width="200px" height="250px" class="mx-auto d-block" src='<c:url value="/resources/img/paris.jpeg" />' alt="not display"  style="width:35%">
             <br/>
             <p id="question" style="text-align: center; font-size: 35px;"></p>
             <br/>

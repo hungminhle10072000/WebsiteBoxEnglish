@@ -137,6 +137,9 @@ public class ReviewService {
         int dayLatest=0,monthLatest=0,yearLatest=0;
         int dayNow=0,monthNow=0,yearNow=0;
         ReviewEntity reviewEntity= reviewImpl.getReviewEntityLatest(userId);
+        if (reviewEntity ==null)
+            return true;
+
         Date date = reviewEntity.getDate_practice();
         LocalDateTime datelatest = DateConverter.convertToLocalDateTimeViaSqlTimestamp(date);
         LocalDateTime datenow = LocalDateTime.now();
