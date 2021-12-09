@@ -62,7 +62,7 @@ public class CategoryEntity {
 
 
 	//Created By Nghia
-	@OneToMany(mappedBy="cate")
+	@OneToMany(mappedBy="cate", cascade=CascadeType.ALL)
 	private List<CommentEntity> commentEntities;
 
 	public List<CommentEntity> getCommentEntities() {
