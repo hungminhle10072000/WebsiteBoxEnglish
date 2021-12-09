@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "COMMENT")
@@ -25,8 +26,19 @@ public class CommentEntity {
     @OneToOne
     @JoinColumn(name = "parent_id", nullable = true)
     private CommentEntity parent;
+    
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    private List<CommentEntity> commentEntities;
 
-    @ManyToOne
+    public List<CommentEntity> getCommentEntities() {
+		return commentEntities;
+	}
+
+	public void setCommentEntities(List<CommentEntity> commentEntities) {
+		this.commentEntities = commentEntities;
+	}
+
+	@ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private UserEntity user;
 
