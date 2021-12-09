@@ -32,6 +32,33 @@ values('disturb.mp3','Let''s see how many products we can count in advance of in
 'disturb.jpg',0,N'Hãy xem có bao nhiêu sản phẩm chúng ta có thể đếm trước khi kiểm kê để cho chúng ta làm phiền khách hàng ít hơn',N'(v): quấy rầy, quấy rối, làm náo động, gây náo loạn, làm ồn, làm phiền','noun','disturb',8);
 
 
+--
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('liability.mp3','The slippery steps were a terrible liability for the store','the state of being legally responsible for something',
+'liability.png',0,N'Những bậc thềm trơn trượt là một nguy cơ tệ hại cho cửa hàng',N'(n): trách nhiệm, nghĩa vụ pháp lý; nguy cơ, điều gây khó khăn trở ngại','noun','liability',8);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('reflection.mp3',' She saw her reflection in the mirro','a sign that shows the state or nature of something',
+'reflection.jpg',0,N'Cô ấy nhìn ảnh của mình ở trong gương',N'(n): ‹sự› phản chiếu, phản xạ, phản ánh, hình ảnh; phê phán, nhận xét','noun','reflection',8);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('run.mp3','As long as the computer is running, you can keep adding new data','to operate or function; to make something do this',
+'run.jpg',0,N'Trong khi máy tính đang chạy, bạn có thể thực hiện việc bổ sung thêm dữ liệu mới',N' (v): chạy, vận hành, hoạt động, thực hiện','noun','run',8);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('scan.mp3','She scanned through the newspaper over breakfast.','to look at every part of something carefully, especially because you are looking for a particular thing or person',
+'scan.jpg',0,N'Cô ấy đã xem qua tờ báo trong lúc ăn sáng',N'(v): xem lướt, xem qua','noun','scan',8);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('subtract.mp3','6 subtracted from 9 is 3','to take a number or an amount away from another number or amount',
+'subtract.png',0,N'6 trừ 9 được 3',N'(v): trừ đi, khấu trừ; loại ra, lấy ra khỏi','noun','subtract',8);
+
 
 
 -- Insert Pharmacy
@@ -60,3 +87,34 @@ insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
 image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
 values('factor.mp3','Could my cat be a factor contributing to my asthma?','one of several things that cause or influence something',
 'factor.jpg',0,N'Con mèo của tôi có thể là một yếu tố góp phần cho bệnh hen suyễn của tôi hay không?',N' (n): nhân tố, yếu tố','noun','factor',9); 
+
+--
+
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('interaction.mp3','My pharmacist was concerned about the interaction of the two medications I was prescribed','communicate with somebody, especially while you work, play or spend time with them',
+'interaction.jpg',0,N'Dược sĩ của tôi lo lắng về sự tương tác của 2 loại thuốc mà tôi được kê toa',N' (n): ‹sự› tương tác, ảnh hưởng lẫn nhau, tác động qua lại','noun','interaction',9);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('limit.mp3','We were reaching the limits of civilization',' a point at which something stops being possible or existing',
+'limit.jpg',0,N'Chúng tôi đã đạt đến giới hạn của nền văn minh.',N'(n): giới hạn, hạn định, ranh giới','noun','limit',9);
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('monitor.mp3','The patient had weekly appointments so that the doctor could monitor their progress','to watch and check something over a period of time',
+'monitor.jpg',0,N'Người bệnh có các cuộc hẹn hàng tuần để cho bác sĩ có thể theo dõi tiến triển của họ',N'(v): màn hình vi tính, lớp trưởng','noun','monitor',9);
+
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('potential.mp3','To avoid any potential side effects from the medication, be sure to tell your doctor all the drugs you are currently taking','that can develop into something or be developed in the future',
+'potential.jpg',0,N'Để tránh bất kỳ phản ứng phụ tiềm tàng nào từ thuốc, hãy bảo đảm là kể cho bác sĩ tất cả loại thuốc mà bạn hiện tại đang uốn',N' (adj): tiềm tàng, tiềm năng, tiềm lực, khả năng','noun','potential',9); 
+
+
+insert into vocabulary(audio_vocabulary,example_vocabulary,explain_vocabulary,
+image_vocabulary,isDelete,mean_example_vocabulary,mean_vocabulary,partOfspeech,vocabulary,category_id)
+values('sample.mp3','A sample of the population taking the new medicine was surveyed to determine whether it caused side effects','a small amount of a substance taken from a larger amount and tested in order to obtain information about the substance',
+'sample.jpg',0,N'Một số người dân uống loại thuốc mới đã được khảo sát để xác định xem nó có gây ra phản ứng phụ hay không',N' (n): mẫu, hàng mẫu','noun','sample',9);
+
