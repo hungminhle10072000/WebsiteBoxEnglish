@@ -2,6 +2,8 @@ package com.hdn.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,7 @@ public class CommentEntity {
     @JoinColumn(name = "parent_id", nullable = true)
     private CommentEntity parent;
     
+	@JsonIgnore
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     private List<CommentEntity> commentEntities;
 
