@@ -168,8 +168,8 @@
 				return;
 			}
 			let passwordNew = $("#passwordNew").val()
-			if(passwordNew === ''){
-				$(".alert-page-edit-info").html('<div class="alert alert-warning" role="alert">Yêu cầu nhập mật khẩu mới !!!</div>')
+			if(passwordNew === '' || passwordNew.length < 6){
+				$(".alert-page-edit-info").html('<div class="alert alert-warning" role="alert">Yêu cầu nhập mật khẩu mới tối thiểu 6 kí tự !!!</div>')
 				window.scrollTo({ top: 0, behavior: 'smooth' });
 				return;
 			}

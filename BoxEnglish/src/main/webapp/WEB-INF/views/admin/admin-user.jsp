@@ -60,7 +60,6 @@
 												<th>Avatar</th>
 												<th>Họ tên</th>
 												<th>Tên đăng nhập</th>
-												<th>Mật khẩu</th>
 												<th>Email</th>
 												<th>Quyền</th>
 												<th></th>
@@ -75,7 +74,6 @@
 											      </td>
 											      <td>${user.fullname }</td>
 											      <td>${user.username }</td>
-											      <td>${user.password }</td>
 											      <td>${user.email }</td>
 											      <c:if test="${user.role == 1}">
 											      		<td>Admin</td>

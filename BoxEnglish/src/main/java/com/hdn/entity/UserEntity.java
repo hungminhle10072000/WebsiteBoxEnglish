@@ -61,7 +61,7 @@ public class UserEntity {
 	private List<Cate_User_Entity> cate_User_Entities;
 
 	//Created By Nghia
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	private List<CommentEntity> commentEntities;
 
 	public List<CommentEntity> getCommentEntities() {
