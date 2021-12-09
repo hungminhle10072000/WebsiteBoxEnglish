@@ -33,7 +33,7 @@
     <div class="col-sm-8">
         <div class="container mt-3">
             <div class="progress" style="height: 30px; border-radius: 25px;">
-                <div id="progress" class="progress-bar bg-warning" style="width:10%;height:30px"></div>
+                <div id="progress" class="progress-bar bg-warning" style="width:5%;height:30px"></div>
             </div>
         </div>
             <br/>

@@ -132,7 +132,7 @@ public class ReviewImpl implements ReviewDao {
     public ReviewEntity getReviewEntityLatest(Long userId) {
         Session session  = sessionFactory.getCurrentSession();
         try {
-            Query query = session.createQuery("FROM  ReviewEntity as R where R.userEntity.id=:userId  ORDER BY R.date_practice Desc");
+            Query query = session.createQuery("FROM  ReviewEntity as R where R.userEntity.id=:userId and R.status !=2  ORDER BY R.date_practice Desc");
             query.setParameter("userId",userId);
             List<ReviewEntity> reviewEntities = query.getResultList();
             return reviewEntities!=null? reviewEntities.get(0):null;

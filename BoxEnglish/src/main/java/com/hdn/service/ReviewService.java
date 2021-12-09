@@ -75,9 +75,18 @@ public class ReviewService {
         List<ReviewEntity> reviewEntities = reviewImpl.getReviewsByUserIdAndVocaID(Cons.USER_ID,reviewDto.getVocabulary_id());
 
         List<ReviewEntity> reviewEntities2 = reviewImpl.getReviewsByUserIdAndLevelAndStatus(Cons.USER_ID,1,2);
+        List<ReviewEntity> reviewEntities3 = new ArrayList<>();
+
+        for(ReviewEntity reviewEntity : reviewEntities2) {
+            LocalDateTime dateLatest =DateConverter.convertToLocalDateTimeViaSqlTimestamp(reviewEntity.getDate_practice());
+            LocalDateTime dateNow = LocalDateTime.now();
+            if (DateConverter.compareDate(dateLatest,dateNow)) {
+                reviewEntities3.add(reviewEntity);
+            }
+        }
         if (reviewEntities != null && reviewEntities.size() > 0) {
             return -1; // Từ này đã tồn tại trong review
-        } else if(reviewEntities2 != null && reviewEntities2.size() > 5) {
+        } else if(reviewEntities3 != null && reviewEntities3.size() > 5) {
             return -2; // Hôm nay đã thêm 5 từ rồi.
         } else {
             reviewDto.setUser_id(Cons.USER_ID);
